@@ -10,13 +10,14 @@ import HomePageStars from '../../assets/banners/HomePageStars.svg'
 import HomePageButton from '../../components/common/HomePageButton';
 import { HomePageButtonSize, HomePageButtonType } from '../../types/Button.t';
 import HeroSocialsIcons from '../../components/presentational/HeroSocialsIcons';
+import HeroDiscordLogo from '../../components/presentational/HeroDiscordLogo';
 
 
 const Home: React.FC = () => {
   const handleDownloadForWindows = () => {}
 
   return (
-    <div>
+    <div className='overflow-hidden' >
       <div className="lg: w-full h-[633px] flex justify-center items-center overflow-hidden divWithSVGBackground bg-brandColor absolute top-0 z-0">
       </div>
       <div className='mx-auto min-h-[644px] max-w-6xl relative z-1 flex flex-col '>
@@ -24,29 +25,31 @@ const Home: React.FC = () => {
         <div className='my-auto'>
         <Hero />
         </div>
-        <div className='absolute z-0 bottom-3 -left-[28rem] overflow-hidden'>
+        <div className='absolute z-0 bottom-3 -left-[28rem]'>
           <img src={LeftSideHero} alt="" height={610}/>
         </div>
-        <div className='absolute z-0 bottom-3 -right-[24rem] overflow-hidden'>
+        <div className='absolute z-0 bottom-3 -right-[28rem] '>
           <img src={RightSideHero} alt="" />
         </div>
       </div>
       
-      <section className='flex justify-center w-full mx-auto gap-40 mt-32'>
+      <div className='mx-auto max-w-6xl'>
+      
+      <section className='flex gap-16  mt-32'>
         <div>
           <img src={CreateAnInvite} alt="Create an invite-only place where you belong" />
         </div>
         <div className='flex flex-col max-w-96 mt-12 mr-52'>
-          <h2 className='font-ggSansBold text-5xl'>Create an invite-only place where you belong</h2>
-          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.
+          <h2 className='font-ggSansBold text-5xl text-notQuiteBlack'>Create an invite-only place where you belong</h2>
+          <p className='font-ggsansNormal text-xl text-left mt-6 break-words'>Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.
           </p>
         </div>
       </section>
 
-      <section className='flex justify-center w-full mx-auto gap-40 mt-52'>
+      <section className='flex gap-16 mt-52'>
         <div className='flex flex-col max-w-96 mt-12 mr-52'>
           <h2 className='font-ggSansBold text-5xl'>Where hanging out is easy</h2>
-          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Grab a seat in a voice channel when you’re free. Friends in your server can see you’re around and instantly pop in to talk without having to call.
+          <p className='font-ggsansNormal text-xl text-left mt-6 break-words'>Grab a seat in a voice channel when you’re free. Friends in your server can see you’re around and instantly pop in to talk without having to call.
 
           </p>
         </div>
@@ -61,7 +64,7 @@ const Home: React.FC = () => {
         </div>
         <div className='flex flex-col max-w-96 mt-12 mr-52'>
           <h2 className='font-ggSansBold text-5xl'>From few to a fandom</h2>
-          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more
+          <p className='font-ggsansNormal text-xl text-left mt-6 break-words'>Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more
           </p>
         </div>
       </section>
@@ -95,6 +98,7 @@ const Home: React.FC = () => {
       </div>
     </div>
     </section>
+    </div>
 
     <footer className='w-full bg-notQuiteBlack py-20 mt-40 text-white font-ggsansNormal'>
       
@@ -152,9 +156,15 @@ const Home: React.FC = () => {
           </div>
         </div>
       
-      <div>
-
       </div>
+
+      <div className='max-w-6xl mx-auto mt-5 py-10 border-t-[1px] border-brandColor flex justify-between'>
+        <div className='w-[124px]'>
+          <HeroDiscordLogo />
+        </div>
+        <div className=' font-ggSansBold'>
+          <HomePageButton onClickHandler={() => {}} text='Sign Up' buttonType={HomePageButtonType.blue} size={HomePageButtonSize.small} />
+        </div>
       </div>
     </footer>
 
