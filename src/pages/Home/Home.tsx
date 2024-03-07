@@ -2,8 +2,18 @@ import Hero from '../../components/presentational/Hero';
 import Navbar from '../../components/presentational/Navbar';
 import LeftSideHero from '../../assets/banners/leftSideHero.svg';
 import RightSideHero from '../../assets/banners/rightSideHero.svg';
+import CreateAnInvite from '../../assets/banners/CreateAnInviteBelong.svg';
+import HanigingOut from '../../assets/banners/Where hanging out is easy.svg';
+import FromFewToFandom from '../../assets/banners/From few to a fandom.svg';
+import ReliableTech from '../../assets/banners/RELIABLETECHFORSTAYINGCLOSE.svg';
+import HomePageStars from '../../assets/banners/HomePageStars.svg'
+import HomePageButton from '../../components/common/HomePageButton';
+import { HomePageButtonSize, HomePageButtonType } from '../../types/Button.t';
+import HeroSocialsIcons from '../../components/presentational/HeroSocialsIcons';
+
 
 const Home: React.FC = () => {
+  const handleDownloadForWindows = () => {}
 
   return (
     <div>
@@ -14,16 +24,140 @@ const Home: React.FC = () => {
         <div className='my-auto'>
         <Hero />
         </div>
-        <div className='absolute z-0 bottom-3 -left-[29rem]'>
+        <div className='absolute z-0 bottom-3 -left-[28rem] overflow-hidden'>
           <img src={LeftSideHero} alt="" height={610}/>
         </div>
-        <div className='absolute z-0 bottom-3 -right-[28rem]'>
-          <img src={RightSideHero} alt="" height={610}/>
+        <div className='absolute z-0 bottom-3 -right-[24rem] overflow-hidden'>
+          <img src={RightSideHero} alt="" />
         </div>
       </div>
-      <section>
-        
+      
+      <section className='flex justify-center w-full mx-auto gap-40 mt-32'>
+        <div>
+          <img src={CreateAnInvite} alt="Create an invite-only place where you belong" />
+        </div>
+        <div className='flex flex-col max-w-96 mt-12 mr-52'>
+          <h2 className='font-ggSansBold text-5xl'>Create an invite-only place where you belong</h2>
+          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Discord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.
+          </p>
+        </div>
       </section>
+
+      <section className='flex justify-center w-full mx-auto gap-40 mt-52'>
+        <div className='flex flex-col max-w-96 mt-12 mr-52'>
+          <h2 className='font-ggSansBold text-5xl'>Where hanging out is easy</h2>
+          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Grab a seat in a voice channel when you’re free. Friends in your server can see you’re around and instantly pop in to talk without having to call.
+
+          </p>
+        </div>
+        <div>
+          <img src={HanigingOut} alt="Where hanging out is easy" />
+        </div>
+      </section>
+
+      <section className='flex justify-center w-full mx-auto gap-40 mt-52'>
+        <div>
+          <img src={FromFewToFandom} alt="From few to a fandom" />
+        </div>
+        <div className='flex flex-col max-w-96 mt-12 mr-52'>
+          <h2 className='font-ggSansBold text-5xl'>From few to a fandom</h2>
+          <p className='font-ggsansNormal text-xl text-center mt-6 break-words'>Get any community running with moderation tools and custom member access. Give members special powers, set up private channels, and more
+          </p>
+        </div>
+      </section>
+
+      <section className='flex flex-col justify-center items-center w-full mx-auto mt-52'>
+      <div className='flex flex-col items-center'>
+          <h2 className='text-4xl font-abcginto text-wrap mb-4 text-notQuiteBlack'>RELIABLE TECH FOR STAYING CLOSE</h2>
+          <p className='text-xl font-ggsansNormal text-center w-1/2'>Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</p>
+      </div>
+      <div className="flex justify-center">
+        <img src={ReliableTech} alt="RELIABLE TECH FOR STAYING CLOSE" />
+      </div>
+    </section>
+
+    <section className='mt-40'>
+      <div className='flex justify-center'>
+      <div className='absolute'>
+        <img src={HomePageStars} alt="" width={800} />
+      </div>
+      <div className='flex flex-col'>
+        <h2 className='font-ggSansBold text-black mb-6 text-3xl'>Ready to Start Your Journey?</h2>
+        <div className='flex justify-center'>
+        <HomePageButton
+          onClickHandler={handleDownloadForWindows}
+          text='Download For Windows' 
+          Icon={true} 
+          buttonType={HomePageButtonType.blue} 
+          size={HomePageButtonSize.large} />
+        </div>
+        
+      </div>
+    </div>
+    </section>
+
+    <footer className='w-full bg-notQuiteBlack py-20 mt-40 text-white font-ggsansNormal'>
+      
+      <div className=' border-brandColor flex max-w-6xl mx-auto'>
+        <div className='mr-20 w-full'>
+          <div className='mb-6 mt-2'>
+            <p>English</p>
+          </div>
+          <div className='mt-6'>
+            <HeroSocialsIcons />
+          </div>
+        </div>
+        <div className='flex w-full justify-end gap-6 '>
+          <div className='w-48'>
+            <p className=' text-brandColor mb-5'>Product</p>
+            <p className='mb-2'>Download</p>
+            <p className='mb-2'>Nitro</p>
+            <p className='mb-2'>Status</p>
+            <p className='mb-2'>App Directory</p>
+            <p className='mb-2'>New Mobile Experience</p>
+          </div>
+
+          <div className='w-48'>
+            <p className=' text-brandColor mb-5'>Company</p>
+            <p className='mb-2'>About</p>
+            <p className='mb-2'>Jobs</p>
+            <p className='mb-2'>Brand</p>
+            <p className='mb-2'>Newsroom</p>
+          </div>
+
+          <div className='w-48'>
+            <p className=' text-brandColor mb-5'>Resources</p>
+            <p className='mb-2'>College</p>
+            <p className='mb-2'>Support</p>
+            <p className='mb-2'>Safety</p>
+            <p className='mb-2'>Blog</p>
+            <p className='mb-2'>Feedback</p>
+            <p className='mb-2'>StreamKit</p>
+            <p className='mb-2'>Creators</p>
+            <p className='mb-2'>Comunnity</p>
+            <p className='mb-2'>Developers</p>
+            <p className='mb-2'>Gaming</p>
+            <p className='mb-2'>Official 3rd Party Merch</p>
+          </div>
+
+          <div className='w-48'>
+            <p className=' text-brandColor mb-5'>Policies</p>
+            <p className='mb-2'>Terms</p>
+            <p className='mb-2'>Privacy</p>
+            <p className='mb-2'>Cookie settings</p>
+            <p className='mb-2'>Guidelines</p>
+            <p className='mb-2'>Acknowledgements</p>
+            <p className='mb-2'>Licenses</p>
+            <p className='mb-2'>Company Information</p>
+          </div>
+        </div>
+      
+      <div>
+
+      </div>
+      </div>
+    </footer>
+
     </div>
   );
 
