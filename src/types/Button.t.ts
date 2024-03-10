@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 
 export enum HomePageButtonType {
   'white',
@@ -10,6 +11,11 @@ export enum HomePageButtonSize {
   'large'
 }
 
+export enum SidebarButtonType {
+  'home',
+  'server',
+}
+
 export type HomePageButtonProps = {
   onClickHandler: () => void,
   text:string,
@@ -18,3 +24,16 @@ export type HomePageButtonProps = {
   size: HomePageButtonSize,
 }
 
+export type SideBarButtonProps = {
+  onClickHandler: () => void,
+  text: string,
+  Icon?: string,
+  type: SidebarButtonType,
+}
+
+export type NavigationButtonProps = {
+  children?: ReactNode;
+  onClickHandler?: () => void,
+  label?: string,
+  Icon?: ReactNode,
+}
