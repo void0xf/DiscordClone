@@ -91,11 +91,13 @@ export const Register = () => {
             
                 <div className='dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
                 scrollbar-thin scrollbar-webkit -webkit-scrollbar-track'>
-                <div onChange={days()} className='box overflow-hidden w-[125px] h-[1240px] bg-zinc-700 ' onClick={(e)=>{
-                    setActiveOptionDay(e.target.textContent)
-                    console.log(e.target)
-                    
-                }}>
+                <div onChange={() => {days()}} className='box overflow-hidden w-[125px] h-[1240px] bg-zinc-700 ' onClick={(e)=>{
+                if (e.target instanceof HTMLElement) {
+                    const p = e.target.textContent; // Type assertion here
+                    setActiveOptionDay(e.target.textContent as string);
+                    console.log(e.target);
+            
+                }}}>
                 {optionsToDays}
                 </div>
                 </div>
@@ -121,8 +123,11 @@ export const Register = () => {
             
                 <div className='dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
                 scrollbar-thin scrollbar-webkit -webkit-scrollbar-track'>
-                <div onChange={month()} className='overflow-hidden w-[125px] h-[480px] bg-zinc-700 ' onClick={(e)=>{
-                    setActiveOptionMonth(e.target.textContent)
+                <div onChange={() => {month()}} className='overflow-hidden w-[125px] h-[480px] bg-zinc-700 ' onClick={(e)=>{
+                    if(e.target instanceof HTMLElement) {
+                        const p = e.target.textContent
+                        setActiveOptionMonth(e.target.textContent as string)
+                    }
                     
                 }}>
                 {optionsToMonths}
@@ -151,9 +156,12 @@ export const Register = () => {
             
                 <div className='dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
                 scrollbar-thin scrollbar-webkit -webkit-scrollbar-track'>
-                <div onChange={years()} className='overflow-hidden w-[125px] h-[6000px] bg-zinc-700 ' onClick={(e)=>{
-                    setActiveOptionYear(e.target.textContent)         
-                }}>
+                <div onChange={() => {years()}} className='overflow-hidden w-[125px] h-[6000px] bg-zinc-700 ' onClick={(e)=>{
+                    if (e.target instanceof HTMLElement) {
+                        const p = e.target.textContent; // Type assertion here
+                        setActiveOptionDay(e.target.textContent as string);
+                        console.log(e.target);         
+                }}}>
                 {optionsToYear}
                 </div>
                 </div>
