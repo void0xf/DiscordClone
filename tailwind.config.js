@@ -26,6 +26,8 @@ export default {
         TextGray: '#949ba4',
         HoverText: '#35373c',
 
+        //Auth
+        FromBackground: '#313338'
 
       },
     fontFamily: {
