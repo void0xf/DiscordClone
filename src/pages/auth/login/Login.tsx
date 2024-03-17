@@ -3,10 +3,13 @@ import QRcode from "../../../components/presentational/QRcode";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import Link from "../../../components/common/AuthPage/Link";
 import FormButton from "../../../components/common/AuthPage/FormButton";
+import { loginUser } from "../../../firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const nav = useNavigate();
 
   const handleSetEmail = (text: string) => {
     setEmail(text);
@@ -15,9 +18,12 @@ const Login = () => {
     setPassword(text);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-      1 + 1;
+      const res = await loginUser(email, password);
+      if (res) {
+        nav("/channels/@me");
+      }
     }
   };
 

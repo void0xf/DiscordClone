@@ -2,8 +2,14 @@ import { useState } from "react";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import FormButton from "../../../components/common/AuthPage/FormButton";
 import Link from "../../../components/common/AuthPage/Link";
+import { createNewUser } from "../../../firebase/auth.js";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import { User } from "../../../types/user.t.js";
 
 export const Register = () => {
+  const nav = useNavigate();
+
   const [activeOptionDay, setActiveOptionDay] = useState("Dzień");
   const [activeOptionMonth, setActiveOptionMonth] = useState("Miesiąc");
   const [activeOptionYear, setActiveOptionYear] = useState("Rok");
@@ -92,16 +98,23 @@ export const Register = () => {
     setPassword(text);
   };
 
-  const handleRegister = () => {
-    console.log(
-      activeOptionDay,
-      activeOptionMonth,
-      activeOptionYear,
-      login,
-      nickname,
-      name,
-      password
-    );
+  const handleRegister = async () => {
+    if (login && nickname && name && password) {
+      const UserData: User = {
+        id: uuidv4(),
+        nickName: nickname,
+        profilePicture: "Default",
+        name: name,
+        servers: [],
+        friends: [],
+        birth: `${activeOptionDay}-${activeOptionMonth}-${activeOptionYear}`,
+      };
+      const res = await createNewUser(login, password, UserData);
+
+      if (res) {
+        nav("/channels/@me");
+      }
+    }
   };
 
   return (

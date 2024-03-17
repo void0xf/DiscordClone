@@ -1,28 +1,25 @@
-import {   ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface User {
   id: string;
-  name: string
-  pronounce: string
-  settings: Settings;
-  ServerPreview: ServerPreview[];
-  friends: UserPreview;
-}
-
-export interface Settings {
-
+  nickName: string;
+  profilePicture: string | "Default";
+  name: string;
+  servers: string[];
+  friends: string[];
+  birth: string;
 }
 
 export interface ServerPreview {
- name: string;
- SvgIcon?: string;
+  name: string;
+  SvgIcon?: string;
 }
 
 export enum UserState {
-  'online',
-  'offline',
-  'idle',
-  'DnD'
+  "online",
+  "offline",
+  "idle",
+  "DnD",
 }
 
 export interface UserPreview {
