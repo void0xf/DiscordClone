@@ -6,6 +6,9 @@ import { createNewUser } from "../../../firebase/auth.js";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../../types/user.t.js";
+import Select from "../../../components/common/AuthPage/Select.tsx";
+import DropDown from "../../../components/common/AuthPage/DropDown.tsx";
+
 
 export const Register = () => {
   const nav = useNavigate();
@@ -124,6 +127,11 @@ export const Register = () => {
           <h1 className="text-whiteMain text-2xl flex justify-center pt-7 pb-[10px] font-semibold">
             Załóż konto
           </h1>
+{/* 
+          <Select label='dzien'>
+            <DropDown items={daysopstion}/>
+          </Select> */}
+
 
           <UserInputForm
             label="Adres e-mail"
@@ -154,49 +162,15 @@ export const Register = () => {
               data urodzenia
             </p>
             <div className="flex flex-auto">
+
+
               {/* SELECT 1 */}
-              <div
-                className="w-[125px] flex  justify-start relative"
-                onClick={() => {
-                  setIsVisibleDay(!isVisibleDay);
-                }}
-              >
-                <div className="flex justify-start "></div>
-                <div className={isVisibleDay ? "block" : "hidden"}>
-                  <div
-                    className="dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
-                scrollbar-thin scrollbar-webkit -webkit-scrollbar-track"
-                  >
-                    <div
-                      className="box overflow-hidden w-[125px] h-[1240px] bg-zinc-700 "
-                      onClick={(e) => {
-                        if (e.target instanceof HTMLElement) {
-                          setActiveOptionDay(e.target.textContent as string);
-                        }
-                      }}
-                    >
-                      {daysElements}
-                    </div>
-                  </div>
-                </div>
-                <div className=" outline-none w-[95%] h-[40px] rounded-sm bg-zinc-800 text-gray-300 px-[10px] pb-1  ">
-                  <div
-                    className="h-[50px] overflow-hidden border-none flex p-1"
-                    onClick={() => {
-                      days();
-                    }}
-                  >
-                    {activeOptionDay}
-                  </div>
-                </div>
-                <div className="block scale-75 absolute flex items-center justify-center h-full pointer-events-none w-[40px] top-0 right-0">
-                  <img
-                    src="../src/assets/photos/arrow.png"
-                    className=""
-                    alt=""
-                  />
-                </div>
-              </div>
+              <Select>
+                  <DropDown options={daysElements} 
+                value={(state) =>{
+                  setActiveOptionDay(state)
+                }}/>
+              </Select>
 
               {/* SELECT 2 */}
               <div
@@ -205,7 +179,6 @@ export const Register = () => {
                   setIsVisibleMonth(!IsVisibleMonth);
                 }}
               >
-                <div className="flex justify-center  "></div>
                 <div className={IsVisibleMonth ? "block" : "hidden"}>
                   <div
                     className="dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
@@ -242,6 +215,7 @@ export const Register = () => {
                 </div>
               </div>
 
+
               {/* SELECT 3 */}
               <div
                 className="flex-auto w-[125px] flex justify-end relative "
@@ -249,7 +223,7 @@ export const Register = () => {
                   setIsVisibleYear(!isVisibleYear);
                 }}
               >
-                <div className="flex justify-end  "></div>
+                
                 <div className={isVisibleYear ? "block" : "hidden"}>
                   <div
                     className="dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
@@ -287,6 +261,10 @@ export const Register = () => {
               </div>
             </div>
           </div>
+              <div className="flex items-center mb-4">
+    <input  type="checkbox" value="" className="w-10 h-10 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+    <label className="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">Disabled checkbox</label>
+</div>
           <FormButton label="Kontynuuj" onClickHandler={handleRegister} />
           <div className="flex pt-2">
             <span className="text-darkWhite text-sm">Potrzebujesz konta?</span>
