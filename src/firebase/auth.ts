@@ -40,8 +40,7 @@ export async function loginUser(email: string, password: string) {
       email,
       password
     );
-    console.log("User logged in:", userCredential.user);
-    return true;
+    return userCredential.user.uid;
   } catch (error) {
     console.error("Error logging in:", error);
     return false;

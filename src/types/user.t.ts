@@ -7,7 +7,11 @@ export interface User {
   name: string;
   servers: string[];
   friends: string[];
+  outgoingFriendRequests: string[];
+  incomingFriendRequests: string[];
   birth: string;
+  DirectMessages: string[];
+  status: UserStatus;
 }
 
 export interface ServerPreview {
@@ -15,7 +19,7 @@ export interface ServerPreview {
   SvgIcon?: string;
 }
 
-export enum UserState {
+export enum UserStatus {
   "online",
   "offline",
   "idle",
@@ -26,5 +30,5 @@ export interface UserPreview {
   id: string;
   profilePicture: string | ReactNode;
   nickName: string;
-  status: UserState;
+  status: UserStatus;
 }

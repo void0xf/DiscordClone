@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface DropDownProps {
   items: ReactNode[] | ReactNode;
@@ -39,11 +40,11 @@ const DropDownn: React.FC<DropDownProps> = ({ items, onSelectHandler }) => {
       >
         <div className="box overflow-hidden w-[125px] h-auto bg-zinc-700">
           {Array.isArray(items) ? (
-            items.map((Element, index) => {
+            items.map((Element: ReactNode) => {
               if (Element) {
                 return (
                   <div
-                    key={index} // Make sure to provide a unique key
+                    key={uuidv4()}
                     onClick={() => handleItemClick(Element)}
                     className="item"
                   >

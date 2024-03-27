@@ -5,10 +5,15 @@ import Link from "../../../components/common/AuthPage/Link";
 import FormButton from "../../../components/common/AuthPage/FormButton";
 import { loginUser } from "../../../firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { getUserStateFromFirestore } from "../../../firebase/firestore";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../slices/userSlice";
+import { User } from "../../../types/user.t";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const dispatch = useDispatch();
   const nav = useNavigate();
 
   const handleSetEmail = (text: string) => {
@@ -20,8 +25,12 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const res = await loginUser(email, password);
-      if (res) {
+      const uid = await loginUser(email, password);
+      if (uid) {
+        const user: User | null = await getUserStateFromFirestore(uid);
+        if (user) {
+          dispatch(setUser(user));
+        }
         nav("/channels/@me");
       }
     }

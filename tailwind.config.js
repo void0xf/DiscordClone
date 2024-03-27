@@ -4,65 +4,65 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        'elevation-low': '0 1px 0 hsl(0, 0%, 0.8%) / 20%, 0 1.5px 0 hsl(240, 7.7%, 2.5%) / 5%, 0 2px 0 hsl(0, 0%, 0.8%) / 5%',
+        "elevation-low":
+          "0 1px 0 hsl(0, 0%, 0.8%) / 20%, 0 1.5px 0 hsl(240, 7.7%, 2.5%) / 5%, 0 2px 0 hsl(0, 0%, 0.8%) / 5%",
       },
       colors: {
-        brandColor: '#404eed',
-        notQuiteBlack: '#23272a',
-        lightBlue: '#5865f2',
-        whiteMain: '#F2F3F5',
-        darkWhite: '#B5BAC1',
-        mainTheme: '#262626',
-        veryLightBlue: '#00a8fc',
+        brandColor: "#404eed",
+        notQuiteBlack: "#23272a",
+        lightBlue: "#5865f2",
+        whiteMain: "#F2F3F5",
+        darkWhite: "#B5BAC1",
+        mainTheme: "#262626",
+        veryLightBlue: "#00a8fc",
         //SidebarColors
-        SidebarServerWithoutIcon: '#313338',
-        SidebarBackground: '#1e1f22',
-        SidebarUltityIcon: '#23a559',
-        SidebarGulidSeparator: 'hsl(228 0.06 32.5% / 0.48)',
-        SidebarTooltip: '#111214',
-        SidebarTooltipText: '#d5d8dc',
+        SidebarServerWithoutIcon: "#313338",
+        SidebarBackground: "#1e1f22",
+        SidebarUltityIcon: "#23a559",
+        SidebarGulidSeparator: "hsl(228 0.06 32.5% / 0.48)",
+        SidebarTooltip: "#111214",
+        SidebarTooltipText: "#d5d8dc",
+
+        LightGray: "#313338",
 
         //AppNavbar
-        TextGray: '#949ba4',
-        HoverText: '#35373c',
+        TextGray: "#949ba4",
+        HoverText: "#35373c",
 
         //Auth
-        FromBackground: '#313338'
-
+        FromBackground: "#313338",
       },
-    fontFamily: {
-      ggsansNormal: ['ggSansNormal', 'sans'],
-      ggSansBold: ['ggSansBold', 'sans'],
-      ggSansMedium: ['ggSansMedium', 'sans'],
-      abcginto: ['abcginto', 'sans'],
+      fontFamily: {
+        ggsansNormal: ["ggSansNormal", "sans"],
+        ggSansBold: ["ggSansBold", "sans"],
+        ggSansMedium: ["ggSansMedium", "sans"],
+        abcginto: ["abcginto", "sans"],
       },
-
     },
   },
   plugins: [
-    function({addUtilities}){
+    function ({ addUtilities }) {
       const newUtilities = {
-        ".scrollbar-thin":{
-          scrollbarWidth:"thin",
-          scrollbarColor:"rgb(0 0 0) rgb(63 63 70)",
-          scrollbarHeight:"3px"
+        ".scrollbar-thin": {
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgb(0 0 0) rgb(63 63 70)",
+          scrollbarHeight: "3px",
         },
-        ".scrollbar-webkit":{
-          "&::-webkit-scrollbar":{
-            width:"8px"
+        ".scrollbar-webkit": {
+          "&::-webkit-scrollbar": {
+            width: "8px",
           },
-          "&::-webkit-scrollbar-track":{
-            background:"rgb(31 29 29)"
+          "&::-webkit-scrollbar-track": {
+            background: "rgb(31 29 29)",
           },
-          "&::-webkit-scrollbar-thumb":{
-            backgroundColor:"rgb(31 41 55)",
-            borderRadius:"20px",
-            border : "1px solid white"
-          }
-        }
-      }
-      addUtilities(newUtilities,["responsive","hover"])
-    }
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "rgb(31 41 55)",
+            borderRadius: "20px",
+            border: "1px solid white",
+          },
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
   ],
-}
-
+};
