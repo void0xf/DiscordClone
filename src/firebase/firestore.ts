@@ -1,19 +1,25 @@
 import {
-  Firestore,
+  DocumentSnapshot,
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
+  onSnapshot,
+  query,
   setDoc,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { User } from "../types/user.t";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { setUser } from "../slices/userSlice";
+import { Dispatch, UnknownAction } from "redux";
 
-export async function addUserDataToFireStore(
-  firestore: Firestore,
-  uid: string,
-  userInfo: User
-) {
+export async function addUserDataToFireStore(uid: string, userInfo: User) {
+  const firestore = getFirestore();
   const userCollectionRef = collection(firestore, "users");
   const userDocRef = doc(userCollectionRef, uid);
   try {
@@ -27,14 +33,16 @@ export async function addUserDataToFireStore(
 
 export async function getCurrentUserUID() {
   const auth = getAuth();
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("User's UID:", user.uid);
-    }
-    () => unsubscribe();
-    return user?.uid;
+  return new Promise((resolve) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(user.uid);
+      } else {
+        resolve(null);
+      }
+      unsubscribe();
+    });
   });
-  return "";
 }
 
 export async function getUserStateFromFirestore(uid: string) {
@@ -51,4 +59,139 @@ export async function getUserStateFromFirestore(uid: string) {
   } catch (error) {
     throw new Error("Error getting document:");
   }
+}
+
+export async function getUIDfromName(name: string) {
+  const firestore = getFirestore();
+  const collectionRef = collection(firestore, "users");
+
+  const q = query(collectionRef, where("name", "==", name));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    for (const doc of querySnapshot.docs) {
+      const uid = doc.id;
+      return uid;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error searching for name:", error);
+    throw new Error("Error searching for name");
+  }
+}
+
+export async function addFriend(name: string) {
+  const myuid = await getCurrentUserUID();
+  const firestore = getFirestore();
+  const targetUID = await getUIDfromName(name);
+
+  if (targetUID !== null && myuid !== "") {
+    const targetRef = doc(firestore, "users", targetUID);
+    const userRef = doc(firestore, "users", myuid as string);
+    try {
+      await updateDoc(targetRef, {
+        incomingFriendRequests: arrayUnion(myuid),
+      });
+      await updateDoc(userRef, {
+        outgoingFriendRequests: arrayUnion(targetUID),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export async function listenForIncomingFriendRequests(callback: () => void) {
+  const db = getFirestore();
+  const userId = (await getCurrentUserUID()) as string;
+  const userDocRef = doc(db, "users", userId);
+
+  const unsubscribe = onSnapshot(
+    userDocRef,
+    (docSnapshot: DocumentSnapshot) => {
+      if (docSnapshot.exists()) {
+        const userData = docSnapshot.data();
+        const incomingFriendRequests = userData.incomingFriendRequests;
+        if (incomingFriendRequests) {
+          console.log("You have new friend requests:", incomingFriendRequests);
+          callback();
+        } else {
+          console.log("No incoming friend requests");
+        }
+      } else {
+        console.log("User document does not exist");
+      }
+    },
+    (error) => {
+      console.error("Error listening to incoming friend requests:", error);
+    }
+  );
+
+  return unsubscribe;
+}
+
+export async function acceptFriendRequest(name: string) {
+  const myuid = (await getCurrentUserUID()) as string;
+  const firestore = getFirestore();
+  const targetUID = await getUIDfromName(name);
+
+  if (targetUID !== null && myuid !== "") {
+    const userRef = doc(firestore, "users", myuid as string);
+    try {
+      await updateDoc(userRef, {
+        incomingFriendRequests: arrayRemove(targetUID),
+      });
+      await updateDoc(userRef, {
+        friends: arrayUnion(targetUID),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export async function declineFriendRequest(name: string) {
+  const myuid = (await getCurrentUserUID()) as string;
+  const firestore = getFirestore();
+  const targetUID = await getUIDfromName(name);
+
+  if (targetUID !== null && myuid !== "") {
+    const userRef = doc(firestore, "users", myuid as string);
+    try {
+      await updateDoc(userRef, {
+        incomingFriendRequests: arrayRemove(targetUID),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export async function cancelSendedFriendRequest(name: string) {
+  const myuid = (await getCurrentUserUID()) as string;
+  const firestore = getFirestore();
+  const targetUID = await getUIDfromName(name);
+
+  if (targetUID !== null && myuid !== "") {
+    const userRef = doc(firestore, "users", myuid as string);
+    const targetRef = doc(firestore, "users", targetUID);
+    try {
+      await updateDoc(userRef, {
+        outgoingFriendRequests: arrayRemove(targetUID),
+      });
+      await updateDoc(targetRef, {
+        incomingFriendRequests: arrayRemove(myuid),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export async function syncStateFromFirestore(
+  dispatch: Dispatch<UnknownAction>
+) {
+  const myUID = (await getCurrentUserUID()) as string;
+  const newUserInfo: User = (await getUserStateFromFirestore(myUID)) as User;
+  dispatch(setUser(newUserInfo));
 }

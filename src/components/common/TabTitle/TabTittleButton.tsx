@@ -1,8 +1,9 @@
 import React from "react";
+import { DisplayFriendsTabs } from "../../features/Friends/friends.t";
 
 interface TabTittleButtonProps {
   label: string;
-  onclickHandler: (selectedTab: string) => void;
+  onclickHandler: (selectedTab: DisplayFriendsTabs) => void;
   selectedTab?: string;
 }
 
@@ -12,7 +13,7 @@ const TabTittleButton: React.FC<TabTittleButtonProps> = ({
   selectedTab,
 }) => {
   const hanleOnClick = () => {
-    onclickHandler(label);
+    onclickHandler(label as DisplayFriendsTabs);
   };
 
   return (

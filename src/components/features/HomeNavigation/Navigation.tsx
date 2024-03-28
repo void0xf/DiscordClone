@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import DirectMessagesNavigation from "./DirectMessagesNavigation";
 import FindOrStartConversation from "./FindOrStartConversation";
 import NavigationButtton from "./NavigationButtton";
+import UserProfile from "./UserProfile";
 
 const NavFriendsIcon = () => (
   <svg
@@ -106,34 +109,41 @@ const ShopIcon = () => (
 );
 
 const Navigation = () => {
+  const user = useSelector((state: RootState) => state.user);
+
   return (
-    <div className=" bg-SidebarServerWithoutIcon h-full w-60">
-      <div className="h-12 flex justify-center pt-2 pb-2 shadow-elevation-low border-b-[2px] border-notQuiteBlack">
-        <FindOrStartConversation />
+    <div className=" bg-SidebarServerWithoutIcon h-full w-60 flex justify-between flex-col">
+      <div>
+        <div className="h-12 flex justify-center pt-2 pb-2 shadow-elevation-low border-b-[2px] border-notQuiteBlack">
+          <FindOrStartConversation />
+        </div>
+        <div className="text-TextGray px-2 py-2">
+          <NavigationButtton
+            label="Friends"
+            onClickHandler={() => {}}
+            Icon={<NavFriendsIcon />}
+          />
+          <NavigationButtton
+            label="Nitro"
+            onClickHandler={() => {}}
+            Icon={<NitroIcon />}
+          />
+          <NavigationButtton
+            label="Message Requests"
+            onClickHandler={() => {}}
+            Icon={<MessageRequestIcon />}
+          />
+          <NavigationButtton
+            label="Shop"
+            onClickHandler={() => {}}
+            Icon={<ShopIcon />}
+          />
+        </div>
+        <DirectMessagesNavigation />
       </div>
-      <div className="text-TextGray px-2 py-2">
-        <NavigationButtton
-          label="Friends"
-          onClickHandler={() => {}}
-          Icon={<NavFriendsIcon />}
-        />
-        <NavigationButtton
-          label="Nitro"
-          onClickHandler={() => {}}
-          Icon={<NitroIcon />}
-        />
-        <NavigationButtton
-          label="Message Requests"
-          onClickHandler={() => {}}
-          Icon={<MessageRequestIcon />}
-        />
-        <NavigationButtton
-          label="Shop"
-          onClickHandler={() => {}}
-          Icon={<ShopIcon />}
-        />
+      <div>
+        <UserProfile user={user} />
       </div>
-      <DirectMessagesNavigation />
     </div>
   );
 };

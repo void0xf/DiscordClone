@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
 import { TbMessageCircle2Filled } from "react-icons/tb";
 import { RiInboxFill } from "react-icons/ri";
 import { MdHelp } from "react-icons/md";
 import FriendsNavigation from "./FriendsNavigation";
+import DisplayFriends from "./DisplayFriends";
+import { DisplayFriendsTabs } from "./friends.t";
+import DisplayAddFriend from "./DisplayAddFriend";
+import {
+  listenForIncomingFriendRequests,
+  syncStateFromFirestore,
+} from "../../../firebase/firestore";
+import { useDispatch } from "react-redux";
+import { Dispatch, UnknownAction } from "redux";
 
 const NavFriendsIcon = () => (
   <svg
@@ -29,8 +38,18 @@ const NavFriendsIcon = () => (
   </svg>
 );
 
+async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {
+  syncStateFromFirestore(dispatch);
+}
+
 const Friends = () => {
-  const [selectedTab, setSelectedTab] = useState<string>("Online");
+  const dispatch = useDispatch();
+  const [selectedTab, setSelectedTab] = useState<DisplayFriendsTabs>("Online");
+  useEffect(() => {
+    listenForIncomingFriendRequests(() => {
+      onFriendRequest(dispatch);
+    });
+  }, []);
 
   return (
     <div className="text-TextGray">
@@ -61,6 +80,13 @@ const Friends = () => {
           </div>
         </div>
       </TabTittleBar>
+      <div>
+        {selectedTab != "Add Friend" ? (
+          <DisplayFriends type={selectedTab} />
+        ) : (
+          <DisplayAddFriend />
+        )}
+      </div>
     </div>
   );
 };

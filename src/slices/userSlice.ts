@@ -23,14 +23,9 @@ const userSlice = createSlice({
     setUser(state, action: PayloadAction<User>) {
       return action.payload;
     },
-    // Action to update a specific field, e.g., status
-    updateUserStatus(state, action: PayloadAction<UserStatus>) {
-      state.status = action.payload;
-    },
-    // Add more actions as needed
   },
 });
 
-export const { setUser, updateUserStatus } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

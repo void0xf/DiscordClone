@@ -8,8 +8,11 @@ import Home from "./pages/Home/Home";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase/FirebaseConfig";
 
 const App: React.FC = () => {
+  initializeApp(firebaseConfig);
   return (
     <Provider store={store}>
       <PersistGate loading={<div>Loading...</div>} persistor={persistor}>

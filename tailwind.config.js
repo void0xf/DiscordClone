@@ -29,6 +29,8 @@ export default {
         TextGray: "#949ba4",
         HoverText: "#35373c",
 
+        DarkGray: "#232428",
+
         //Auth
         FromBackground: "#313338",
       },

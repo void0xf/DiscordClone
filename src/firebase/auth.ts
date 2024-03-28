@@ -8,7 +8,6 @@ import {
 import { firebaseConfig } from "./FirebaseConfig";
 import { User } from "../types/user.t";
 import { addUserDataToFireStore } from "./firestore";
-import { getFirestore } from "firebase/firestore";
 
 export async function createNewUser(
   email: string,
@@ -16,12 +15,11 @@ export async function createNewUser(
   userInfo: User
 ) {
   const firebaseApp = initializeApp(firebaseConfig);
-  const db = getFirestore();
   const auth = getAuth(firebaseApp);
 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    const res2 = await addUserDataToFireStore(db, res.user.uid, userInfo);
+    const res2 = await addUserDataToFireStore(res.user.uid, userInfo);
     if (res && res2) {
       return true;
     }

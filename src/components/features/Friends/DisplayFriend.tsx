@@ -8,8 +8,8 @@ interface DisplayFriendProps {
 const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
   return (
     <div>
-      <img src={UserData.profilePicture} alt="" />
       {UserData.nickName}
+      {UserData.name}
       <div>{UserData.status}</div>
     </div>
   );

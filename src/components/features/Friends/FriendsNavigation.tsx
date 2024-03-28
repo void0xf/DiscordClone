@@ -1,10 +1,11 @@
 import React from "react";
 import TabTittleButton from "../../common/TabTitle/TabTittleButton";
 import AddFriendButton from "../../common/TabTitle/AddFriendButton";
+import { DisplayFriendsTabs } from "./friends.t";
 
 interface FriendsNavigationProps {
-  selectedTab: string;
-  setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
+  selectedTab: DisplayFriendsTabs;
+  setSelectedTab: React.Dispatch<React.SetStateAction<DisplayFriendsTabs>>;
 }
 
 const FriendsNavigation: React.FC<FriendsNavigationProps> = ({
