@@ -43,7 +43,7 @@ const DisplayFriends: React.FC<{ type: DisplayFriendsTabs }> = ({ type }) => {
   }, [type, user]);
 
   return (
-    <div className=" bg-LightGray flex-grow">
+    <div className=" bg-LightGray flex-grow h-full">
       <p>{type}</p>
       {type == "Pending" ? (
         <>

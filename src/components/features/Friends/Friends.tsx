@@ -52,7 +52,7 @@ const Friends = () => {
   }, []);
 
   return (
-    <div className="text-TextGray">
+    <div className="text-TextGray flex flex-auto flex-col">
       <TabTittleBar>
         <div className="w-full flex justify-between">
           <div className="flex">
@@ -80,7 +80,7 @@ const Friends = () => {
           </div>
         </div>
       </TabTittleBar>
-      <div>
+      <div className="h-full">
         {selectedTab != "Add Friend" ? (
           <DisplayFriends type={selectedTab} />
         ) : (

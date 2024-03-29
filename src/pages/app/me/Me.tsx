@@ -3,7 +3,6 @@ import { ServerPreview } from "../../../types/user.t";
 import ExampleServerIcon from "../../../assets/icons/Sidebar/ExampleServerIcon.svg";
 import Navigation from "../../../components/features/HomeNavigation/Navigation";
 import Friends from "../../../components/features/Friends/Friends";
-import DisplayFriends from "../../../components/features/Friends/DisplayFriends";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 
@@ -28,7 +27,6 @@ const Me = () => {
           </section>
           <section className="h-screen w-full flex flex-auto flex-col border-l-[1px] border-notQuiteBlack">
             <Friends />
-            <DisplayFriends type="" />
           </section>
         </div>
       )}
