@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,10 +11,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --elevation-low: 0 1px 0 hsl(0 calc( 1 * 0%) 0.8% / 0.2), 0 1.5px 0 hsl(240 calc( 1 * 7.7%) 2.5% / 0.05), 0 2px 0 hsl(0 calc( 1 * 0%) 0.8% / 0.05);
+  --elevation-low: 0 1px 0 hsl(0 calc(1 * 0%) 0.8% / 0.2),
+    0 1.5px 0 hsl(240 calc(1 * 7.7%) 2.5% / 0.05),
+    0 2px 0 hsl(0 calc(1 * 0%) 0.8% / 0.05);
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -23,65 +26,81 @@
   margin: 0;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
 @font-face {
-  font-family: 'UniSansHeavy';
-  src: url('./assets/fonts/UniSansHeavy.otf') format('opentype');
+  font-family: "UniSansHeavy";
+  src: url("./assets/fonts/UniSansHeavy.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'ggSansNormal';
-  src: url('/src/assets/fonts/ggsans-Normal.woff2') format('woff2');
+  font-family: "ggSansNormal";
+  src: url("/src/assets/fonts/ggsans-Normal.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'ggSansBold';
-  src: url('/src/assets/fonts/ggsans-Bold.woff2') format('woff2');
+  font-family: "ggSansBold";
+  src: url("/src/assets/fonts/ggsans-Bold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'ggSansMedium';
-  src: url('/src/assets/fonts/ggsans-Medium.woff2') format('woff2');
+  font-family: "ggSansMedium";
+  src: url("/src/assets/fonts/ggsans-Medium.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'abcginto';
-  src: url('/src/assets/fonts/ABCGintoNord.otf') format('opentype');
+  font-family: "abcginto";
+  src: url("/src/assets/fonts/ABCGintoNord.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
 }
 
 .divWithSVGBackground {
-  background-image: url('./assets/banners/centerHero.svg');
-  background-size:auto; /* or contain depending on the effect you want */
+  background-image: url("./assets/banners/centerHero.svg");
+  background-size: auto; /* or contain depending on the effect you want */
   background-repeat: no-repeat;
   background-position: 50% 100%;
-  }
+}
+.divWithSVGBackgroundAddFriendsTab {
+  background-image: url("./assets/banners/AddFriendsTab_noFriedns.svg");
+  background-size: auto; /* or contain depending on the effect you want */
+  background-repeat: no-repeat;
+  background-position: 50% 100%;
+}
 
-  .divWithSVGBackgroundAuth {
-    background-image: url('./assets/banners/loginbg.svg');
-    background-size:cover; /* or contain depending on the effect you want */
-    background-repeat: no-repeat;
-    /* background-position: 50% 100%; */
-    }
-
-  
-  
+.divWithSVGBackgroundAuth {
+  background-image: url("./assets/banners/loginbg.svg");
+  background-size: cover; /* or contain depending on the effect you want */
+  background-repeat: no-repeat;
+  /* background-position: 50% 100%; */
+}

@@ -3,7 +3,8 @@ import { RootState } from "../../../store/store";
 import DirectMessagesNavigation from "./DirectMessagesNavigation";
 import FindOrStartConversation from "./FindOrStartConversation";
 import NavigationButtton from "./NavigationButtton";
-import UserProfile from "./UserProfile";
+import { useNavigate } from "react-router-dom";
+import UserProfileHomeNavigation from "./UserProfile";
 
 const NavFriendsIcon = () => (
   <svg
@@ -110,6 +111,7 @@ const ShopIcon = () => (
 
 const Navigation = () => {
   const user = useSelector((state: RootState) => state.user);
+  const nav = useNavigate();
 
   return (
     <div className=" bg-SidebarServerWithoutIcon h-full w-60 flex justify-between flex-col">
@@ -120,7 +122,9 @@ const Navigation = () => {
         <div className="text-TextGray px-2 py-2">
           <NavigationButtton
             label="Friends"
-            onClickHandler={() => {}}
+            onClickHandler={() => {
+              nav("/channels/@me");
+            }}
             Icon={<NavFriendsIcon />}
           />
           <NavigationButtton
@@ -142,7 +146,7 @@ const Navigation = () => {
         <DirectMessagesNavigation />
       </div>
       <div>
-        <UserProfile user={user} />
+        <UserProfileHomeNavigation user={user} />
       </div>
     </div>
   );

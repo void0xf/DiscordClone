@@ -1,16 +1,19 @@
-import React from 'react';
-import { NavigationButtonProps } from '../../../types/Button.t';
+import React from "react";
+import { NavigationButtonProps } from "../../../types/Button.t";
 
 // Correct destructuring to include `children` within props
-const NavigationButtton: React.FC<NavigationButtonProps> = ({ Icon, label }) => {
+const NavigationButtton: React.FC<NavigationButtonProps> = ({
+  Icon,
+  label,
+  onClickHandler,
+}) => {
   return (
-    <button className='flex font-normal text-lg gap-3 font-ggSansMedium hover:bg-HoverText p-2 w-full rounded-lg items-center'>
-      <div>
-        {Icon}
-      </div>
-      <div>
-        {label}  
-      </div>  
+    <button
+      className="flex font-normal text-lg gap-3 font-ggSansMedium hover:bg-HoverText p-2 w-full rounded-lg items-center"
+      onClick={() => onClickHandler()}
+    >
+      <div>{Icon}</div>
+      <div>{label}</div>
     </button>
   );
 };

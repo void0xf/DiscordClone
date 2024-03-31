@@ -13,7 +13,7 @@ const FriendsNavigation: React.FC<FriendsNavigationProps> = ({
   setSelectedTab,
 }) => {
   return (
-    <div>
+    <div className="flex gap-4 items-baseline">
       <TabTittleButton
         label="Online"
         onclickHandler={setSelectedTab}

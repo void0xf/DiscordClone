@@ -18,8 +18,12 @@ const TabTittleButton: React.FC<TabTittleButtonProps> = ({
 
   return (
     <button
-      className={`${selectedTab == label ? "bg-gray-200" : "bg-transparent"}
-      px-4 `}
+      className={`font-ggSansMedium ${
+        selectedTab == label
+          ? "bg-SelectedFriendTab rounded-md text-white"
+          : "bg-transparent"
+      }
+      px-2 `}
       onClick={() => hanleOnClick()}
     >
       {label}

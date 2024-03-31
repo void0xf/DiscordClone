@@ -56,9 +56,10 @@ const Friends = () => {
       <TabTittleBar>
         <div className="w-full flex justify-between">
           <div className="flex">
-            <div className=" flex justify-start items-center px-2">
+            <div className=" flex justify-start items-center px-4">
               <NavFriendsIcon />
               <span className="font-ggSansMedium text-white pl-2">Friends</span>
+              <div className="h-6 w-[1px] bg-SelectedFriendTab ml-4"></div>
             </div>
             <div className="items-center flex">
               <FriendsNavigation

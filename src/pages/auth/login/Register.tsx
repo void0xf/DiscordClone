@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import FormButton from "../../../components/common/AuthPage/FormButton";
 import Link from "../../../components/common/AuthPage/Link";
@@ -15,13 +15,13 @@ export const Register = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  const [login, setActiveLogin] = useState<string | null>(null);
-  const [nickname, setNickName] = useState<string | null>(null);
-  const [name, setName] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
   const [activeOptionDay, setActiveOptionDay] = useState<string>();
   const [activeOptionMonth, setActiveOptionMonth] = useState<string>();
   const [activeOptionYear, setactiveOptionYear] = useState<string>();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const nickNameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const [days] = useState<string[]>(
     [...Array(31).keys()].map((x) => (x + 1).toString())
@@ -47,25 +47,38 @@ export const Register = () => {
   ]);
 
   const handleSetLogin = (text: string) => {
-    setActiveLogin(text);
+    return text;
   };
   const handleSetNickname = (text: string) => {
-    setNickName(text);
+    return text;
   };
   const handleSetName = (text: string) => {
-    setName(text);
+    return text;
   };
   const hadnleSetPassword = (text: string) => {
-    setPassword(text);
+    return text;
   };
 
   const handleRegister = async () => {
-    if (login && nickname && name && password) {
+    console.log(
+      emailRef.current?.value,
+      nickNameRef.current?.value,
+      nameRef.current?.value,
+      passwordRef.current?.value
+    );
+
+    if (
+      emailRef.current?.value &&
+      nickNameRef.current?.value &&
+      nameRef.current?.value &&
+      passwordRef.current?.value
+    ) {
       const UserData: User = {
         id: uuidv4(),
-        nickName: nickname,
-        profilePicture: "Default",
-        name: name,
+        nickName: nickNameRef.current?.value,
+        profilePicture:
+          "https://qph.cf2.quoracdn.net/main-qimg-79328e1b72fb21811c72f9e1dbebed14",
+        name: nameRef.current?.value,
         servers: [],
         friends: [],
         incomingFriendRequests: [],
@@ -74,7 +87,11 @@ export const Register = () => {
         status: UserStatus.online,
         birth: `${activeOptionDay}-${activeOptionMonth}-${activeOptionYear}`,
       };
-      const res = await createNewUser(login, password, UserData);
+      const res = await createNewUser(
+        emailRef.current?.value,
+        passwordRef.current?.value,
+        UserData
+      );
       dispatch(setUser(UserData));
       if (res) {
         nav("/channels/@me");
@@ -94,24 +111,28 @@ export const Register = () => {
             onInputChange={handleSetLogin}
             hiddeInput={false}
             required={true}
+            inputRef={emailRef}
           />
           <UserInputForm
             label="Wyświetlana nazwa"
             onInputChange={handleSetNickname}
             hiddeInput={false}
             required={true}
+            inputRef={nickNameRef}
           />
           <UserInputForm
             label="Nazwa użytkownika"
             onInputChange={handleSetName}
             hiddeInput={false}
             required={true}
+            inputRef={nameRef}
           />
           <UserInputForm
             label="Hasło"
             onInputChange={hadnleSetPassword}
             hiddeInput={true}
             required={true}
+            inputRef={passwordRef}
           />
           <div>
             <p className="text-darkWhite uppercase text-xs font-bold pt-[21px] pb-2 ">
@@ -152,8 +173,10 @@ export const Register = () => {
               </Selectt>
             </div>
           </div>
-          <div className="flex items-center mb-4"></div>
-          <FormButton label="Kontynuuj" onClickHandler={handleRegister} />
+          <div className="flex items-center"></div>
+          <div className="h-16 flex">
+            <FormButton label="Kontynuuj" onClickHandler={handleRegister} />
+          </div>
           <div className="flex pt-2">
             <span className="text-darkWhite text-sm">Potrzebujesz konta?</span>
             <Link label="Masz już konto?" navigateTo="/login" />

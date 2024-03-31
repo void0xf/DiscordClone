@@ -1,5 +1,6 @@
 import {
   DocumentSnapshot,
+  addDoc,
   arrayRemove,
   arrayUnion,
   collection,
@@ -137,12 +138,40 @@ export async function acceptFriendRequest(name: string) {
 
   if (targetUID !== null && myuid !== "") {
     const userRef = doc(firestore, "users", myuid as string);
+    const targetRef = doc(firestore, "users", targetUID);
     try {
       await updateDoc(userRef, {
         incomingFriendRequests: arrayRemove(targetUID),
       });
+      await updateDoc(targetRef, {
+        outgoingFriendRequests: arrayRemove(myuid),
+      });
+      await updateDoc(targetRef, {
+        friends: arrayUnion(myuid),
+      });
       await updateDoc(userRef, {
         friends: arrayUnion(targetUID),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export async function removeFromFriends(name: string) {
+  const myuid = (await getCurrentUserUID()) as string;
+  const firestore = getFirestore();
+  const targetUID = await getUIDfromName(name);
+
+  if (targetUID !== null && myuid !== "") {
+    const userRef = doc(firestore, "users", myuid as string);
+    const targetRef = doc(firestore, "users", targetUID);
+    try {
+      await updateDoc(userRef, {
+        friends: arrayRemove(targetUID),
+      });
+      await updateDoc(targetRef, {
+        friends: arrayRemove(myuid),
       });
     } catch (error) {
       console.log(error);
@@ -194,4 +223,89 @@ export async function syncStateFromFirestore(
   const myUID = (await getCurrentUserUID()) as string;
   const newUserInfo: User = (await getUserStateFromFirestore(myUID)) as User;
   dispatch(setUser(newUserInfo));
+}
+
+export async function findConversation(targetUID: string) {
+  const firestore = getFirestore();
+  const conversationRef = collection(firestore, "conversations");
+  const q = query(
+    conversationRef,
+    where("members", "array-contains", targetUID)
+  );
+
+  try {
+    const querySnapshot = await getDocs(q);
+    for (const doc of querySnapshot.docs) {
+      return doc.id;
+    }
+    return null;
+  } catch (error) {
+    console.error("Error searching for conversation:", error);
+    throw new Error("Error searching for conversation");
+  }
+}
+
+export async function createConversation(targetUID: string) {
+  const myuid = (await getCurrentUserUID()) as string;
+
+  const firestore = getFirestore();
+  const conversationRef = collection(firestore, "conversations");
+  const userRef = await doc(firestore, "users", myuid);
+  await updateDoc(userRef, {
+    DirectMessages: arrayUnion(targetUID),
+  });
+
+  const converstaionDoc = await addDoc(conversationRef, {
+    members: [targetUID, myuid],
+    messages: [],
+  });
+  return converstaionDoc.id;
+}
+
+export interface Message {
+  sender: string;
+  text: string;
+  timestamp: number;
+}
+
+export function listenAndGetMessages(
+  conversationId: string,
+  callback: (messages: Message[]) => void
+) {
+  const db = getFirestore();
+  const conversationRef = doc(db, "conversations", conversationId);
+
+  return onSnapshot(
+    conversationRef,
+    (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        const messages = data.messages || [];
+        callback(messages);
+      } else {
+        callback([]);
+      }
+    },
+    (error) => {
+      console.error("Error getting messages:", error);
+    }
+  );
+}
+
+export function sendMessage(conversationId: string, message: Message) {
+  const db = getFirestore();
+  const conversationRef = doc(db, "conversations", conversationId);
+
+  updateDoc(conversationRef, {
+    messages: arrayUnion(message),
+  });
+}
+
+export async function getUsersFromUID(userIds: string[]) {
+  const usersPromises = userIds.map((userId) => {
+    return getUserStateFromFirestore(userId);
+  });
+
+  const users = await Promise.all(usersPromises);
+  return users.filter(Boolean);
 }

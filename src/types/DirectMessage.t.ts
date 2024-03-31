@@ -1,5 +1,5 @@
-import { UserPreview } from "./user.t"
+import { User } from "./user.t";
 
 export type DirectMessageProps = {
-  UserInfo: UserPreview 
-}
+  UserInfo: User;
+};

@@ -16,9 +16,9 @@ const AddFriendButton: React.FC<TabTittleFriendButtonProps> = ({
     <button
       className={`${
         selectedTab == label
-          ? "text-green-600 bg-transparent"
-          : "bg-green-600 rounded-md"
-      }`}
+          ? "text-green-500 bg-transparent"
+          : "bg-green-700 rounded-md text-white"
+      } rounded-md px-2 font-ggSansMedium`}
       onClick={() => {
         onclickHandler(label as DisplayFriendsTabs);
       }}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import QRcode from "../../../components/presentational/QRcode";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import Link from "../../../components/common/AuthPage/Link";
@@ -13,6 +13,8 @@ import { User } from "../../../types/user.t";
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const loginInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -52,12 +54,14 @@ const Login = () => {
             onInputChange={handleSetEmail}
             required={true}
             hiddeInput={false}
+            inputRef={loginInputRef}
           />
           <UserInputForm
             label="Hasło"
             onInputChange={handleSetPassword}
             required={true}
             hiddeInput={true}
+            inputRef={passwordInputRef}
           />
 
           <a href="">
@@ -65,7 +69,9 @@ const Login = () => {
               Nie pamiętasz hasła?
             </p>
           </a>
-          <FormButton label="Zaloguj się" onClickHandler={handleLogin} />
+          <div className="h-16 flex">
+            <FormButton label="Zaloguj się" onClickHandler={handleLogin} />
+          </div>
 
           <div className="flex pt-2">
             <span className="text-darkWhite text-sm">Potrzebujesz konta?</span>

@@ -7,6 +7,10 @@ import {
   syncStateFromFirestore,
 } from "../../../firebase/firestore";
 import { useDispatch } from "react-redux";
+import UserProfile from "../../common/UserProfile";
+import FriendAction from "./FriendAction";
+import { IoCloseOutline } from "react-icons/io5";
+import { Check, X } from "lucide-react";
 
 type PendingRequestType = "Incoming" | "Outgoing";
 
@@ -34,33 +38,63 @@ const DisplayPendingRequest: React.FC<{
   return (
     <div>
       {pendingType === "Incoming" ? (
-        <div className="flex">
-          <div>{user.name}</div>
-          <button
-            onClick={() => {
-              handleAccept(user.name);
-            }}
+        <div>
+          <div className="h-[1px] w-full bg-SelectedFriendTab"></div>
+          <div
+            className="flex justify-between border-t-[1px] border-SelectedFriendTab 
+          hover:bg-SelectedUserTab rounded-md px-2 hover:cursor-pointer py-4 cursor-pointer "
           >
-            Accept
-          </button>
-          <button
-            onClick={() => {
-              handleDecline(user.name);
-            }}
-          >
-            Decline
-          </button>
+            <UserProfile
+              UserData={user}
+              showNameOnHover={true}
+              showOnlineStatus={false}
+              additionalInfo="Incoming Friend Request"
+            />
+            <div className="flex gap-4">
+              <div className="flex items-center gap-2">
+                <FriendAction
+                  icon={<Check strokeWidth={2} />}
+                  label="Accept"
+                  onClickHandler={() => {
+                    handleAccept(user.name);
+                  }}
+                  hoverColor="accept"
+                />
+                <FriendAction
+                  icon={<X strokeWidth={2} />}
+                  label="Igonore"
+                  onClickHandler={() => {
+                    handleDecline(user.name);
+                  }}
+                  hoverColor="decline"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="flex">
-          <div>{user.name}</div>
-          <button
-            onClick={() => {
-              handleCancelRequest(user.name);
-            }}
-          >
-            Cancel Friend Request
-          </button>
+        <div>
+          <div className="h-[1px] w-full bg-SelectedFriendTab"></div>
+          <div className="flex justify-between">
+            <UserProfile
+              UserData={user}
+              showNameOnHover={true}
+              showOnlineStatus={false}
+              additionalInfo="Outgoing Friend Request"
+            />
+            <div className="flex gap-4 items-center">
+              <div>
+                <FriendAction
+                  icon={<IoCloseOutline />}
+                  label="Cancel"
+                  onClickHandler={() => {
+                    handleCancelRequest(user.name);
+                  }}
+                  hoverColor="decline"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

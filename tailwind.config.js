@@ -25,11 +25,15 @@ export default {
 
         LightGray: "#313338",
 
+        SelectedFriendTab: "#4E505899",
+        SelectedUserTab: "#4E50584C",
         //AppNavbar
         TextGray: "#949ba4",
         HoverText: "#35373c",
 
         DarkGray: "#232428",
+
+        FriendActionIconBackground: "#2b2b31",
 
         //Auth
         FromBackground: "#313338",
