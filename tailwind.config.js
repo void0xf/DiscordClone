@@ -30,6 +30,7 @@ export default {
         //AppNavbar
         TextGray: "#949ba4",
         HoverText: "#35373c",
+        DirectMessageStrangerInfoButton: "#4e5058",
 
         DarkGray: "#232428",
 
