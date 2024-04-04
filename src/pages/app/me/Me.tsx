@@ -24,7 +24,7 @@ const Me = () => {
       <section className="h-screen">
         <Navigation />
       </section>
-      <section className="h-screen w-full flex flex-auto flex-col border-l-[1px] border-notQuiteBlack">
+      <section className=" max-h-screen w-full flex flex-auto flex-col border-l-[1px] border-notQuiteBlack">
         <Outlet />
       </section>
     </div>

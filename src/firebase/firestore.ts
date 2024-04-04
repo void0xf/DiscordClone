@@ -309,3 +309,24 @@ export async function getUsersFromUID(userIds: string[]) {
   const users = await Promise.all(usersPromises);
   return users.filter(Boolean);
 }
+
+export async function getStrangerInfoFromConversation(converstaionID: string) {
+  const db = getFirestore();
+  const conversationRef = doc(db, "conversations", converstaionID);
+  const myUID = (await getCurrentUserUID()) as string;
+
+  const conversationDoc = await getDoc(conversationRef);
+  if (conversationDoc.exists()) {
+    const data = conversationDoc.data();
+
+    if (data) {
+      const members = data.members as string[];
+      const strangerUID = members.find((uid) => uid !== myUID);
+
+      if (strangerUID) {
+        return (await getUserStateFromFirestore(strangerUID)) as User;
+      }
+    }
+  }
+  return null;
+}

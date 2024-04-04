@@ -31,7 +31,7 @@ export default {
         TextGray: "#949ba4",
         HoverText: "#35373c",
         DirectMessageStrangerInfoButton: "#4e5058",
-
+        MessageInputBackground: "#383a40",
         DarkGray: "#232428",
 
         FriendActionIconBackground: "#2b2b31",

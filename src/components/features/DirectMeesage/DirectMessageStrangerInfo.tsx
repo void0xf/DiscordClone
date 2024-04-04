@@ -34,7 +34,7 @@ const DirectMessageStrangerInfo: React.FC<DirectMessageStrangerInfoProps> = ({
         <p className="font-ggSansBold text-gray-300">{user.nickName}.</p>
       </div>
       <div className="flex items-center text-gray-300">
-        <p className="text-sm text-gray-400">2 Mutual Servers</p>
+        <p className="text-sm text-gray-400">0 Mutual Servers</p>
         <div className="h-1 w-1 rounded-full bg-gray-600 mx-4"></div>
         <div className="flex gap-2">
           <DirectMessageStrangerInfoButton
