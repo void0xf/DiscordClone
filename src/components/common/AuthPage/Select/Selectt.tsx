@@ -32,7 +32,7 @@ const Selectt: React.FC<SelectProps> = (props) => {
         />
       </div>
 
-      <div className=" outline-none w-[95%] h-[40px] rounded-sm bg-zinc-800 text-gray-300 px-[10px] pb-1  ">
+      <div className=" outline-none w-[95%] h-[40px] rounded-sm bg-inputColor text-TextGray px-[8px] pt-1">
         <div className="h-[50px] overflow-hidden border-none flex p-1">
           {selectedValue ? selectedValue : label}
         </div>

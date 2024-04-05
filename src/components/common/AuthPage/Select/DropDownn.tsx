@@ -35,10 +35,10 @@ const DropDownn: React.FC<DropDownProps> = ({ items, onSelectHandler }) => {
   return (
     <div>
       <div
-        className="dropDown overflow-x-hidden w-[95%] h-[215px] bg-zinc-700 border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
+        className="dropDown overflow-x-hidden w-[95%] h-[215px] bg-FromBackground border-stone-900 shadow-sm shadow-zinc-900 border absolute my-[-215px] rounded-md
                           scrollbar-thin scrollbar-webkit -webkit-scrollbar-track"
       >
-        <div className="box overflow-hidden w-[125px] h-auto bg-zinc-700">
+        <div className="box overflow-hidden w-[125px] h-auto">
           {Array.isArray(items) ? (
             items.map((Element: ReactNode) => {
               if (Element) {

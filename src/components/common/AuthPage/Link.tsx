@@ -10,7 +10,7 @@ const Link: React.FC<Link> = ({label, navigateTo}) => {
   const nav = useNavigate();
 
   return (
-    <div className='text-veryLightBlue pl-2 hover:underline text-sm cursor-pointer' onClick={() => {nav(navigateTo)}}>
+    <div className='text-veryLightBlue pl-2 hover:underline text-sm cursor-pointer pb-4' onClick={() => {nav(navigateTo)}}>
       {label}
     </div>
   )
