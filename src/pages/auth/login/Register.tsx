@@ -8,27 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { User, UserStatus } from "../../../types/user.t.js";
 import Selectt from "../../../components/common/AuthPage/Select/Selectt.tsx";
 import DropDownItem from "../../../components/common/AuthPage/Select/DropDownItem.tsx";
-<<<<<<< Updated upstream
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice.ts";
+import CheckBox from "../../../components/common/AuthPage/CheckBox.tsx";
+import CheckBoxPolicy from "../../../components/common/AuthPage/CheckBoxPolicy.tsx";
 
 export const Register = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
-
-=======
-import CheckBox from "../../../components/common/AuthPage/CheckBox.tsx";
-import CheckBoxPolicy from "../../../components/common/AuthPage/CheckBoxPolicy.tsx"
-
-export const Register = () => {
-  const nav = useNavigate();
-  const [activeButton,setActiveButton] = useState(false)
-  const [isInputClicked,setIsInputClicked] = useState(false)
-  const [login, setActiveLogin] = useState<string | null>(null);
-  const [nickname, setNickName] = useState<string | null>(null);
-  const [name, setName] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
->>>>>>> Stashed changes
+  const [activeButton, setActiveButton] = useState(false);
   const [activeOptionDay, setActiveOptionDay] = useState<string>();
   const [activeOptionMonth, setActiveOptionMonth] = useState<string>();
   const [activeOptionYear, setactiveOptionYear] = useState<string>();
@@ -78,7 +66,10 @@ export const Register = () => {
       emailRef.current?.value,
       nickNameRef.current?.value,
       nameRef.current?.value,
-      passwordRef.current?.value
+      passwordRef.current?.value,
+      activeOptionDay,
+      activeOptionMonth,
+      activeOptionYear
     );
 
     if (
@@ -113,125 +104,95 @@ export const Register = () => {
     }
   };
   return (
-    
     <div className="flex justify-center items-center h-screen divWithSVGBackgroundAuth">
       <div className='rounded-md flex min-h-[730px] max-h-[900px] w-[480px] font-"ggsans-Normal" bg-FromBackground shadow-lg'>
         <div className="flex-auto w-96 flex-col px-8">
           <div className="container h-full pb-2">
-          <h1 className="text-whiteMain text-2xl flex justify-center pt-7 pb-[10px] font-semibold">
-            Załóż konto
-          </h1>
+            <h1 className="text-whiteMain text-2xl flex justify-center pt-7 pb-[10px] font-semibold">
+              Załóż konto
+            </h1>
 
-          <UserInputForm
-            label="Adres e-mail"
-            onInputChange={handleSetLogin}
-            hiddeInput={false}
-            required={true}
-<<<<<<< Updated upstream
-            inputRef={emailRef}
-          />
-=======
-            isInputClicked={(isInputClicked) => setIsInputClicked(isInputClicked)}
+            <UserInputForm
+              label="Adres e-mail"
+              onInputChange={handleSetLogin}
+              hideInput={false}
+              required={true}
+              inputRef={emailRef}
             />
->>>>>>> Stashed changes
-          <UserInputForm
-            label="Wyświetlana nazwa"
-            onInputChange={handleSetNickname}
-            hiddeInput={false}
-            required={true}
-<<<<<<< Updated upstream
-            inputRef={nickNameRef}
-          />
-=======
-            isInputClicked={(isInputClicked) => setIsInputClicked(isInputClicked)}
-            text="Tak będą widzieć cię inni użytkownicy. Możesz użyć znaków specjalnych i emoji"
+            <UserInputForm
+              label="Wyświetlana nazwa"
+              onInputChange={handleSetNickname}
+              hideInput={false}
+              required={true}
+              inputRef={nickNameRef}
+              text="Tak będą widzieć cię inni użytkownicy. Możesz użyć znaków specjalnych i emoji"
             />
->>>>>>> Stashed changes
-          <UserInputForm
-          label="Nazwa użytkownika"
-          onInputChange={handleSetName}
-          hiddeInput={false}
-            required={true}
-<<<<<<< Updated upstream
-            inputRef={nameRef}
-          />
-          <UserInputForm
-            label="Hasło"
-            onInputChange={hadnleSetPassword}
-            hiddeInput={true}
-            required={true}
-            inputRef={passwordRef}
-=======
-            isInputClicked={(isInputClicked) => setIsInputClicked(isInputClicked)}
-            text="Używaj tylko cyfr, liter, podkreślników _ i kropek."
-
+            <UserInputForm
+              label="Nazwa użytkownika"
+              onInputChange={handleSetName}
+              hideInput={false}
+              required={true}
+              inputRef={nameRef}
+              text="Używaj tylko cyfr, liter, podkreślników _ i kropek."
             />
-          <UserInputForm
-          label="Hasło"
-          onInputChange={hadnleSetPassword}
-          hiddeInput={true}
-          isInputClicked={(isInputClicked) => setIsInputClicked(isInputClicked)}
-          required={true}
->>>>>>> Stashed changes
-          />
-          <div>
-            <p className="text-darkWhite uppercase text-xs font-bold pt-3 pb-2 ">
-              data urodzenia
-            </p>
-            <div className="flex flex-auto">
-              <Selectt
-                label="Dzień"
-                onSelectHandler={(selectedOption: string) => {
-                  setActiveOptionDay(selectedOption);
-                }}
-              >
-                {days.map((number) => (
-                  <DropDownItem>{number}</DropDownItem>
+            <UserInputForm
+              label="Hasło"
+              onInputChange={hadnleSetPassword}
+              hideInput={true}
+              inputRef={passwordRef}
+              required={true}
+            />
+            <div>
+              <p className="text-darkWhite uppercase text-xs font-bold pt-3 pb-2 ">
+                data urodzenia
+              </p>
+              <div className="flex flex-auto">
+                <Selectt
+                  label="Dzień"
+                  onSelectHandler={(selectedOption: string) => {
+                    setActiveOptionDay(selectedOption);
+                  }}
+                >
+                  {days.map((number) => (
+                    <DropDownItem>{number}</DropDownItem>
                   ))}
-              </Selectt>
+                </Selectt>
 
-              <Selectt
-                label="Miesiąc"
-                onSelectHandler={(selectedOption: string) => {
-                  console.log(setActiveOptionMonth(selectedOption));
-                }}
-              >
-                {Months.map((month) => (
-                  <DropDownItem>{month}</DropDownItem>
+                <Selectt
+                  label="Miesiąc"
+                  onSelectHandler={(selectedOption: string) => {
+                    console.log(setActiveOptionMonth(selectedOption));
+                  }}
+                >
+                  {Months.map((month) => (
+                    <DropDownItem>{month}</DropDownItem>
                   ))}
-              </Selectt>
+                </Selectt>
 
-              <Selectt
-                label="Rok"
-                onSelectHandler={(selectedOption: string) => {
-                  setactiveOptionYear(selectedOption);
-                }}
-              >
-                {years.map((number) => (
-                  <DropDownItem>{number}</DropDownItem>
+                <Selectt
+                  label="Rok"
+                  onSelectHandler={(selectedOption: string) => {
+                    setactiveOptionYear(selectedOption);
+                  }}
+                >
+                  {years.map((number) => (
+                    <DropDownItem>{number}</DropDownItem>
                   ))}
-              </Selectt>
+                </Selectt>
+              </div>
+
+              <CheckBox />
             </div>
-
-                  <CheckBox/>
-          </div>
-<<<<<<< Updated upstream
-          <div className="flex items-center"></div>
-          <div className="h-16 flex">
-            <FormButton label="Kontynuuj" onClickHandler={handleRegister} />
-          </div>
-          <div className="flex pt-2">
-            <span className="text-darkWhite text-sm">Potrzebujesz konta?</span>
+            <FormButton
+              label="Kontynuuj"
+              onClickHandler={handleRegister}
+              activeBoolean={activeButton}
+            />
+            <CheckBoxPolicy
+              activeButton={(isActive) => setActiveButton(isActive)}
+            />
             <Link label="Masz już konto?" navigateTo="/login" />
           </div>
-=======
-          <FormButton label="Kontynuuj" onClickHandler={handleRegister} 
-          activeBoolean={activeButton}/>
-          <CheckBoxPolicy 
-          activeButton={(isActive) => setActiveButton(isActive)}/>
-          <Link label="Masz już konto?" navigateTo="/login" />
-        </div>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>

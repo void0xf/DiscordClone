@@ -53,14 +53,14 @@ const Login = () => {
             label="ADRES E-MAIL LUB NUMER TELEFONU"
             onInputChange={handleSetEmail}
             required={true}
-            hiddeInput={false}
+            hideInput={false}
             inputRef={loginInputRef}
           />
           <UserInputForm
             label="Hasło"
             onInputChange={handleSetPassword}
             required={true}
-            hiddeInput={true}
+            hideInput={true}
             inputRef={passwordInputRef}
           />
 
@@ -69,8 +69,12 @@ const Login = () => {
               Nie pamiętasz hasła?
             </p>
           </a>
-          <div className="h-16 flex">
-            <FormButton label="Zaloguj się" onClickHandler={handleLogin} />
+          <div className="h-16 flex w-full">
+            <FormButton
+              label="Zaloguj się"
+              onClickHandler={handleLogin}
+              activeBoolean={true}
+            />
           </div>
 
           <div className="flex pt-2">

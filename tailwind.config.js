@@ -8,26 +8,15 @@ export default {
           "0 1px 0 hsl(0, 0%, 0.8%) / 20%, 0 1.5px 0 hsl(240, 7.7%, 2.5%) / 5%, 0 2px 0 hsl(0, 0%, 0.8%) / 5%",
       },
       colors: {
-<<<<<<< Updated upstream
         brandColor: "#404eed",
         notQuiteBlack: "#23272a",
+        inputColor: "#1F2021",
         lightBlue: "#5865f2",
         whiteMain: "#F2F3F5",
         darkWhite: "#B5BAC1",
         mainTheme: "#262626",
         veryLightBlue: "#00a8fc",
-=======
-        brandColor: '#404eed',
-        notQuiteBlack: '#23272a',
-        inputColor: '#1F2021',
-        lightBlue: '#5865f2',
-        whiteMain: '#F2F3F5',
-        darkWhite: '#B5BAC1',
-        mainTheme: '#262626',
-        veryLightBlue: '#00a8fc',
-        
 
->>>>>>> Stashed changes
         //SidebarColors
         SidebarServerWithoutIcon: "#313338",
         SidebarBackground: "#1e1f22",
