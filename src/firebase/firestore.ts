@@ -179,6 +179,18 @@ export async function removeFromFriends(name: string) {
   }
 }
 
+export function removeFromUserFromDms(uid: string) {
+  getCurrentUserUID().then((myuid) => {
+    if (myuid !== null) {
+      const firestore = getFirestore();
+      const userRef = doc(firestore, "users", myuid as string);
+      updateDoc(userRef, {
+        DirectMessages: arrayRemove(uid),
+      });
+    }
+  });
+}
+
 export async function declineFriendRequest(name: string) {
   const myuid = (await getCurrentUserUID()) as string;
   const firestore = getFirestore();
@@ -223,6 +235,14 @@ export async function syncStateFromFirestore(
   const myUID = (await getCurrentUserUID()) as string;
   const newUserInfo: User = (await getUserStateFromFirestore(myUID)) as User;
   dispatch(setUser(newUserInfo));
+}
+
+export function addStrangerToUserDMs(targetUID: string, myUID: string) {
+  const firestore = getFirestore();
+  const userRef = doc(firestore, "users", myUID);
+  updateDoc(userRef, {
+    DirectMessages: arrayUnion(targetUID),
+  });
 }
 
 export async function findConversation(targetUID: string, myUID: string) {

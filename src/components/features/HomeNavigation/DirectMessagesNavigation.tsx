@@ -1,7 +1,6 @@
 import { GoPlus } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { useParams } from "react-router-dom";
 import { getUsersFromUID } from "../../../firebase/firestore";
 import { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
@@ -9,18 +8,21 @@ import DirectMessage from "./DirectMessage";
 
 const DirectMessagesNavigation = () => {
   const user = useSelector((state: RootState) => state.user);
-  const { conversationID } = useParams();
   const [usersToDisplay, setUsersToDisplay] = useState<User[]>([]);
 
+  async function getUsersFromDMs() {
+    const res = await getUsersFromUID(user.DirectMessages as string[]);
+    return res;
+  }
+
   useEffect(() => {
-    if (!conversationID) return;
-    getUsersFromUID(user.DirectMessages as string[]).then((result) => {
-      setUsersToDisplay(result as User[]);
+    getUsersFromDMs().then((res) => {
+      setUsersToDisplay(res as User[]);
     });
-  }, [conversationID]);
+  }, [user.DirectMessages.length]);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <div className="flex justify-between px-4 text-xs font-ggSansMedium">
         <p className="text-TextGray">DIRECT MESSAGES</p>
         <button className="text-TextGray text-lg">
@@ -31,7 +33,7 @@ const DirectMessagesNavigation = () => {
       <div className="text-TextGray">
         {usersToDisplay.map((user) => {
           return (
-            <div>
+            <div className="px-2 ">
               <DirectMessage UserInfo={user} />
             </div>
           );

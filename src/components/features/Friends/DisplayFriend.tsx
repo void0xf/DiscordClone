@@ -1,6 +1,7 @@
 import React from "react";
 import { User } from "../../../types/user.t";
 import {
+  addStrangerToUserDMs,
   createConversation,
   findConversation,
   getUIDfromName,
@@ -29,6 +30,8 @@ const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
     const conversationId = await findConversation(uid, myuid);
 
     if (conversationId) {
+      addStrangerToUserDMs(uid, myuid); // incase user deleted stranger from Dms
+      syncStateFromFirestore(dispatch);
       nav(`/channels/${conversationId}`);
     } else {
       const createdConversationId = await createConversation(uid);

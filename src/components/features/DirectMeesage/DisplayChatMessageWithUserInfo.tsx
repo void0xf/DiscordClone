@@ -33,8 +33,6 @@ const formatDate = (timestamp: number): string => {
 const DisplayChatMessageWithUserInfo: React.FC<
   DisplayChatMessageWithUserInfoProps
 > = ({ message, UserInfo }) => {
-  console.log(message.timestamp);
-
   return (
     <div>
       {UserInfo ? (
