@@ -225,7 +225,7 @@ export async function syncStateFromFirestore(
   dispatch(setUser(newUserInfo));
 }
 
-export async function findConversation(targetUID: string) {
+export async function findConversation(targetUID: string, myUID: string) {
   const firestore = getFirestore();
   const conversationRef = collection(firestore, "conversations");
   const q = query(
@@ -236,7 +236,10 @@ export async function findConversation(targetUID: string) {
   try {
     const querySnapshot = await getDocs(q);
     for (const doc of querySnapshot.docs) {
-      return doc.id;
+      const data = doc.data();
+      if (data.members.includes(myUID)) {
+        return doc.id;
+      }
     }
     return null;
   } catch (error) {

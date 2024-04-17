@@ -26,7 +26,6 @@ import { RootState } from "../../../store/store";
 
 const DirectMessage = () => {
   const { conversationID } = useParams();
-  // const inputRef = useRef<HTMLInputElement>(null);
   const [strangerInfo, setStrangerInfo] = useState<User>();
   const [isLoading, setIsLoading] = useState(true);
   const myUser = useSelector((state: RootState) => state.user);
@@ -36,7 +35,6 @@ const DirectMessage = () => {
       const fetchedStranger =
         await getStrangerInfoFromConversation(conversationID);
       if (fetchedStranger) {
-        console.log("if");
         setStrangerInfo(fetchedStranger as User);
         setIsLoading(false);
       }

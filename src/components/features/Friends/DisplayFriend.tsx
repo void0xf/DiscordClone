@@ -7,11 +7,12 @@ import {
   syncStateFromFirestore,
 } from "../../../firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import { BiSolidMessageRounded } from "react-icons/bi";
 import { IoMdMore } from "react-icons/io";
 import FriendAction from "./FriendAction";
+import { RootState } from "../../../store/store";
 
 interface DisplayFriendProps {
   UserData: User;
@@ -20,10 +21,13 @@ interface DisplayFriendProps {
 const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
   const nav = useNavigate();
   const dispatch = useDispatch();
+  const myUser = useSelector((state: RootState) => state.user);
 
   const handleSendMessage = async () => {
     const uid = (await getUIDfromName(UserData.name)) as string;
-    const conversationId = await findConversation(uid);
+    const myuid = (await getUIDfromName(myUser.name)) as string;
+    const conversationId = await findConversation(uid, myuid);
+
     if (conversationId) {
       nav(`/channels/${conversationId}`);
     } else {
