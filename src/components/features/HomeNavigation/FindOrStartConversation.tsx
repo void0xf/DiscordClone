@@ -1,11 +1,14 @@
-import React from 'react'
-
 const FindOrStartConversation = () => {
   return (
     <div>
-      <button className='outline-none text-TextGray bg-SidebarBackground font-ggsansNormal text-sm pl-2 py-1 rounded-md min-w-52 text-left'>Find or start conversation</button>
+      <button
+        className="outline-none text-gray-400 bg-SidebarBackground font-ggsansNormal text-sm px-[0.4rem] py-1 rounded-[0.3rem] w-56 text-left
+      "
+      >
+        Find or start a conversation
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default FindOrStartConversation
+export default FindOrStartConversation;

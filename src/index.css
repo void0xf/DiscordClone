@@ -67,8 +67,22 @@ h6 {
 @font-face {
   font-family: "ggSansBold";
   src: url("/src/assets/fonts/ggsans-Bold.woff2") format("woff2");
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "ggSansExtraBold";
+  src: url("/src/assets/fonts/ggsans-ExtraBold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: "ggSansSemiBold";
+  src: url("/src/assets/fonts/ggsans-Semibold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: bold;
 }
 
 @font-face {

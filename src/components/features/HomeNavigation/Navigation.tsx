@@ -116,10 +116,10 @@ const Navigation = () => {
   return (
     <div className=" bg-DmsNavigationBg h-full w-60 flex justify-between flex-col">
       <div>
-        <div className="h-12 flex justify-center pt-2 pb-2 shadow-elevation-low border-b-[2px] border-notQuiteBlack">
+        <div className="h-12 flex justify-center pt-[0.6rem] pb-2  border-b-[2px] border-notQuiteBlack">
           <FindOrStartConversation />
         </div>
-        <div className="text-TextGray px-2 py-2">
+        <div className="text-TextGray px-3 py-2">
           <NavigationButtton
             label="Friends"
             onClickHandler={() => {

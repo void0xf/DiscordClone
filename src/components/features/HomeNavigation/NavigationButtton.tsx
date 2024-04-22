@@ -9,7 +9,7 @@ const NavigationButtton: React.FC<NavigationButtonProps> = ({
 }) => {
   return (
     <button
-      className="flex font-normal text-lg gap-3 font-ggSansMedium hover:bg-HoverText p-2 w-full rounded-lg items-center"
+      className="flex  gap-4 font-ggsansNormal  text-base hover:bg-HoverText p-2 w-full rounded-lg items-center py-[0.64rem]"
       onClick={() => onClickHandler()}
     >
       <div>{Icon}</div>
