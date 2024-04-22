@@ -38,6 +38,8 @@ export default {
 
         FriendActionIconBackground: "#2b2b31",
 
+        DmsNavigationBg: "#2b2d31",
+
         //Auth
         FromBackground: "#313338",
       },

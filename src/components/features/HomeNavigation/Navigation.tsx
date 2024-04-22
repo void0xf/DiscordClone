@@ -114,7 +114,7 @@ const Navigation = () => {
   const nav = useNavigate();
 
   return (
-    <div className=" bg-SidebarServerWithoutIcon h-full w-60 flex justify-between flex-col">
+    <div className=" bg-DmsNavigationBg h-full w-60 flex justify-between flex-col">
       <div>
         <div className="h-12 flex justify-center pt-2 pb-2 shadow-elevation-low border-b-[2px] border-notQuiteBlack">
           <FindOrStartConversation />
