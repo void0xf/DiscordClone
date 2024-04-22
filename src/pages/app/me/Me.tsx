@@ -9,6 +9,8 @@ import { Outlet } from "react-router-dom"; // Import Outlet
 const Me = () => {
   const dummyServers: ServerPreview[] = [
     { name: "Test", SvgIcon: ExampleServerIcon },
+    { name: "Hi" },
+    { name: "Test app My app ok?" },
   ];
   const user = useSelector((state: RootState) => state.user);
 
