@@ -42,6 +42,7 @@ const FormButton: React.FC<FromButton> = ({
             onClick={() => {
               onClickHandler();
             }}
+            type="submit"
           >
             {label}
           </button>

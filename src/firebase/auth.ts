@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseError, initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -40,8 +40,7 @@ export async function loginUser(email: string, password: string) {
     );
     return userCredential.user.uid;
   } catch (error) {
-    console.error("Error logging in:", error);
-    return false;
+    throw error;
   }
 }
 

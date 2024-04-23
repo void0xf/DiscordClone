@@ -65,6 +65,22 @@ h6 {
 }
 
 @font-face {
+  font-family: "ggSansNormalItalic";
+  src: url("/src/assets/fonts/ggsans-NormalItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ggSansMediumItalic";
+  src: url("/src/assets/fonts/ggsans-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "ggSansBold";
   src: url("/src/assets/fonts/ggsans-Bold.woff2") format("woff2");
   font-weight: 400;

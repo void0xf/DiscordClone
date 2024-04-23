@@ -55,6 +55,8 @@ export default {
       },
       fontFamily: {
         ggsansNormal: ["ggSansNormal", "sans"],
+        ggSansNormalItalic: ["ggSansNormalItalic", "sans"],
+        ggSansMediumItalic: ["ggSansMediumItalic", "sans"],
         ggSansBold: ["ggSansBold", "sans"],
         ggSansExtraBold: ["ggSansExtraBold", "sans"],
         ggSansSemiBold: ["ggSansSemiBold", "sans"],

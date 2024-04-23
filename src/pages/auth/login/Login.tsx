@@ -10,12 +10,14 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice";
 import { User } from "../../../types/user.t";
 import DiscordPageLogo from "../../../assets/icons/DiscordPageLogo.svg";
+import { FirebaseError } from "firebase/app";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const loginInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+  const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
   const nav = useNavigate();
 
@@ -28,13 +30,20 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const uid = await loginUser(email, password);
-      if (uid) {
-        const user: User | null = await getUserStateFromFirestore(uid);
-        if (user) {
-          dispatch(setUser(user));
+      try {
+        const uid = await loginUser(email, password);
+        setErrorCode("");
+        if (uid) {
+          const user: User | null = await getUserStateFromFirestore(uid);
+          if (user) {
+            dispatch(setUser(user));
+          }
+          nav("/channels/@me");
         }
-        nav("/channels/@me");
+      } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+          setErrorCode(error.code);
+        }
       }
     }
   };
@@ -54,34 +63,41 @@ const Login = () => {
               Cieszymy się,że znowu z nami jesteś!
             </p>
           </div>
-
-          <UserInputForm
-            label="ADRES E-MAIL LUB NUMER TELEFONU"
-            onInputChange={handleSetEmail}
-            required={true}
-            hideInput={false}
-            inputRef={loginInputRef}
-          />
-          <UserInputForm
-            label="Hasło"
-            onInputChange={handleSetPassword}
-            required={true}
-            hideInput={true}
-            inputRef={passwordInputRef}
-          />
-
-          <a href="">
-            <p className="text-veryLightBlue hover:underline text-sm pt-1">
-              Nie pamiętasz hasła?
-            </p>
-          </a>
-          <div className="h-16 flex w-full mt-4 ">
-            <FormButton
-              label="Zaloguj się"
-              onClickHandler={handleLogin}
-              activeBoolean={true}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <UserInputForm
+              label="ADRES E-MAIL LUB NUMER TELEFONU"
+              onInputChange={handleSetEmail}
+              required={true}
+              hideInput={false}
+              inputRef={loginInputRef}
+              errorCode={errorCode}
             />
-          </div>
+            <UserInputForm
+              label="Hasło"
+              onInputChange={handleSetPassword}
+              required={true}
+              hideInput={true}
+              inputRef={passwordInputRef}
+              errorCode={errorCode}
+            />
+
+            <a href="">
+              <p className="text-veryLightBlue hover:underline text-sm pt-1">
+                Nie pamiętasz hasła?
+              </p>
+            </a>
+            <div className="h-16 flex w-full mt-4 ">
+              <FormButton
+                label="Zaloguj się"
+                onClickHandler={handleLogin}
+                activeBoolean={true}
+              />
+            </div>
+          </form>
 
           <div className="flex">
             <span className="text-TextGray text-sm">Potrzebujesz konta?</span>
