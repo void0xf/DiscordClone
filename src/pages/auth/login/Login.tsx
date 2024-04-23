@@ -9,6 +9,7 @@ import { getUserStateFromFirestore } from "../../../firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice";
 import { User } from "../../../types/user.t";
+import DiscordPageLogo from "../../../assets/icons/DiscordPageLogo.svg";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
@@ -40,14 +41,19 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center h-screen divWithSVGBackgroundAuth">
-      <div className='rounded-md flex h-[420px] w-[800px] font-"ggsans-Normal" bg-FromBackground'>
-        <div className="flex-auto w-96 flex-col px-8">
-          <h1 className="text-whiteMain text-2xl flex justify-center pt-7 font-semibold">
-            Witamy ponownie!
-          </h1>
-          <p className="text-darkWhite flex justify-center p-1">
-            Cieszymy się,że znowu z nami jesteś!
-          </p>
+      <div className='w-full h-full md:justify-between xs:rounded-md xs:flex xs:h-[420px] xs:w-full xs:max-w-[50rem] font-"ggsans-Normal" bg-FromBackground xs:mx-16'>
+        <div className="flex-auto flex-col px-8">
+          <div className="justify-center flex mt-4 xs:hidden">
+            <img src={DiscordPageLogo} alt="DiscordLogo" className="h-8 " />
+          </div>
+          <div className="text-center text-nowrap ">
+            <h1 className="text-whiteMain text-2xl flex justify-center pt-7 font-semibold">
+              Witamy ponownie!
+            </h1>
+            <p className="text-darkWhite flex justify-center p-1">
+              Cieszymy się,że znowu z nami jesteś!
+            </p>
+          </div>
 
           <UserInputForm
             label="ADRES E-MAIL LUB NUMER TELEFONU"
@@ -83,7 +89,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="h-full w-[300px] flex items-center">
+        <div className="h-full max-w-[300px] items-center hidden md:visible md:flex ">
           <QRcode />
         </div>
       </div>

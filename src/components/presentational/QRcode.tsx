@@ -5,7 +5,7 @@ import DiscordLogoLoginQR from "../../assets/banners/DiscordQRCodeLogo.png";
 const QRcode = () => {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative max-w-fit max-h-fit mb-5 border-white border-8 rounded-md">
+      <div className="relative w-fit max-h-fit mb-5 border-white border-8 rounded-md">
         <img
           src={DiscordLoginQR}
           alt="QR code"
