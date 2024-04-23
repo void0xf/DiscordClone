@@ -104,9 +104,9 @@ export const Register = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen divWithSVGBackgroundAuth">
-      <div className='rounded-md flex min-h-[730px] max-h-[900px] w-[480px] font-"ggsans-Normal" bg-FromBackground shadow-lg'>
-        <div className="flex-auto w-96 flex-col px-8">
+    <div className="flex justify-center items-center w-full h-screen divWithSVGBackgroundAuth">
+      <div className='rounded-md flex hidde-scrollbar max-h-screen overflow-y-scroll w-[38%] font-"ggsans-Normal" bg-FromBackground shadow-lg'>
+        <div className="flex-auto flex-col px-8">
           <div className="container h-full pb-2">
             <h1 className="text-whiteMain text-2xl flex justify-center pt-7 pb-[10px] font-semibold">
               Załóż konto
