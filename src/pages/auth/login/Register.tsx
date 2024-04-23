@@ -20,6 +20,8 @@ export const Register = () => {
   const [activeOptionDay, setActiveOptionDay] = useState<string>();
   const [activeOptionMonth, setActiveOptionMonth] = useState<string>();
   const [activeOptionYear, setactiveOptionYear] = useState<string>();
+  const [errorCode, setErrorCode] = useState("");
+
   const emailRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -62,16 +64,6 @@ export const Register = () => {
   };
 
   const handleRegister = async () => {
-    console.log(
-      emailRef.current?.value,
-      nickNameRef.current?.value,
-      nameRef.current?.value,
-      passwordRef.current?.value,
-      activeOptionDay,
-      activeOptionMonth,
-      activeOptionYear
-    );
-
     if (
       emailRef.current?.value &&
       nickNameRef.current?.value &&
@@ -105,7 +97,7 @@ export const Register = () => {
   };
   return (
     <div className="flex justify-center items-center w-full h-screen divWithSVGBackgroundAuth">
-      <div className='rounded-md flex hidde-scrollbar max-h-screen overflow-y-scroll w-[38%] font-"ggsans-Normal" bg-FromBackground shadow-lg'>
+      <div className='rounded-md flex hidde-scrollbar max-h-screen overflow-y-scroll max-w-[30rem] font-"ggsans-Normal" bg-FromBackground shadow-lg'>
         <div className="flex-auto flex-col px-8">
           <div className="container h-full pb-2">
             <h1 className="text-whiteMain text-2xl flex justify-center pt-7 pb-[10px] font-semibold">
@@ -118,6 +110,7 @@ export const Register = () => {
               hideInput={false}
               required={true}
               inputRef={emailRef}
+              errorCode={errorCode}
             />
             <UserInputForm
               label="Wyświetlana nazwa"
@@ -126,6 +119,7 @@ export const Register = () => {
               required={true}
               inputRef={nickNameRef}
               text="Tak będą widzieć cię inni użytkownicy. Możesz użyć znaków specjalnych i emoji"
+              errorCode={errorCode}
             />
             <UserInputForm
               label="Nazwa użytkownika"
@@ -134,6 +128,7 @@ export const Register = () => {
               required={true}
               inputRef={nameRef}
               text="Używaj tylko cyfr, liter, podkreślników _ i kropek."
+              errorCode={errorCode}
             />
             <UserInputForm
               label="Hasło"
@@ -141,6 +136,7 @@ export const Register = () => {
               hideInput={true}
               inputRef={passwordRef}
               required={true}
+              errorCode={errorCode}
             />
             <div>
               <p className="text-darkWhite uppercase text-xs font-bold pt-3 pb-2 ">
