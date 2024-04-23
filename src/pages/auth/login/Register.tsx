@@ -12,15 +12,21 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice.ts";
 import CheckBox from "../../../components/common/AuthPage/CheckBox.tsx";
 import CheckBoxPolicy from "../../../components/common/AuthPage/CheckBoxPolicy.tsx";
+import { FirebaseError } from "firebase/app";
+import { isNameAvaliable } from "../../../firebase/firestore.ts";
+import { isValidDate } from "../../../utils/dateUtils.ts";
 
 export const Register = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const [activeButton, setActiveButton] = useState(false);
-  const [activeOptionDay, setActiveOptionDay] = useState<string>();
-  const [activeOptionMonth, setActiveOptionMonth] = useState<string>();
-  const [activeOptionYear, setactiveOptionYear] = useState<string>();
-  const [errorCode, setErrorCode] = useState("");
+  const [activeOptionDay, setActiveOptionDay] = useState<string>("");
+  const [activeOptionMonth, setActiveOptionMonth] = useState<string>("");
+  const [activeOptionYear, setactiveOptionYear] = useState<string>("");
+
+  const [emialErrorCode, setEmailErrorCode] = useState("");
+  const [nameErrorCode, setNameErrorCode] = useState("");
+  const [dateErrorCode, setDateErrorCode] = useState("");
 
   const emailRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
@@ -35,20 +41,22 @@ export const Register = () => {
       (1900 + index).toString()
     )
   );
-  const [Months] = useState<string[]>([
-    "Styczeń",
-    "Luty",
-    "Marzec",
-    "Kwiecień",
-    "Maj",
-    "Czerwiec",
-    "Lipiec",
-    "Sierpień",
-    "Wrzesień",
-    "Październik",
-    "Listopad",
-    "Grudzień",
-  ]);
+  const [monthMap] = useState(
+    new Map([
+      ["Styczeń", 0],
+      ["Luty", 1],
+      ["Marzec", 2],
+      ["Kwiecień", 3],
+      ["Maj", 4],
+      ["Czerwiec", 5],
+      ["Lipiec", 6],
+      ["Sierpień", 7],
+      ["Wrzesień", 8],
+      ["Październik", 9],
+      ["Listopad", 10],
+      ["Grudzień", 11],
+    ])
+  );
 
   const handleSetLogin = (text: string) => {
     return text;
@@ -64,6 +72,44 @@ export const Register = () => {
   };
 
   const handleRegister = async () => {
+    console.log(emialErrorCode, nameErrorCode, dateErrorCode);
+
+    if (emailRef.current?.value === "") {
+      setEmailErrorCode("required");
+    } else {
+      setEmailErrorCode("");
+    }
+
+    if (nameRef.current?.value === "") {
+      setNameErrorCode("required");
+    } else {
+      setNameErrorCode("");
+    }
+    if (
+      activeOptionDay === "" ||
+      activeOptionMonth === "" ||
+      activeOptionYear === ""
+    ) {
+      setDateErrorCode("empty-date");
+      return;
+    } else {
+      setDateErrorCode("");
+    }
+    if (activeOptionDay && activeOptionMonth && activeOptionYear) {
+      if (
+        !isValidDate(
+          Number(activeOptionDay),
+          monthMap.get(activeOptionMonth) as number,
+          Number(activeOptionYear)
+        )
+      ) {
+        setDateErrorCode("invalid-date");
+        return;
+      } else {
+        setDateErrorCode("");
+      }
+    }
+
     if (
       emailRef.current?.value &&
       nickNameRef.current?.value &&
@@ -84,14 +130,27 @@ export const Register = () => {
         status: UserStatus.online,
         birth: `${activeOptionDay}-${activeOptionMonth}-${activeOptionYear}`,
       };
-      const res = await createNewUser(
-        emailRef.current?.value,
-        passwordRef.current?.value,
-        UserData
-      );
-      dispatch(setUser(UserData));
-      if (res) {
-        nav("/channels/@me");
+      try {
+        const isNameAvaliableToUse = await isNameAvaliable(
+          nameRef.current?.value
+        );
+        if (isNameAvaliableToUse) {
+          const res = await createNewUser(
+            emailRef.current?.value,
+            passwordRef.current?.value,
+            UserData
+          );
+          dispatch(setUser(UserData));
+          if (res) {
+            nav("/channels/@me");
+          }
+        }
+      } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+          setEmailErrorCode(error.code);
+        } else {
+          console.log(error);
+        }
       }
     }
   };
@@ -110,16 +169,16 @@ export const Register = () => {
               hideInput={false}
               required={true}
               inputRef={emailRef}
-              errorCode={errorCode}
+              errorCode={emialErrorCode}
             />
             <UserInputForm
               label="Wyświetlana nazwa"
               onInputChange={handleSetNickname}
               hideInput={false}
-              required={true}
+              required={false}
               inputRef={nickNameRef}
               text="Tak będą widzieć cię inni użytkownicy. Możesz użyć znaków specjalnych i emoji"
-              errorCode={errorCode}
+              errorCode={""}
             />
             <UserInputForm
               label="Nazwa użytkownika"
@@ -128,7 +187,7 @@ export const Register = () => {
               required={true}
               inputRef={nameRef}
               text="Używaj tylko cyfr, liter, podkreślników _ i kropek."
-              errorCode={errorCode}
+              errorCode={nameErrorCode}
             />
             <UserInputForm
               label="Hasło"
@@ -136,11 +195,29 @@ export const Register = () => {
               hideInput={true}
               inputRef={passwordRef}
               required={true}
-              errorCode={errorCode}
+              errorCode={""}
             />
             <div>
-              <p className="text-darkWhite uppercase text-xs font-bold pt-3 pb-2 ">
+              <p
+                className={`${
+                  dateErrorCode === "invalid-date" ||
+                  dateErrorCode === "empty-date"
+                    ? "text-red-400"
+                    : "text-darkWhite"
+                } uppercase text-xs font-ggSansBold pt-3 pb-2 `}
+              >
                 data urodzenia
+                {dateErrorCode === "empty-date" ? (
+                  <ins className="no-underline font-ggSansNormalItalic text-[0.7rem] normal-case">
+                    {" "}
+                    - Wymagane
+                  </ins>
+                ) : dateErrorCode === "invalid-date" ? (
+                  <ins className="no-underline font-ggSansNormalItalic text-[0.7rem] normal-case">
+                    {" "}
+                    - Wprowadź prawidłową datę urodzenia
+                  </ins>
+                ) : null}
               </p>
               <div className="flex flex-auto">
                 <Selectt
@@ -157,11 +234,11 @@ export const Register = () => {
                 <Selectt
                   label="Miesiąc"
                   onSelectHandler={(selectedOption: string) => {
-                    console.log(setActiveOptionMonth(selectedOption));
+                    setActiveOptionMonth(selectedOption);
                   }}
                 >
-                  {Months.map((month) => (
-                    <DropDownItem>{month}</DropDownItem>
+                  {Array.from(monthMap.entries()).map(([name, number]) => (
+                    <DropDownItem>{name}</DropDownItem>
                   ))}
                 </Selectt>
 

@@ -25,6 +25,7 @@ export async function createNewUser(
     }
   } catch (error) {
     console.error("Registration error:", error);
+    throw error;
   }
 }
 

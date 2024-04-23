@@ -315,6 +315,17 @@ export function listenAndGetMessages(
   );
 }
 
+export async function isNameAvaliable(name: string) {
+  const db = getFirestore();
+  const usersCollection = collection(db, "users");
+
+  const q = query(usersCollection, where("name", "==", name));
+  const querySnapshot = await getDocs(q);
+  console.log(querySnapshot);
+  if (querySnapshot.empty) return true;
+  throw "auth/name-in-use";
+}
+
 export function sendMessage(conversationId: string, message: Message) {
   const db = getFirestore();
   const conversationRef = doc(db, "conversations", conversationId);

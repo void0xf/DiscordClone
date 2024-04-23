@@ -13,6 +13,12 @@ function errorCodeToMessage(errorCode: string) {
   switch (errorCode) {
     case "auth/invalid-email":
       return "Dane logowanie lub hasło są nieprawidłowe";
+    case "auth/email-already-in-use":
+      return "Adres e-mail jest już zarejestrowany";
+    case "auth/name-in-use":
+      return "Ta nazwa użytkownika jest niedostępna.";
+    case "required":
+      return "Wymagane";
   }
 }
 
@@ -43,7 +49,7 @@ const UserInputForm: React.FC<UserInputFormProps> = ({
           {errorCode !== "" ? (
             <ins className="no-underline font-ggSansMediumItalic text-[0.65rem]">
               {" "}
-              - Dane logowanie lub hasło są nieprawidłowe
+              - {errorCodeToMessage(errorCode)}
             </ins>
           ) : (
             ""
