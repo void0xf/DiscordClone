@@ -1,15 +1,34 @@
-import React from 'react'
+import React from "react";
+import DiscordLoginQR from "../../assets/banners/LoginQRCode.svg";
+import DiscordLogoLoginQR from "../../assets/banners/DiscordQRCodeLogo.png";
 
 const QRcode = () => {
   return (
-    <div className='flex flex-col'>
-      <img src="" alt="" className='rounded-sm w-[180px] h-[180px] mx-auto mb-5'/>
-      <h2 className='text-whiteMain text-2xl mx-auto font-semibold pb-2'>Zaloguj się kodem QR</h2>
-      <span className='text-darkWhite mx-10 text-center'>Zeskanuj to
-        <strong> aplikacją mobilną Discorda</strong>
-        , by natychmiast się zalogować. </span>
+    <div className="flex flex-col items-center">
+      <div className="relative max-w-fit max-h-fit mb-5 border-white border-8 rounded-md">
+        <img
+          src={DiscordLoginQR}
+          alt="QR code"
+          className="rounded-sm w-[180px] h-[180px] mx-auto"
+        />
+        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+          <img
+            src={DiscordLogoLoginQR}
+            alt="DiscordLogoQR"
+            className="w-12 h-12"
+          />
+        </div>
+      </div>
+      <h2 className="text-whiteMain text-2xl mx-auto font-semibold pb-2">
+        Zaloguj się kodem QR
+      </h2>
+      <span className="text-darkWhite mx-10 text-center">
+        Zeskanuj to
+        <strong> aplikacją mobilną Discorda</strong>, by natychmiast się
+        zalogować.{" "}
+      </span>
     </div>
-  )
-}
+  );
+};
 
-export default QRcode
+export default QRcode;

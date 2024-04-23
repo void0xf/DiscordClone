@@ -69,7 +69,7 @@ const Login = () => {
               Nie pamiętasz hasła?
             </p>
           </a>
-          <div className="h-16 flex w-full">
+          <div className="h-16 flex w-full mt-4 ">
             <FormButton
               label="Zaloguj się"
               onClickHandler={handleLogin}
@@ -77,8 +77,8 @@ const Login = () => {
             />
           </div>
 
-          <div className="flex pt-2">
-            <span className="text-darkWhite text-sm">Potrzebujesz konta?</span>
+          <div className="flex">
+            <span className="text-TextGray text-sm">Potrzebujesz konta?</span>
             <Link label="Zarejestruj się" navigateTo="/register" />
           </div>
         </div>
