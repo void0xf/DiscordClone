@@ -13,7 +13,7 @@ const Sidebar: React.FC<{ servers: ServerPreview[] }> = ({ servers }) => {
   const nav = useNavigate();
 
   return (
-    <div className="w-[72px] h-full bg-SidebarBackground flex flex-col gap-1 p-2">
+    <div className="w-[72px] h-full bg-SidebarBackground flex flex-col gap-1 p-2 hidde-scrollbar overflow-y-scroll overflow-x-hidden">
       <SidebarHomeButton
         onClickHandler={() => {
           nav("/channels/@me");
