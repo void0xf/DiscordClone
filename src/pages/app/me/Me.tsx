@@ -19,14 +19,14 @@ const Me = () => {
   }
 
   return (
-    <div className="flex">
-      <section className="h-screen">
+    <div className="flex h-screen">
+      <section className="h-full">
         <Sidebar servers={dummyServers} />
       </section>
-      <section className="h-screen">
+      <section className="h-full">
         <Navigation />
       </section>
-      <section className=" max-h-screen w-full flex flex-auto flex-col border-l-[1px] border-notQuiteBlack">
+      <section className="max-h-full w-full flex flex-auto flex-col border-l-[1px] border-notQuiteBlack">
         <Outlet />
       </section>
     </div>
