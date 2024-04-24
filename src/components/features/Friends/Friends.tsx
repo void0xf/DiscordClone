@@ -4,15 +4,19 @@ import { TbMessageCircle2Filled } from "react-icons/tb";
 import { RiInboxFill } from "react-icons/ri";
 import { MdHelp } from "react-icons/md";
 import FriendsNavigation from "./FriendsNavigation";
-import DisplayFriends from "./DisplayFriends";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayAddFriend from "./DisplayAddFriend";
 import {
+  getUsersFromUID,
   listenForIncomingFriendRequests,
   syncStateFromFirestore,
 } from "../../../firebase/firestore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, UnknownAction } from "redux";
+import DisplayFriendsList from "./DisplayAllFriendsList";
+import { User } from "../../../types/user.t";
+import { RootState } from "../../../store/store";
+import DisplayPendingList from "./DisplayPendingList";
 
 const NavFriendsIcon = () => (
   <svg
@@ -42,14 +46,28 @@ async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {
   syncStateFromFirestore(dispatch);
 }
 
+const getAllFriends = async (user: User) => {
+  const users = await getUsersFromUID(user.friends);
+  return users as User[];
+};
+
 const Friends = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
   const [selectedTab, setSelectedTab] = useState<DisplayFriendsTabs>("Online");
+  const [allFriends, setAllFriends] = useState<User[]>([]);
+
   useEffect(() => {
+    async function fetchFriends() {
+      const friends = await getAllFriends(user);
+      setAllFriends(friends);
+    }
     listenForIncomingFriendRequests(() => {
       onFriendRequest(dispatch);
     });
-  }, []);
+
+    fetchFriends();
+  }, [user.friends.length]);
 
   return (
     <div className="text-TextGray flex flex-auto flex-col">
@@ -82,8 +100,14 @@ const Friends = () => {
         </div>
       </TabTittleBar>
       <div className="h-full">
-        {selectedTab != "Add Friend" ? (
-          <DisplayFriends type={selectedTab} />
+        {selectedTab == "All" ? (
+          <DisplayFriendsList type={selectedTab} items={allFriends} />
+        ) : selectedTab == "Pending" ? (
+          <DisplayPendingList />
+        ) : selectedTab == "Blocked" ? (
+          <DisplayFriendsList type={selectedTab} items={[]} />
+        ) : selectedTab == "Online" ? (
+          <DisplayFriendsList type={selectedTab} items={[]} />
         ) : (
           <DisplayAddFriend />
         )}
