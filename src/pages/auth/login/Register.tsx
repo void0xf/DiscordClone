@@ -237,7 +237,7 @@ export const Register = () => {
                     setActiveOptionMonth(selectedOption);
                   }}
                 >
-                  {Array.from(monthMap.entries()).map(([name, number]) => (
+                  {Array.from(monthMap.entries()).map(([name]) => (
                     <DropDownItem>{name}</DropDownItem>
                   ))}
                 </Selectt>
