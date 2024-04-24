@@ -14,7 +14,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { User } from "../types/user.t";
+import { User, UserStatus } from "../types/user.t";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { setUser } from "../slices/userSlice";
 import { Dispatch, UnknownAction } from "redux";
@@ -131,6 +131,40 @@ export async function listenForIncomingFriendRequests(callback: () => void) {
   return unsubscribe;
 }
 
+export function listenToUserStatuses(
+  userIds: string[],
+  onStatusChange: () => void
+) {
+  const db = getFirestore();
+
+  type NoArgFunction = () => void;
+  const unsubscribeFunctions: NoArgFunction[] = [];
+
+  userIds.forEach((userId) => {
+    const userDocRef = doc(db, "users", userId);
+
+    const unsubscribe = onSnapshot(
+      userDocRef,
+      (doc) => {
+        if (doc.exists()) {
+          onStatusChange();
+        }
+      },
+      (error) => {
+        console.error(
+          `Error listening to user status for userID ${userId}:`,
+          error
+        );
+      }
+    );
+
+    unsubscribeFunctions.push(unsubscribe);
+  });
+
+  return () => {
+    unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
+  };
+}
 export async function acceptFriendRequest(name: string) {
   const myuid = (await getCurrentUserUID()) as string;
   const firestore = getFirestore();
@@ -342,6 +376,20 @@ export async function getUsersFromUID(userIds: string[]) {
 
   const users = await Promise.all(usersPromises);
   return users.filter(Boolean);
+}
+
+export async function getOnlineUsersFromUID(userIds: string[]) {
+  const usersPromises = userIds.map((userId) => {
+    return getUserStateFromFirestore(userId);
+  });
+
+  const users = await Promise.all(usersPromises);
+  const onlineUsers = users.map((user) => {
+    if (user?.status !== UserStatus.offline) {
+      return user;
+    }
+  });
+  return onlineUsers.filter(Boolean);
 }
 
 export async function getStrangerInfoFromConversation(converstaionID: string) {

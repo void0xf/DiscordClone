@@ -7,8 +7,10 @@ import FriendsNavigation from "./FriendsNavigation";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayAddFriend from "./DisplayAddFriend";
 import {
+  getOnlineUsersFromUID,
   getUsersFromUID,
   listenForIncomingFriendRequests,
+  listenToUserStatuses,
   syncStateFromFirestore,
 } from "../../../firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,8 +48,13 @@ async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {
   syncStateFromFirestore(dispatch);
 }
 
-const getAllFriends = async (user: User) => {
+const fetchAllFriends = async (user: User) => {
   const users = await getUsersFromUID(user.friends);
+  return users as User[];
+};
+
+const fetchOnlineFriends = async (user: User) => {
+  const users = await getOnlineUsersFromUID(user.friends);
   return users as User[];
 };
 
@@ -56,17 +63,28 @@ const Friends = () => {
   const user = useSelector((state: RootState) => state.user);
   const [selectedTab, setSelectedTab] = useState<DisplayFriendsTabs>("Online");
   const [allFriends, setAllFriends] = useState<User[]>([]);
+  const [onlineFriends, setOnlineFriends] = useState<User[]>([]);
 
   useEffect(() => {
-    async function fetchFriends() {
-      const friends = await getAllFriends(user);
+    async function getAllFriends() {
+      const friends = await fetchAllFriends(user);
       setAllFriends(friends);
+    }
+    async function getOnlineFriends() {
+      const friends = await fetchOnlineFriends(user);
+      setOnlineFriends(friends);
     }
     listenForIncomingFriendRequests(() => {
       onFriendRequest(dispatch);
     });
+    const sub = listenToUserStatuses(user.friends, () => {
+      getOnlineFriends();
+    });
 
-    fetchFriends();
+    getAllFriends();
+    return () => {
+      sub();
+    };
   }, [user.friends.length]);
 
   return (
@@ -107,7 +125,7 @@ const Friends = () => {
         ) : selectedTab == "Blocked" ? (
           <DisplayFriendsList type={selectedTab} items={[]} />
         ) : selectedTab == "Online" ? (
-          <DisplayFriendsList type={selectedTab} items={[]} />
+          <DisplayFriendsList type={selectedTab} items={onlineFriends} />
         ) : (
           <DisplayAddFriend />
         )}
