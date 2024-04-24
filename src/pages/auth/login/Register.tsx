@@ -128,6 +128,7 @@ export const Register = () => {
         outgoingFriendRequests: [],
         DirectMessages: [],
         status: UserStatus.online,
+        customStatus: "",
         birth: `${activeOptionDay}-${activeOptionMonth}-${activeOptionYear}`,
       };
       try {

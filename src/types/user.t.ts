@@ -12,6 +12,7 @@ export interface User {
   birth: string;
   DirectMessages: string[];
   status: UserStatus;
+  customStatus: string;
 }
 
 export interface ServerPreview {
