@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User } from "../../types/user.t";
-import { getStatusString } from "../utlis/user";
+import { getStatusString } from "../../utils/userUtils/getStatusString";
 
 export interface UserProfileProps {
   UserData: User;

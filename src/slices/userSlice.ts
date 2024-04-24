@@ -14,6 +14,7 @@ const initialState: User = {
   birth: "",
   DirectMessages: [],
   status: UserStatus.online,
+  customStatus: "",
 };
 const userSlice = createSlice({
   name: "user",
@@ -23,9 +24,12 @@ const userSlice = createSlice({
     setUser(state, action: PayloadAction<User>) {
       return action.payload;
     },
+    setStatus(state, action: PayloadAction<UserStatus>) {
+      state.status = action.payload;
+    },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setStatus } = userSlice.actions;
 
 export default userSlice.reducer;

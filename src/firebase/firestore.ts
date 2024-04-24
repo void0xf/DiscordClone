@@ -412,3 +412,12 @@ export async function getStrangerInfoFromConversation(converstaionID: string) {
   }
   return null;
 }
+
+export async function updateUserState(status: UserStatus) {
+  const myuid = (await getCurrentUserUID()) as string;
+  const db = getFirestore();
+  const collectionRef = doc(db, "users", myuid);
+  updateDoc(collectionRef, {
+    status: status,
+  });
+}
