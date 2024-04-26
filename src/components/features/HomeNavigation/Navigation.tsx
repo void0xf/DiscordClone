@@ -133,9 +133,7 @@ const Navigation = () => {
           />
           <NavigationButtton
             label="Nitro"
-            onClickHandler={() => {
-              nav("/nitro");
-            }}
+            onClickHandler={() => {}}
             Icon={<NitroIcon />}
             isActive={false}
           />

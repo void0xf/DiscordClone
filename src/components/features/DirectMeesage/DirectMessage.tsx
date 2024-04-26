@@ -23,6 +23,7 @@ import DirectMessageChatInput from "./DirectMessageChatInput";
 import { User } from "../../../types/user.t";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import MessageLoadingScreen from "../../common/MessageLoadingScreen";
 
 const DirectMessage = () => {
   const { conversationID } = useParams();
@@ -53,10 +54,6 @@ const DirectMessage = () => {
     sendMessage(conversationID, messageObj);
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="h-full bg-LightGray grid grid-rows-[1fr_auto] min-h-screen ">
       <TabTittleBar>
@@ -85,17 +82,13 @@ const DirectMessage = () => {
           </div>
         </div>
       </TabTittleBar>
-      {strangerInfo && (
+      {strangerInfo && !isLoading ? (
         <>
-          {/* <DirectMessagesContainer> */}
-          {/* <div className="flex flex-col justify-between h-full"> */}
-          {/* Container for messages, it should expand to fill the available space */}
           <div className="flex-1 overflow-y-auto flex-grow px-4">
             <DirectMessageStrangerInfo user={strangerInfo as User} />
             <DirectMessageChat UserInfo={strangerInfo} />
           </div>
 
-          {/* Fixed-height container for the chat input */}
           <div className="h-12 px-4 pb-4">
             <DirectMessageChatInput
               strangerUserName={strangerInfo.nickName}
@@ -104,8 +97,20 @@ const DirectMessage = () => {
               }}
             />
           </div>
-          {/* </div> */}
-          {/* </DirectMessagesContainer> */}
+        </>
+      ) : (
+        <>
+          <div className="flex-1 overflow-y-auto flex-grow px-4">
+            <MessageLoadingScreen />
+          </div>
+          <div className="h-12 px-4 pb-4">
+            <DirectMessageChatInput
+              strangerUserName={"message"}
+              onSendMessage={(mess) => {
+                handleSendMessage(mess);
+              }}
+            />
+          </div>
         </>
       )}
     </div>
