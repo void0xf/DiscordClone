@@ -12,19 +12,28 @@ function getDateFromTimestamp(timestamp: number) {
 
   // Extract the date components
   const year = date.getFullYear();
-  const month = date.getMonth() + 1; // Months are zero-based, so we add 1
+  const month = date.getMonth(); // Months are zero-based, so we add 1
   const day = date.getDate();
 
-  // Return the date in the desired format
-  return `${year}-${month < 10 ? "0" + month : month}-${
-    day < 10 ? "0" + day : day
-  }`;
+  const createdDate = new Date(
+    year,
+    Number(month),
+    Number(`${day < 10 ? "0" + day : day}`)
+  );
+  return createdDate.toLocaleDateString("en-uk", {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  });
 }
 
 const DisplayDateInfo: React.FC<DisplayDateInfoProps> = ({ timestamp }) => {
   return (
-    <div className="text-gray-400 text-center border-t-[1px] justify-center border-gray-500 mt-2 mb-2">
-      {getDateFromTimestamp(timestamp)}
+    <div className="relative my-4">
+      <div className="text-gray-400 absolute top-0 font-ggSansSemiBold text-xs -translate-y-1/2 left-1/2 bg-LightGray z-40  w-24 text-center">
+        {getDateFromTimestamp(timestamp)}
+      </div>
+      <hr className="relative z-10 border-t-SidebarGulidSeparator"></hr>
     </div>
   );
 };
