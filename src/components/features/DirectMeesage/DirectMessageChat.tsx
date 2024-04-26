@@ -7,36 +7,11 @@ import DisplayDateInfo from "./DisplayDateInfo";
 import { User } from "../../../types/user.t";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import {
+  isOlderThanOneDay,
+  isOlderThanOneMinute,
+} from "../../../utils/dateUtils";
 
-function isOlderThanOneMinute(timestamp: number) {
-  // Convert timestamp to milliseconds
-  const timestampMilliseconds = timestamp;
-
-  // Get current time in milliseconds
-  const currentTimeMilliseconds = new Date().getTime();
-
-  // Calculate difference in milliseconds
-  const differenceMilliseconds =
-    currentTimeMilliseconds - timestampMilliseconds;
-
-  // Check if difference is greater than one minute (60,000 milliseconds)
-  return differenceMilliseconds > 60000;
-}
-
-// function isOlderThanOneDay(timestamp: number) {
-//   // Convert timestamp to milliseconds
-//   const timestampMilliseconds = timestamp;
-
-//   // Get current time in milliseconds
-//   const currentTimeMilliseconds = new Date().getTime();
-
-//   // Calculate difference in milliseconds
-//   const differenceMilliseconds =
-//     currentTimeMilliseconds - timestampMilliseconds;
-
-//   // Check if difference is greater than one minute (60,000 milliseconds)
-//   return differenceMilliseconds > 60000 * 60 * 24;
-// }
 interface DirectMessageChatProps {
   UserInfo: User;
 }
@@ -66,6 +41,7 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
         if (!message) return null;
         if (index > 0) {
           if (
+            //check for second message if its second message we dont render user profile
             message.sender === array[index - 1].sender &&
             isOlderThanOneMinute(message.timestamp - array[index - 1].timestamp)
           ) {
@@ -73,7 +49,12 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
           } else {
             return (
               <>
-                {/* <DisplayDateInfo timestamp={message.timestamp} /> */}
+                {isOlderThanOneDay(
+                  message.timestamp,
+                  array[index - 1].timestamp
+                ) ? (
+                  <DisplayDateInfo timestamp={message.timestamp} />
+                ) : null}
                 <div className="">
                   <DisplayChatMessageWithUserInfo
                     message={message}
