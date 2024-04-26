@@ -28,7 +28,7 @@ const FriendFilter: React.FC<FriendFilterProps> = ({ users, setNewUsers }) => {
   }, [inputValue]);
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <input
         type="text"
         ref={inputRef}
