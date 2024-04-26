@@ -18,10 +18,13 @@ const UserProfileHomeNavigation: React.FC<{ user: User }> = ({ user }) => {
   useOutsideClick(modalRef, closeUserProfileCard);
 
   return (
-    <div className="h-14 w-full bg-DarkGray text-white flex justify-between items-center px-1  relative">
+    <div
+      ref={modalRef}
+      className="h-14 w-full bg-DarkGray text-white flex justify-between items-center px-1  relative"
+    >
       <div className="absolute bottom-14 -translate-x-8 -translate-y-4 z-20">
         {showUserProfileCard && (
-          <div ref={modalRef}>
+          <div>
             <UserProfileCard user={user} />
           </div>
         )}
