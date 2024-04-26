@@ -6,10 +6,12 @@ const NavigationButtton: React.FC<NavigationButtonProps> = ({
   Icon,
   label,
   onClickHandler,
+  isActive,
 }) => {
   return (
     <button
-      className="flex  gap-4 font-ggsansNormal  text-base hover:bg-HoverText p-2 w-full rounded-lg items-center py-[0.64rem]"
+      className={`${isActive ? "bg-HoverText text-white" : ""}
+      flex gap-4  text-base hover:bg-HoverText p-2 w-full rounded-lg items-center py-[0.64rem] font-ggSansMedium`}
       onClick={() => onClickHandler()}
     >
       <div>{Icon}</div>

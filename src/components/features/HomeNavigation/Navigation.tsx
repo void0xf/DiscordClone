@@ -3,7 +3,7 @@ import { RootState } from "../../../store/store";
 import DirectMessagesNavigation from "./DirectMessagesNavigation";
 import FindOrStartConversation from "./FindOrStartConversation";
 import NavigationButtton from "./NavigationButtton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import UserProfileHomeNavigation from "./UserProfile";
 
 const NavFriendsIcon = () => (
@@ -112,6 +112,9 @@ const ShopIcon = () => (
 const Navigation = () => {
   const user = useSelector((state: RootState) => state.user);
   const nav = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
 
   return (
     <div className=" bg-DmsNavigationBg h-full w-60 flex justify-between flex-col">
@@ -119,28 +122,34 @@ const Navigation = () => {
         <div className="h-12 flex justify-center pt-[0.6rem] pb-2  border-b-[2px] border-notQuiteBlack">
           <FindOrStartConversation />
         </div>
-        <div className="text-TextGray px-3 py-2">
+        <div className="text-TextGray px-3 py-2 gap-[0.2px] flex flex-col">
           <NavigationButtton
             label="Friends"
             onClickHandler={() => {
               nav("/channels/@me");
             }}
             Icon={<NavFriendsIcon />}
+            isActive={location.pathname === "/channels/@me"}
           />
           <NavigationButtton
             label="Nitro"
-            onClickHandler={() => {}}
+            onClickHandler={() => {
+              nav("/nitro");
+            }}
             Icon={<NitroIcon />}
+            isActive={false}
           />
           <NavigationButtton
             label="Message Requests"
             onClickHandler={() => {}}
             Icon={<MessageRequestIcon />}
+            isActive={false}
           />
           <NavigationButtton
             label="Shop"
             onClickHandler={() => {}}
             Icon={<ShopIcon />}
+            isActive={false}
           />
         </div>
         <DirectMessagesNavigation />

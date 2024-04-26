@@ -36,4 +36,5 @@ export type NavigationButtonProps = {
   onClickHandler: () => void;
   label: string;
   Icon: ReactNode;
+  isActive: boolean;
 };
