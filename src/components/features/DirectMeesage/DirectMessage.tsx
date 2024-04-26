@@ -89,7 +89,7 @@ const DirectMessage = () => {
             <DirectMessageChat UserInfo={strangerInfo} />
           </div>
 
-          <div className="h-12 px-4 pb-4">
+          <div className="h-12 px-4 pb-4 mt-4">
             <DirectMessageChatInput
               strangerUserName={strangerInfo.nickName}
               onSendMessage={(mess) => {

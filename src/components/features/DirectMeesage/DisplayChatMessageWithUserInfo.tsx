@@ -36,7 +36,7 @@ const DisplayChatMessageWithUserInfo: React.FC<
   return (
     <div>
       {UserInfo ? (
-        <div className="flex gap-2 items-center px-2">
+        <div className="flex gap-2 items-center px-2 py-1">
           <div>
             <img
               src={`${UserInfo.profilePicture}`}
@@ -47,9 +47,9 @@ const DisplayChatMessageWithUserInfo: React.FC<
             />
           </div>
           <div className="flex flex-col">
-            <div className="text-whiteMain font-ggSansMedium text-xl flex items-baseline">
+            <div className="text-whiteMain font-ggSansMedium text-base flex items-baseline">
               <p>{UserInfo.nickName}</p>
-              <p className="text-gray-400 font-ggsansNormal text-sm items-baseline pl-2">
+              <p className="text-gray-500 text-xs font-ggsansNormal items-baseline pl-2">
                 {formatDate(message.timestamp)}
               </p>
             </div>
