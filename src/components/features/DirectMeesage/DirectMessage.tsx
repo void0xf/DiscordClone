@@ -84,7 +84,7 @@ const DirectMessage = () => {
       </TabTittleBar>
       {strangerInfo && !isLoading ? (
         <>
-          <div className="flex-1 overflow-y-auto flex-grow px-4">
+          <div className="flex-1 overflow-y-auto flex-grow px-4 scrollbar-chat scrollbar-webkit -webkit-scrollbar-track webkit-scrollbar-track webkit-scrollbar-thumb">
             <DirectMessageStrangerInfo user={strangerInfo as User} />
             <DirectMessageChat UserInfo={strangerInfo} />
           </div>
@@ -100,7 +100,7 @@ const DirectMessage = () => {
         </>
       ) : (
         <>
-          <div className="flex-1 overflow-y-auto flex-grow px-4">
+          <div className="flex-1 overflow-y-auto flex-grow px-4 scrollbar-chat scrollbar-webkit -webkit-scrollbar-track webkit-scrollbar-track webkit-scrollbar-thumb">
             <MessageLoadingScreen />
           </div>
           <div className="h-12 px-4 pb-4">

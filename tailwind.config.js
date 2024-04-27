@@ -86,6 +86,12 @@ export default {
             border: "1px solid white",
           },
         },
+
+        ".scrollbar-chat": {
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgb(40 40 40) rgb(63 63 70)",
+          scrollbarHeight: "3px",
+        },
       };
       addUtilities(newUtilities, ["responsive", "hover"]);
     },
