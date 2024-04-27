@@ -5,11 +5,16 @@ import { getUsersFromUID } from "../../../firebase/firestore";
 import { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
 import DirectMessage from "./DirectMessage";
+import { useNavigate } from "react-router-dom";
 
 const DirectMessagesNavigation = () => {
   const user = useSelector((state: RootState) => state.user);
   const [usersToDisplay, setUsersToDisplay] = useState<User[]>([]);
+  const [directMessagesLength, setDirectMessagesLength] = useState(
+    user.DirectMessages.length
+  );
 
+  const nav = useNavigate();
   async function getUsersFromDMs() {
     const res = await getUsersFromUID(user.DirectMessages as string[]);
     return res;
@@ -19,6 +24,11 @@ const DirectMessagesNavigation = () => {
     getUsersFromDMs().then((res) => {
       setUsersToDisplay(res as User[]);
     });
+    //incase when user will remove someone from friends
+    if (directMessagesLength >= user.DirectMessages.length) {
+      nav("/channels/@me");
+      setDirectMessagesLength(user.DirectMessages.length);
+    }
   }, [user.DirectMessages.length]);
 
   return (

@@ -203,6 +203,7 @@ export async function removeFromFriends(name: string) {
     try {
       await updateDoc(userRef, {
         friends: arrayRemove(targetUID),
+        DirectMessages: arrayRemove(targetUID),
       });
       await updateDoc(targetRef, {
         friends: arrayRemove(myuid),

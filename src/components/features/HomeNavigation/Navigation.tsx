@@ -114,8 +114,6 @@ const Navigation = () => {
   const nav = useNavigate();
   const location = useLocation();
 
-  console.log(location);
-
   return (
     <div className=" bg-DmsNavigationBg h-full w-60 flex justify-between flex-col">
       <div>
