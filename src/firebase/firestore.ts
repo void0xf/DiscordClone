@@ -363,10 +363,33 @@ export async function isNameAvaliable(name: string) {
 export function sendMessage(conversationId: string, message: Message) {
   const db = getFirestore();
   const conversationRef = doc(db, "conversations", conversationId);
-
   updateDoc(conversationRef, {
     messages: arrayUnion(message),
   });
+  updateMemberDm(conversationId);
+}
+
+export async function updateMemberDm(conversationId: string) {
+  const db = getFirestore();
+  const loggedUserUid = (await getCurrentUserUID()) as string;
+
+  const conversationRef = doc(db, "conversations", conversationId);
+  const conversationSnapshot = await getDoc(conversationRef);
+  if (conversationSnapshot.exists()) {
+    const conversationData = conversationSnapshot.data();
+    const members = conversationData.members as string[];
+    const conversationStranger = members.find(
+      (member) => member !== loggedUserUid
+    );
+    if (conversationStranger) {
+      console.log(conversationStranger);
+
+      const targetRef = doc(db, "users", conversationStranger as string);
+      updateDoc(targetRef, {
+        DirectMessages: arrayUnion(loggedUserUid),
+      });
+    }
+  }
 }
 
 export async function getUsersFromUID(userIds: string[]) {
