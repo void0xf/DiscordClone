@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Message, listenAndGetMessages } from "../../../firebase/firestore";
 import { useParams } from "react-router-dom";
 import DisplayChatMessageWithUserInfo from "./DisplayChatMessageWithUserInfo";
@@ -20,6 +20,8 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
   const { conversationID } = useParams();
   const [messages, setMessages] = useState<Message[]>();
   const user = useSelector((state: RootState) => state.user);
+  const scrollTo = useRef<HTMLDivElement>(null);
+  const [disableAutoScroll, setDisableAutoScroll] = useState(false);
 
   useEffect(() => {
     if (conversationID === undefined) return;
@@ -29,11 +31,23 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
         setMessages(fetchedMessages);
       }
     );
-
     return () => {
       unSubscribeFromListening();
     };
   }, [conversationID]);
+
+  useEffect(() => {
+    if (messages) {
+      if (!disableAutoScroll && messages?.length > 0) {
+        scrollTo.current?.scrollIntoView({ behavior: "smooth" });
+        setDisableAutoScroll(true);
+      }
+
+      if (messages.at(messages.length - 1)?.sender === user.name) {
+        scrollTo.current?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [messages]);
 
   return (
     <div>
@@ -75,6 +89,7 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
           </>
         );
       })}
+      <div ref={scrollTo}></div>
     </div>
   );
 };
