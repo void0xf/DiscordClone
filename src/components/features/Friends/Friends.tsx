@@ -83,6 +83,7 @@ const Friends = () => {
     });
 
     getAllFriends();
+    getOnlineFriends();
     return () => {
       sub();
     };
