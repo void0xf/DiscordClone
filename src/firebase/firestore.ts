@@ -184,6 +184,7 @@ export async function acceptFriendRequest(name: string) {
         friends: arrayUnion(myuid),
       });
       await updateDoc(userRef, {
+        DirectMessages: arrayUnion(targetUID),
         friends: arrayUnion(targetUID),
       });
     } catch (error) {
