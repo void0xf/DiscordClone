@@ -45,7 +45,9 @@ const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
       <div className="h-[1px] w-full bg-SelectedFriendTab"></div>
       <div
         className="hover:bg-SelectedUserTab rounded-md px-2 hover:cursor-pointer py-1"
-        onClick={() => {}}
+        onClick={() => {
+          handleSendMessage();
+        }}
       >
         <div className="flex justify-between">
           <UserProfile
