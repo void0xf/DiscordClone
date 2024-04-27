@@ -40,6 +40,7 @@ const DirectMessage = () => {
         setIsLoading(false);
       }
     }
+
     setStrangerInfoFromConversation(conversationID as string);
   }, [conversationID]);
 
