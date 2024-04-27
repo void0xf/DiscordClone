@@ -42,7 +42,7 @@ const DisplayPendingRequest: React.FC<{
           <div className="h-[1px] w-full bg-SelectedFriendTab"></div>
           <div
             className="flex justify-between border-t-[1px] border-SelectedFriendTab 
-          hover:bg-SelectedUserTab rounded-md px-2 hover:cursor-pointer py-4 cursor-pointer "
+          hover:bg-SelectedUserTab rounded-md px-2 hover:cursor-pointer py-2 cursor-pointer "
           >
             <UserProfile
               UserData={user}
@@ -75,7 +75,7 @@ const DisplayPendingRequest: React.FC<{
       ) : (
         <div>
           <div className="h-[1px] w-full bg-SelectedFriendTab"></div>
-          <div className="flex justify-between">
+          <div className="flex justify-between px-2 py-2 cursor-pointer hover:bg-SelectedUserTab">
             <UserProfile
               UserData={user}
               showNameOnHover={true}

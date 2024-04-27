@@ -26,7 +26,7 @@ const DisplayFriendsList: React.FC<{
           setNewUsers={setUsersToDisplayFiltered}
         />
       </div>
-      <p className="font-ggSansBold text-xs pb-4">{type.toLocaleUpperCase()}</p>
+      <p className="font-ggSansBold text-xs pb-2">{type.toLocaleUpperCase()}</p>
       <>
         {usersToDisplayFiltered.map((user) => (
           <DisplayFriend UserData={user} />
