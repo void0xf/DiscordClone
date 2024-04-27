@@ -79,6 +79,7 @@ const Friends = () => {
     });
     const sub = listenToUserStatuses(user.friends, () => {
       getOnlineFriends();
+      getAllFriends();
     });
 
     getAllFriends();
