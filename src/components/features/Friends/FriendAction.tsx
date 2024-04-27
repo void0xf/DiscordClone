@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import { User } from "../../../types/user.t";
 import {
   removeFromFriends,
   syncStateFromFirestore,
 } from "../../../firebase/firestore";
 import { useDispatch } from "react-redux";
+import useOutsideClick from "../../../hooks/useOutsideClick";
 
 interface FriendActionProps {
   icon: JSX.Element;
@@ -26,7 +27,7 @@ const FriendAction: React.FC<FriendActionProps> = ({
   const [isHovering, setIsHovering] = useState(false);
   const [showContextMenuAfterClick, setShowContextMenuAfterClick] =
     useState(false);
-
+  const dropDownRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const handleRemoveFriend = async () => {
     if (!user) return;
@@ -34,8 +35,13 @@ const FriendAction: React.FC<FriendActionProps> = ({
     syncStateFromFirestore(dispatch);
   };
 
+  useOutsideClick(dropDownRef, () => {
+    setShowContextMenuAfterClick(false);
+  });
+
   return (
-    <button
+    <div
+      ref={dropDownRef}
       className={`bg-FriendActionIconBackground w-9 h-9  text-TextGraytext text-2xl rounded-full ${
         hoverColor == "accept"
           ? "hover:text-SidebarUltityIcon"
@@ -43,7 +49,8 @@ const FriendAction: React.FC<FriendActionProps> = ({
             ? "hover:text-red-500"
             : null
       } cursor-pointer relative flex items-center justify-center`}
-      onClick={() => {
+      onClick={(e: MouseEvent) => {
+        e.stopPropagation();
         if (!showContextMenu) {
           onClickHandler();
         }
@@ -64,7 +71,8 @@ const FriendAction: React.FC<FriendActionProps> = ({
 
       {showContextMenuAfterClick && showContextMenu && (
         <div
-          onClick={() => {
+          onClick={(e: MouseEvent) => {
+            e.stopPropagation();
             handleRemoveFriend();
           }}
           className="absolute bg-black text-white text-sm p-2 rounded-md
@@ -73,7 +81,7 @@ const FriendAction: React.FC<FriendActionProps> = ({
           <p className="text-red-500">Remove Friend</p>
         </div>
       )}
-    </button>
+    </div>
   );
 };
 
