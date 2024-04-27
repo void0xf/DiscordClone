@@ -25,7 +25,6 @@ export function isOlderThanOneMinute(timestamp: number) {
 export function isOlderThanOneDay(date1: number, date2: number): boolean {
   const dateFromTimestamp = new Date(date1);
   const dateFromTimestamp2 = new Date(date2);
-  console.log(dateFromTimestamp, dateFromTimestamp2);
 
   const difference = dateFromTimestamp2.getTime() - dateFromTimestamp.getTime();
 

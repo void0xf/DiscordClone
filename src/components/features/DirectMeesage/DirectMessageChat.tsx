@@ -21,7 +21,7 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
   const [messages, setMessages] = useState<Message[]>();
   const user = useSelector((state: RootState) => state.user);
   const scrollTo = useRef<HTMLDivElement>(null);
-  const [disableAutoScroll, setDisableAutoScroll] = useState(false);
+  const [currentConversationID, setCurrentConversationID] = useState("");
 
   useEffect(() => {
     if (conversationID === undefined) return;
@@ -37,17 +37,17 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
   }, [conversationID]);
 
   useEffect(() => {
-    if (messages) {
-      if (!disableAutoScroll && messages?.length > 0) {
+    if (messages && conversationID) {
+      if (messages?.length > 0 && currentConversationID !== conversationID) {
         scrollTo.current?.scrollIntoView({ behavior: "smooth" });
-        setDisableAutoScroll(true);
+        setCurrentConversationID(conversationID);
       }
 
       if (messages.at(messages.length - 1)?.sender === user.name) {
         scrollTo.current?.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [messages]);
+  }, [messages, conversationID]);
 
   return (
     <div>
