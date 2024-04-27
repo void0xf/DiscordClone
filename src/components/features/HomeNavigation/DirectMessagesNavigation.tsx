@@ -24,12 +24,12 @@ const DirectMessagesNavigation = () => {
     getUsersFromDMs().then((res) => {
       setUsersToDisplay(res as User[]);
     });
-    //incase when user will remove someone from friends
+    //incase when user will remove someone from friends mid dm
     if (directMessagesLength >= user.DirectMessages.length) {
       nav("/channels/@me");
       setDirectMessagesLength(user.DirectMessages.length);
     }
-  }, [user.DirectMessages.length]);
+  }, [user.DirectMessages.length, user.friends.length]);
 
   return (
     <div className="flex flex-col">
