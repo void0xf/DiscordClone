@@ -1,5 +1,8 @@
 import React from "react";
 import { DisplayFriendsTabs } from "../../features/Friends/friends.t";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+import NotificationCounterDot from "../NotificationCounterDot";
 
 interface TabTittleButtonProps {
   label: string;
@@ -15,10 +18,11 @@ const TabTittleButton: React.FC<TabTittleButtonProps> = ({
   const hanleOnClick = () => {
     onclickHandler(label as DisplayFriendsTabs);
   };
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <button
-      className={`font-ggSansMedium ${
+      className={`font-ggSansMedium flex items-center gap-2 ${
         selectedTab == label
           ? "bg-SelectedFriendTab rounded-md text-white"
           : "bg-transparent"
@@ -27,6 +31,11 @@ const TabTittleButton: React.FC<TabTittleButtonProps> = ({
       onClick={() => hanleOnClick()}
     >
       {label}
+      {label === "Pending" && user.incomingFriendRequests.length > 0 ? (
+        <NotificationCounterDot
+          NotifcaiotnCount={user.incomingFriendRequests.length}
+        />
+      ) : null}
     </button>
   );
 };
