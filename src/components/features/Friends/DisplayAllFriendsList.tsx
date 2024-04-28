@@ -3,6 +3,8 @@ import { User } from "../../../types/user.t";
 import FriendFilter from "./FriendFilter";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayFriend from "./DisplayFriend";
+import EmptyAllFriendsBanner from "../../../assets/banners/EmptyAllFriends.svg";
+import EmptyOnlineFriendsBanner from "../../../assets/banners/EmptyOnlineFriends.svg";
 
 const DisplayFriendsList: React.FC<{
   type: DisplayFriendsTabs;
@@ -18,7 +20,7 @@ const DisplayFriendsList: React.FC<{
     setUsersToDisplayFiltered(items);
   }, [items]);
 
-  return (
+  return usersToDisplayFiltered.length > 0 ? (
     <div className=" bg-LightGray flex-grow h-full px-8">
       <div className="py-4">
         <FriendFilter
@@ -32,6 +34,16 @@ const DisplayFriendsList: React.FC<{
           <DisplayFriend UserData={user} />
         ))}
       </>
+    </div>
+  ) : type === "All" ? (
+    <div className="flex-col flex justify-center items-center bg-LightGray h-full">
+      <img src={EmptyAllFriendsBanner} alt="Wumps" />
+      <p>Wumpus is waiting on friends. You don't have to, though!</p>
+    </div>
+  ) : (
+    <div className="flex-col flex justify-center items-center bg-LightGray h-full">
+      <img src={EmptyOnlineFriendsBanner} alt="Wumps" />
+      <p>No one's around to play with Wumpus!</p>
     </div>
   );
 };

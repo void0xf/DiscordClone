@@ -4,6 +4,7 @@ import { getUsersFromUID } from "../../../firebase/firestore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DisplayPendingRequest from "./DisplayPendingRequest";
+import EmptyFriendsRequests from "../../../assets/banners/EmptyFriendsRequests.svg";
 
 const DisplayPendingList = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -31,15 +32,22 @@ const DisplayPendingList = () => {
           setNewUsers={setUsersToDisplayFiltered}
         /> */}
       </div>
-      <p className="font-ggSansBold text-xs pb-4">PENDING</p>
-      <>
-        {incomingpendingRequests.map((user) => {
-          return <DisplayPendingRequest user={user} pendingType="Incoming" />;
-        })}
-        {outcomingpendingRequests.map((user) => {
-          return <DisplayPendingRequest user={user} pendingType="Outgoing" />;
-        })}
-      </>
+      {incomingpendingRequests.length + outcomingpendingRequests.length ? (
+        <>
+          <p className="font-ggSansBold text-xs pb-4">PENDING</p>
+          {incomingpendingRequests.map((user) => {
+            return <DisplayPendingRequest user={user} pendingType="Incoming" />;
+          })}
+          {outcomingpendingRequests.map((user) => {
+            return <DisplayPendingRequest user={user} pendingType="Outgoing" />;
+          })}
+        </>
+      ) : (
+        <div className="justify-center flex items-center flex-col h-full">
+          <img src={EmptyFriendsRequests} alt="" />
+          <p>There are no pending friend requests. Here's Wumpus for now.</p>
+        </div>
+      )}
     </div>
   );
 };
