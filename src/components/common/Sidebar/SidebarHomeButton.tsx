@@ -4,6 +4,7 @@ import SidebarDot from "./SidebarDot";
 import { useDispatch, useSelector } from "react-redux";
 import { setSidebarCurrentButton } from "../../../slices/sidebarSlice";
 import { RootState } from "../../../store/store";
+import NotificationCounterDot from "../NotificationCounterDot";
 
 interface SidebarHomeButtonProps {
   onClickHandler: () => void;
@@ -15,13 +16,20 @@ const SidebarHomeButton: React.FC<SidebarHomeButtonProps> = ({
   const [doAnimation, setDoAnimation] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const sidebarState = useSelector((state: RootState) => state.sidebar);
+  const user = useSelector((state: RootState) => state.user);
   const [isSelected, setIsSelected] = useState(false);
   const dispatch = useDispatch();
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     setIsSelected(sidebarState === "@me");
-    console.log(isSelected);
   }, [sidebarState]);
+
+  useEffect(() => {
+    user.incomingFriendRequests.length > 0
+      ? setShowNotification(true)
+      : setShowNotification(false);
+  }, [user.incomingFriendRequests.length]);
 
   const handleAnimation = () => {
     setDoAnimation(true);
@@ -63,6 +71,13 @@ const SidebarHomeButton: React.FC<SidebarHomeButtonProps> = ({
           isSelected={isSelected}
           notification={false}
         />
+        {showNotification ? (
+          <div className="absolute items-center flex justify-center text-center right-0 bottom-0 border-DarkGray border-[4px] rounded-full">
+            <NotificationCounterDot
+              NotifcaiotnCount={user.incomingFriendRequests.length}
+            />
+          </div>
+        ) : null}
       </div>
     </button>
   );
