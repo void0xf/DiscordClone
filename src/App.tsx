@@ -14,7 +14,6 @@ import Friends from "./components/features/Friends/Friends";
 
 const App: React.FC = () => {
   initializeApp(firebaseConfig);
-  console.log("render");
 
   return (
     <Provider store={store}>
