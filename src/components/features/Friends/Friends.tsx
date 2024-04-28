@@ -9,12 +9,9 @@ import DisplayAddFriend from "./DisplayAddFriend";
 import {
   getOnlineUsersFromUID,
   getUsersFromUID,
-  listenForIncomingFriendRequests,
   listenToUserStatuses,
-  syncStateFromFirestore,
 } from "../../../firebase/firestore";
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, UnknownAction } from "redux";
+import { useSelector } from "react-redux";
 import DisplayFriendsList from "./DisplayAllFriendsList";
 import { User } from "../../../types/user.t";
 import { RootState } from "../../../store/store";
@@ -44,10 +41,6 @@ const NavFriendsIcon = () => (
   </svg>
 );
 
-async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {
-  syncStateFromFirestore(dispatch);
-}
-
 const fetchAllFriends = async (user: User) => {
   const users = await getUsersFromUID(user.friends);
   return users as User[];
@@ -59,7 +52,6 @@ const fetchOnlineFriends = async (user: User) => {
 };
 
 const Friends = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const [selectedTab, setSelectedTab] = useState<DisplayFriendsTabs>("Online");
   const [allFriends, setAllFriends] = useState<User[]>([]);
@@ -74,9 +66,6 @@ const Friends = () => {
       const friends = await fetchOnlineFriends(user);
       setOnlineFriends(friends);
     }
-    listenForIncomingFriendRequests(() => {
-      onFriendRequest(dispatch);
-    });
     const sub = listenToUserStatuses(user.friends, () => {
       getOnlineFriends();
       getAllFriends();
