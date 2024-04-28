@@ -1,19 +1,23 @@
 import { GoPlus } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { getUsersFromUID } from "../../../firebase/firestore";
+import {
+  getStrangerInfoFromConversation,
+  getUsersFromUID,
+} from "../../../firebase/firestore";
 import { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
 import DirectMessage from "./DirectMessage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DirectMessagesNavigation = () => {
   const user = useSelector((state: RootState) => state.user);
   const [usersToDisplay, setUsersToDisplay] = useState<User[]>([]);
+  const [fetchedStranger, setFetchedStanger] = useState<User | null>(null);
   const [directMessagesLength, setDirectMessagesLength] = useState(
     user.DirectMessages.length
   );
-
+  const { conversationID } = useParams();
   const nav = useNavigate();
   async function getUsersFromDMs() {
     const res = await getUsersFromUID(user.DirectMessages as string[]);
@@ -31,6 +35,21 @@ const DirectMessagesNavigation = () => {
     }
   }, [user.DirectMessages.length, user.friends.length]);
 
+  useEffect(() => {
+    async function fetchUser() {
+      if (conversationID) {
+        const user = await getStrangerInfoFromConversation(
+          conversationID as string
+        );
+        setFetchedStanger(user as User);
+      } else {
+        setFetchedStanger(null);
+      }
+    }
+
+    fetchUser();
+  }, [conversationID]);
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between px-4 text-xs font-ggSansMedium pt-2">
@@ -44,11 +63,22 @@ const DirectMessagesNavigation = () => {
 
       <div className="text-TextGray">
         {usersToDisplay.map((user) => {
-          return (
-            <div className="px-2 ">
-              <DirectMessage UserInfo={user} />
-            </div>
-          );
+          if (fetchedStranger) {
+            return (
+              <div className={`px-2`}>
+                <DirectMessage
+                  UserInfo={user}
+                  isActive={fetchedStranger.name === user.name}
+                />
+              </div>
+            );
+          } else {
+            return (
+              <div className={`px-2`}>
+                <DirectMessage UserInfo={user} isActive={false} />
+              </div>
+            );
+          }
         })}
       </div>
     </div>

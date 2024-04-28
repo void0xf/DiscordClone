@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DirectMessageUserProfile from "./DirectMessageUserProfile";
 
-const DirectMessage: React.FC<DirectMessageProps> = ({ UserInfo }) => {
+const DirectMessage: React.FC<DirectMessageProps> = ({
+  UserInfo,
+  isActive,
+}) => {
   const user = useSelector((state: RootState) => state.user);
   const nav = useNavigate();
   const handleNavigateToConverstaion = async () => {
@@ -21,7 +24,9 @@ const DirectMessage: React.FC<DirectMessageProps> = ({ UserInfo }) => {
 
   return (
     <div
-      className={`hover:bg-SelectedUserTab rounded-md hover:cursor-pointer px-2 }`}
+      className={`hover:bg-SelectedUserTab ${
+        isActive ? "bg-SelectedFriendTab" : ""
+      } rounded-md hover:cursor-pointer px-2 }`}
       onClick={() => {
         handleNavigateToConverstaion();
       }}
