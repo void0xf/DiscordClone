@@ -14,9 +14,9 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { User, UserStatus } from "../types/user.t";
+import { User, UserStatus } from "@/src/types/user.t";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { setUser } from "../slices/userSlice";
+import { setUser } from "@/src/slices/userSlice";
 import { Dispatch, UnknownAction } from "redux";
 
 export async function addUserDataToFireStore(uid: string, userInfo: User) {
@@ -384,8 +384,6 @@ export async function updateMemberDm(conversationId: string) {
       (member) => member !== loggedUserUid
     );
     if (conversationStranger) {
-      console.log(conversationStranger);
-
       const targetRef = doc(db, "users", conversationStranger as string);
       updateDoc(targetRef, {
         DirectMessages: arrayUnion(loggedUserUid),

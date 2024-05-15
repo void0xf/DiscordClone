@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { User } from "../../../types/user.t";
 import {
@@ -5,7 +7,7 @@ import {
   cancelSendedFriendRequest,
   declineFriendRequest,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useDispatch } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import FriendAction from "./FriendAction";

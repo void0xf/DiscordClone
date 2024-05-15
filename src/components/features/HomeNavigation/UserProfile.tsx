@@ -1,8 +1,9 @@
+"use client";
+
 import React, { useRef, useState } from "react";
 import { User } from "../../../types/user.t";
 import { FaMicrophone } from "react-icons/fa";
 import { FaHeadphonesSimple } from "react-icons/fa6";
-import { TbSettingsFilled } from "react-icons/tb";
 import UserStatusDotIndicator from "../../common/UserStatusDotIndicator";
 import UserProfileCard from "./UserProfileCard/UserProfileCard";
 import { getStatusString } from "../../../utils/userUtils/getStatusString";
@@ -65,7 +66,7 @@ const UserProfileHomeNavigation: React.FC<{ user: User }> = ({ user }) => {
           <FaHeadphonesSimple />
         </button>
         <button className="hover:bg-HoverText rounded-md h-7 w-7 items-center flex justify-center">
-          <TbSettingsFilled />
+          {/* <TbSettingsFilled /> */}
         </button>
       </div>
     </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { NavigationButtonProps } from "../../../types/Button.t";
 import NotificationCounterDot from "../../common/NotificationCounterDot";

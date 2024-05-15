@@ -1,3 +1,5 @@
+"use client";
+
 import AddFriendInput from "./AddFriendInput";
 import ExploreDisoverableServers from "./ExploreDisoverableServers";
 

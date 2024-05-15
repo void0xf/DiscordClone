@@ -1,24 +1,27 @@
+"use client";
+
 import { GoPlus } from "react-icons/go";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import {
   getStrangerInfoFromConversation,
   getUsersFromUID,
-} from "../../../firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
 import DirectMessage from "./DirectMessage";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const DirectMessagesNavigation = () => {
+  const router = useRouter();
+  const conversationID = useParams().id;
   const user = useSelector((state: RootState) => state.user);
   const [usersToDisplay, setUsersToDisplay] = useState<User[]>([]);
   const [fetchedStranger, setFetchedStanger] = useState<User | null>(null);
   const [directMessagesLength, setDirectMessagesLength] = useState(
     user.DirectMessages.length
   );
-  const { conversationID } = useParams();
-  const nav = useNavigate();
   async function getUsersFromDMs() {
     const res = await getUsersFromUID(user.DirectMessages as string[]);
     return res;
@@ -29,9 +32,9 @@ const DirectMessagesNavigation = () => {
       setUsersToDisplay(res as User[]);
     });
     //incase when user will remove someone from friends mid dm
-    if (directMessagesLength >= user.DirectMessages.length) {
-      nav("/channels/@me");
+    if (directMessagesLength > user.DirectMessages.length) {
       setDirectMessagesLength(user.DirectMessages.length);
+      router.push("/channels/@me");
     }
   }, [user.DirectMessages.length, user.friends.length]);
 
@@ -46,7 +49,6 @@ const DirectMessagesNavigation = () => {
         setFetchedStanger(null);
       }
     }
-
     fetchUser();
   }, [conversationID]);
 

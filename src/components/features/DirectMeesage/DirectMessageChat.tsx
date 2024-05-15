@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
-import { Message, listenAndGetMessages } from "../../../firebase/firestore";
-import { useParams } from "react-router-dom";
+import { Message, listenAndGetMessages } from "@/src/firebase/firestore";
 import DisplayChatMessageWithUserInfo from "./DisplayChatMessageWithUserInfo";
 import DisplayChatMessage from "./DisplayChatMessage";
 import DisplayDateInfo from "./DisplayDateInfo";
@@ -11,13 +12,14 @@ import {
   isOlderThanOneDay,
   isOlderThanOneMinute,
 } from "../../../utils/dateUtils";
+import { useParams } from "next/navigation";
 
 interface DirectMessageChatProps {
   UserInfo: User;
 }
 
 const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
-  const { conversationID } = useParams();
+  const conversationID = useParams().id;
   const [messages, setMessages] = useState<Message[]>();
   const user = useSelector((state: RootState) => state.user);
   const scrollTo = useRef<HTMLDivElement>(null);
@@ -26,7 +28,7 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
   useEffect(() => {
     if (conversationID === undefined) return;
     const unSubscribeFromListening = listenAndGetMessages(
-      conversationID,
+      conversationID as string,
       (fetchedMessages: Message[]) => {
         setMessages(fetchedMessages);
       }
@@ -40,7 +42,7 @@ const DirectMessageChat: React.FC<DirectMessageChatProps> = ({ UserInfo }) => {
     if (messages && conversationID) {
       if (messages?.length > 0 && currentConversationID !== conversationID) {
         scrollTo.current?.scrollIntoView({ behavior: "smooth" });
-        setCurrentConversationID(conversationID);
+        setCurrentConversationID(conversationID as string);
       }
 
       if (messages.at(messages.length - 1)?.sender === user.name) {

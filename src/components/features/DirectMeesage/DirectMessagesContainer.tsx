@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from "react";
 
 const DirectMessagesContainer: React.FC<{

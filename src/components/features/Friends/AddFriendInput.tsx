@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import {
   addFriend,
   getUIDfromName,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import FormButton from "../../common/AuthPage/FormButton";
@@ -57,6 +59,7 @@ const AddFriendInput = () => {
         <FormButton
           label="Send Friend Request"
           onClickHandler={handleAddFriend}
+          activeBoolean={true}
         />
       </div>
       <p className="text-red-400 text-sm mt-2 font-ggsansNormal">{error}</p>

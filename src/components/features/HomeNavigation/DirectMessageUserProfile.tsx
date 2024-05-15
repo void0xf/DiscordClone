@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { User } from "../../../types/user.t";
 import { X } from "lucide-react";
@@ -5,9 +7,9 @@ import {
   getUIDfromName,
   removeFromUserFromDms,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface DirectMessageUserProfileProps {
   UserData: User;
@@ -17,8 +19,8 @@ const DirectMessageUserProfile: React.FC<DirectMessageUserProfileProps> = ({
   UserData,
 }) => {
   const [isHovering, setisHovering] = useState(false);
+  const router = useRouter();
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const handleRemoveDirectMessage = (event: React.MouseEvent) => {
     event.stopPropagation();
     getUIDfromName(UserData.name).then((uid) => {
@@ -26,7 +28,7 @@ const DirectMessageUserProfile: React.FC<DirectMessageUserProfileProps> = ({
       removeFromUserFromDms(uid as string);
     });
     syncStateFromFirestore(dispatch);
-    nav("/channels/@me");
+    router.push("/channels/@me");
   };
 
   return (

@@ -1,18 +1,19 @@
 import React from "react";
-import DiscordLoginQR from "../../assets/banners/LoginQRCode.svg";
-import DiscordLogoLoginQR from "../../assets/banners/DiscordQRCodeLogo.png";
+import DiscordLoginQR from "@/src/assets/banners/LoginQRCode.svg";
+import DiscordLogoLoginQR from "@/src/assets/banners/DiscordQRCodeLogo.png";
+import Image from "next/image";
 
 const QRcode = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-fit max-h-fit mb-5 border-white border-8 rounded-md">
-        <img
+        <Image
           src={DiscordLoginQR}
           alt="QR code"
           className="rounded-sm w-[180px] h-[180px] mx-auto"
         />
         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-          <img
+          <Image
             src={DiscordLogoLoginQR}
             alt="DiscordLogoQR"
             className="w-12 h-12"

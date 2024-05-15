@@ -1,10 +1,13 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
 import FriendFilter from "./FriendFilter";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayFriend from "./DisplayFriend";
-import EmptyAllFriendsBanner from "../../../assets/banners/EmptyAllFriends.svg";
-import EmptyOnlineFriendsBanner from "../../../assets/banners/EmptyOnlineFriends.svg";
+import EmptyAllFriendsBanner from "@/src/assets/banners/EmptyAllFriends.svg";
+import EmptyOnlineFriendsBanner from "@/src/assets/banners/EmptyOnlineFriends.svg";
+import Image from "next/image";
 
 const DisplayFriendsList: React.FC<{
   type: DisplayFriendsTabs;
@@ -20,8 +23,8 @@ const DisplayFriendsList: React.FC<{
     setUsersToDisplayFiltered(items);
   }, [items]);
 
-  return usersToDisplayFiltered.length > 0 ? (
-    <div className=" bg-LightGray flex-grow h-full px-8">
+  return (
+    <div className="bg-LightGray flex-grow h-full px-8">
       <div className="py-4">
         <FriendFilter
           users={usersToDisplay}
@@ -29,21 +32,23 @@ const DisplayFriendsList: React.FC<{
         />
       </div>
       <p className="font-ggSansBold text-xs pb-2">{type.toLocaleUpperCase()}</p>
-      <>
-        {usersToDisplayFiltered.map((user) => (
-          <DisplayFriend UserData={user} />
-        ))}
-      </>
-    </div>
-  ) : type === "All" ? (
-    <div className="flex-col flex justify-center items-center bg-LightGray h-full">
-      <img src={EmptyAllFriendsBanner} alt="Wumps" />
-      <p>Wumpus is waiting on friends. You don't have to, though!</p>
-    </div>
-  ) : (
-    <div className="flex-col flex justify-center items-center bg-LightGray h-full">
-      <img src={EmptyOnlineFriendsBanner} alt="Wumps" />
-      <p>No one's around to play with Wumpus!</p>
+      {usersToDisplayFiltered.length > 0 ? (
+        <>
+          {usersToDisplayFiltered.map((user) => (
+            <DisplayFriend UserData={user} />
+          ))}
+        </>
+      ) : type === "All" ? (
+        <div className="flex-col flex justify-center items-center bg-LightGray h-full">
+          <Image src={EmptyAllFriendsBanner} alt="Wumps" />
+          <p>Wumpus is waiting on friends. You don't have to, though!</p>
+        </div>
+      ) : (
+        <div className="flex-col flex justify-center items-center bg-LightGray h-full">
+          <Image src={EmptyOnlineFriendsBanner} alt="Wumps" />
+          <p>Looks like you don’t have any friends in this category.</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { FaCompass } from "react-icons/fa";
 import { MdKeyboardArrowRight } from "react-icons/md";
 

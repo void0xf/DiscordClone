@@ -1,4 +1,4 @@
-import { FirebaseError, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,8 +6,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { firebaseConfig } from "./FirebaseConfig";
-import { User } from "../types/user.t";
 import { addUserDataToFireStore } from "./firestore";
+import { User } from "../types/user.t";
 
 export async function createNewUser(
   email: string,
@@ -33,16 +33,12 @@ export async function loginUser(email: string, password: string) {
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
 
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    return userCredential.user.uid;
-  } catch (error) {
-    throw error;
-  }
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  return userCredential.user.uid;
 }
 
 export async function logOutUser() {

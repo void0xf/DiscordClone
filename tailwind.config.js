@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    // Or if using `src` directory:
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     screens: {
       xs: "480px",
@@ -54,14 +60,14 @@ export default {
         FromBackground: "#313338",
       },
       fontFamily: {
-        ggsansNormal: ["ggSansNormal", "sans"],
-        ggSansNormalItalic: ["ggSansNormalItalic", "sans"],
-        ggSansMediumItalic: ["ggSansMediumItalic", "sans"],
-        ggSansBold: ["ggSansBold", "sans"],
-        ggSansExtraBold: ["ggSansExtraBold", "sans"],
-        ggSansSemiBold: ["ggSansSemiBold", "sans"],
-        ggSansMedium: ["ggSansMedium", "sans"],
-        abcginto: ["abcginto", "sans"],
+        ggSansNormal: ["var(--font-normalggsans)", "sans-serif"],
+        ggSansNormalItalic: ["var(--font-normalitalicggsans)", "sans-serif"],
+        ggSansMediumItalic: ["var(--font-mediumitalicggsans)", "sans-serif"],
+        ggSansBold: ["var(--font-boldggsans)", "sans-serif"],
+        ggSansExtraBold: ["var(--font-extraboldggsans)", "sans-serif"],
+        ggSansSemiBold: ["var(--font-semiboldggsans)", "sans-serif"],
+        ggSansMedium: ["var(--font-mediumggsans)", "sans-serif"],
+        abcginto: ["var(--font-abcginto)"], // Assuming serif as a fallback
       },
     },
   },

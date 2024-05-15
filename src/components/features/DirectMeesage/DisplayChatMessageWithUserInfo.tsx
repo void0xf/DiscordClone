@@ -1,5 +1,7 @@
+"use client";
+
 import React from "react";
-import { Message } from "../../../firebase/firestore";
+import { Message } from "@/src/firebase/firestore";
 import { User } from "../../../types/user.t";
 
 interface DisplayChatMessageWithUserInfoProps {

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { UserStatus } from "../../types/user.t";
 

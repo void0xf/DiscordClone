@@ -1,10 +1,13 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
-import { getUsersFromUID } from "../../../firebase/firestore";
+import { getUsersFromUID } from "@/src/firebase/firestore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DisplayPendingRequest from "./DisplayPendingRequest";
-import EmptyFriendsRequests from "../../../assets/banners/EmptyFriendsRequests.svg";
+import EmptyFriendsRequests from "@/src/assets/banners/EmptyFriendsRequests.svg";
+import Image from "next/image";
 
 const DisplayPendingList = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -44,7 +47,7 @@ const DisplayPendingList = () => {
         </>
       ) : (
         <div className="justify-center flex items-center flex-col h-full">
-          <img src={EmptyFriendsRequests} alt="" />
+          <Image src={EmptyFriendsRequests} alt="" />
           <p>There are no pending friend requests. Here's Wumpus for now.</p>
         </div>
       )}
