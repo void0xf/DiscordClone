@@ -9,9 +9,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Provider store={store}>
-        <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-          {children}
-        </PersistGate>
+        <PersistGate persistor={persistor}>{children}</PersistGate>
       </Provider>
     </div>
   );
