@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-
+import "@/src/index.css";
 import fonts from "@/src/utils/fonts/createFonts";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../firebase/FirebaseConfig";
+import StoreProvider from "../store/StoreProvider";
 
 export const metadata: Metadata = {
   title: "My App",
@@ -13,14 +16,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  initializeApp(firebaseConfig);
   return (
-    <html lang="en" className={createdFonts}>
+    <html lang="en">
       <head>
         <title>Discord</title>
         <meta name="description" content="My App is a Discord clone" />
       </head>
       <body>
-        <div id="root">{children}</div>
+        <StoreProvider>
+          <div id="root" className={createdFonts}>
+            {children}
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );

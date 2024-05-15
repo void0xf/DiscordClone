@@ -7,20 +7,14 @@ import React from "react";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "./pages/firebase/FirebaseConfig";
-import Register from "./pages/auth/login/Register";
-// import Friends from "./components/features/Friends/Friends";
 
 const App: React.FC = () => {
-  initializeApp(firebaseConfig);
-
   return (
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-        {/* <Login /> */}
-        <Register />
-      </PersistGate>
+      <PersistGate
+        loading={<div>Loading...</div>}
+        persistor={persistor}
+      ></PersistGate>
     </Provider>
   );
 };

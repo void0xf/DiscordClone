@@ -1,14 +1,9 @@
-"use client";
-
 import React from "react";
-import Login from "../../pages/auth/login/Login";
+
+import Login from "@/src/components/features/auth/login/Login";
 
 const Page = () => {
-  return (
-    <div>
-      <Login />
-    </div>
-  );
+  return <Login />;
 };
 
 export default Page;

@@ -1,20 +1,22 @@
+"use client";
+
+import CheckBoxPolicy from "@/src/components/common/AuthPage/CheckBoxPolicy";
+import FormButton from "@/src/components/common/AuthPage/FormButton";
+import DropDownItem from "@/src/components/common/AuthPage/Select/DropDownItem";
+import Selectt from "@/src/components/common/AuthPage/Select/Selectt";
+import UserInputForm from "@/src/components/common/AuthPage/UserInputForm";
+import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
+import { createNewUser } from "@/src/firebase/auth";
+import { isNameAvaliable } from "@/src/firebase/firestore";
+import { setUser } from "@/src/slices/userSlice";
+import { User, UserStatus } from "@/src/types/user.t";
+import { isValidDate } from "@/src/utils/dateUtils";
+import { FirebaseError, initializeApp } from "firebase/app";
+import Link from "next/link";
 import { useRef, useState } from "react";
-import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
-import FormButton from "../../../components/common/AuthPage/FormButton";
-import { v4 as uuidv4 } from "uuid";
-import Selectt from "../../../components/common/AuthPage/Select/Selectt.tsx";
-import DropDownItem from "../../../components/common/AuthPage/Select/DropDownItem.tsx";
-// import { useDispatch } from "react-redux";
-// import { setUser } from "../../../slices/userSlice.ts";
-import CheckBox from "../../../components/common/AuthPage/CheckBox.tsx";
-import CheckBoxPolicy from "../../../components/common/AuthPage/CheckBoxPolicy.tsx";
-import { FirebaseError } from "firebase/app";
-import { isNameAvaliable } from "../../firebase/firestore.ts";
-import { isValidDate } from "../../../utils/dateUtils.ts";
-import { User, UserStatus } from "../../../types/user.t.ts";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../slices/userSlice.ts";
-import { createNewUser } from "../../firebase/auth.ts";
+import { v4 as uuidv4 } from "uuid";
+import { redirect } from "next/navigation";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -72,7 +74,7 @@ export const Register = () => {
 
   const handleRegister = async () => {
     console.log(emialErrorCode, nameErrorCode, dateErrorCode);
-
+    initializeApp(firebaseConfig);
     if (emailRef.current?.value === "") {
       setEmailErrorCode("required");
     } else {
@@ -142,7 +144,7 @@ export const Register = () => {
           );
           dispatch(setUser(UserData));
           if (res) {
-            // nav("/channels/@me");
+            redirect("/channels/@me");
           }
         }
       } catch (error: unknown) {
@@ -253,18 +255,16 @@ export const Register = () => {
                   ))}
                 </Selectt>
               </div>
-
-              <CheckBox />
             </div>
             <FormButton
               label="Kontynuuj"
               onClickHandler={handleRegister}
               activeBoolean={activeButton}
             />
-            <CheckBoxPolicy
-              activeButton={(isActive) => setActiveButton(isActive)}
-            />
-            {/* <Link label="Masz już konto?" navigateTo="/login" /> */}
+            <CheckBoxPolicy activeButton={setActiveButton} />
+            <Link href="/login" className="text-[#00a8fc] text-sm">
+              Masz już konto?
+            </Link>
           </div>
         </div>
       </div>

@@ -1,16 +1,19 @@
+"use client";
+
 import { useRef, useState } from "react";
-import QRcode from "../../../components/presentational/QRcode";
-import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
-import Link from "../../../components/common/AuthPage/Link";
-import FormButton from "../../../components/common/AuthPage/FormButton";
-import { loginUser } from "../../firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { getUserStateFromFirestore } from "../../firebase/firestore";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../slices/userSlice";
-import { User } from "../../../types/user.t";
-import DiscordPageLogo from "../../../assets/icons/DiscordPageLogo.svg";
+import DiscordPageLogo from "@/src/assets/icons/DiscordPageLogo.svg";
 import { FirebaseError } from "firebase/app";
+import { loginUser } from "@/src/firebase/auth";
+import { getUserStateFromFirestore } from "@/src/firebase/firestore";
+import { User } from "@/src/types/user.t";
+import UserInputForm from "@/src/components/common/AuthPage/UserInputForm";
+import QRcode from "@/src/components/presentational/QRcode";
+import FormButton from "@/src/components/common/AuthPage/FormButton";
+import Image from "next/image";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/src/slices/userSlice";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
@@ -19,7 +22,6 @@ const Login = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
-
   const handleSetEmail = (text: string) => {
     setEmail(text);
   };
@@ -36,6 +38,7 @@ const Login = () => {
           const user: User | null = await getUserStateFromFirestore(uid);
           if (user) {
             dispatch(setUser(user));
+            redirect("/channels/@me");
           }
         }
       } catch (error: unknown) {
@@ -51,7 +54,7 @@ const Login = () => {
       <div className='w-full h-full md:justify-between xs:rounded-md xs:flex xs:h-[420px] xs:w-full xs:max-w-[50rem] font-"ggsans-Normal" bg-FromBackground xs:mx-16'>
         <div className="flex-auto flex-col px-8">
           <div className="justify-center flex mt-4 xs:hidden">
-            <img src={DiscordPageLogo} alt="DiscordLogo" className="h-8 " />
+            <Image src={DiscordPageLogo} alt="DiscordLogo" className="h-6" />
           </div>
           <div className="text-center text-nowrap ">
             <h1 className="text-whiteMain text-2xl flex justify-center pt-7 font-semibold">
@@ -99,7 +102,9 @@ const Login = () => {
 
           <div className="flex">
             <span className="text-TextGray text-sm">Potrzebujesz konta?</span>
-            {/* <Link label="Zarejestruj się" navigateTo="/register" /> */}
+            <p className="text-[#00A8FC] text-sm ml-1">
+              <Link href={"/register"}>Zarejestruj się</Link>
+            </p>
           </div>
         </div>
 
