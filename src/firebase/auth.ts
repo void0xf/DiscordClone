@@ -6,8 +6,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { firebaseConfig } from "./FirebaseConfig";
-import { User } from "../../types/user.t";
 import { addUserDataToFireStore } from "./firestore";
+import { User } from "../types/user.t";
 
 export async function createNewUser(
   email: string,

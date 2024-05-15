@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { User, UserStatus } from "../../../../types/user.t";
 // import UserStatusDotIndicator from "../../../common/UserStatusDotIndicator";
@@ -6,7 +8,7 @@ import { ArrowUpDown, ChevronRight, Copy, Smile } from "lucide-react";
 import HoverDropDownMenu from "./HoverDropDownMenu";
 import { useDispatch } from "react-redux";
 import { setStatus } from "../../../../slices/userSlice";
-import { updateUserState } from "../../../../pages/firebase/firestore";
+import { updateUserState } from "@/src/firebase/firestore";
 import UserStatusDotIndicator from "../../../common/UserStatusDotIndicator";
 
 interface UserProfileCardProps {

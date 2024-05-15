@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { DisplayFriendsTabs } from "../../features/Friends/friends.t";
 

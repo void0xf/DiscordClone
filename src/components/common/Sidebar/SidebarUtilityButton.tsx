@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import SidebarTooltip from "./SidebarTooltip";
 import { SidebarUltityButtonProps } from "../../../types/sidebar.t";

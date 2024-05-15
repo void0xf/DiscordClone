@@ -10,10 +10,10 @@ import UserInputForm from "@/src/components/common/AuthPage/UserInputForm";
 import QRcode from "@/src/components/presentational/QRcode";
 import FormButton from "@/src/components/common/AuthPage/FormButton";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/src/slices/userSlice";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
@@ -22,6 +22,7 @@ const Login = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
+  const router = useRouter();
   const handleSetEmail = (text: string) => {
     setEmail(text);
   };
@@ -38,7 +39,7 @@ const Login = () => {
           const user: User | null = await getUserStateFromFirestore(uid);
           if (user) {
             dispatch(setUser(user));
-            redirect("/channels/@me");
+            router.push("/channels/@me");
           }
         }
       } catch (error: unknown) {

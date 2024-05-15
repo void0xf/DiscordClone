@@ -1,9 +1,11 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import {
   addFriend,
   getUIDfromName,
   syncStateFromFirestore,
-} from "../../../pages/firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import FormButton from "../../common/AuthPage/FormButton";

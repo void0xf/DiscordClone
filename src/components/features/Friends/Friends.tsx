@@ -1,6 +1,6 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
-import { TbMessageCircle2Filled } from "react-icons/tb";
 import { RiInboxFill } from "react-icons/ri";
 import { MdHelp } from "react-icons/md";
 import FriendsNavigation from "./FriendsNavigation";
@@ -10,7 +10,7 @@ import {
   getOnlineUsersFromUID,
   getUsersFromUID,
   listenToUserStatuses,
-} from "../../../pages/firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useSelector } from "react-redux";
 import DisplayFriendsList from "./DisplayAllFriendsList";
 import { User } from "../../../types/user.t";
@@ -96,9 +96,7 @@ const Friends = () => {
             </div>
           </div>
           <div className="text-3xl flex px-4 justify-center items-center">
-            <div className="p-2">
-              <TbMessageCircle2Filled />
-            </div>
+            <div className="p-2">{/* <TbMessageCircle2Filled /> */}</div>
             <div className="p-2">
               <RiInboxFill />
             </div>

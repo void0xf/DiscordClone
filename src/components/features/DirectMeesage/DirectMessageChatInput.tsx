@@ -1,3 +1,5 @@
+"use client";
+
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaGift } from "react-icons/fa";
 import { PiGifFill } from "react-icons/pi";

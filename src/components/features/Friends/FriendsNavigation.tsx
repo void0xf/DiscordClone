@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import TabTittleButton from "../../common/TabTitle/TabTittleButton";
 import AddFriendButton from "../../common/TabTitle/AddFriendButton";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../../types/user.t";
 import { CiSearch } from "react-icons/ci";

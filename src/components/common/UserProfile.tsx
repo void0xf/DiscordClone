@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { User } from "../../types/user.t";
 import { getStatusString } from "../../utils/userUtils/getStatusString";

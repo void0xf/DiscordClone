@@ -1,9 +1,11 @@
+"use client";
+
 import React, { MouseEvent, useRef, useState } from "react";
 import { User } from "../../../types/user.t";
 import {
   removeFromFriends,
   syncStateFromFirestore,
-} from "../../../pages/firebase/firestore";
+} from "@/src/firebase/firestore";
 import { useDispatch } from "react-redux";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 

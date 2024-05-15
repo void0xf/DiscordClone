@@ -1,3 +1,5 @@
+"use client";
+
 import { Search, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 

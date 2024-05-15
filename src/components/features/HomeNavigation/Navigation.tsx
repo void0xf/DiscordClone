@@ -1,10 +1,12 @@
+"use client";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DirectMessagesNavigation from "./DirectMessagesNavigation";
 import FindOrStartConversation from "./FindOrStartConversation";
 import NavigationButtton from "./NavigationButtton";
-import { useLocation, useNavigate } from "react-router-dom";
 import UserProfileHomeNavigation from "./UserProfile";
+import { useParams, useRouter } from "next/navigation";
 
 const NavFriendsIcon = () => (
   <svg
@@ -111,8 +113,8 @@ const ShopIcon = () => (
 
 const Navigation = () => {
   const user = useSelector((state: RootState) => state.user);
-  const nav = useNavigate();
-  const location = useLocation();
+  const path = useParams();
+  const router = useRouter();
 
   return (
     <div className=" bg-DmsNavigationBg h-full w-60 flex justify-between flex-col">
@@ -124,10 +126,10 @@ const Navigation = () => {
           <NavigationButtton
             label="Friends"
             onClickHandler={() => {
-              nav("/channels/@me");
+              router.push("/channels/@me");
             }}
             Icon={<NavFriendsIcon />}
-            isActive={location.pathname === "/channels/@me"}
+            isActive={path.id === "%40me"}
           />
           <NavigationButtton
             label="Nitro"

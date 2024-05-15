@@ -13,13 +13,14 @@ import { User, UserStatus } from "@/src/types/user.t";
 import { isValidDate } from "@/src/utils/dateUtils";
 import { FirebaseError, initializeApp } from "firebase/app";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { redirect } from "next/navigation";
 
 export const Register = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [activeButton, setActiveButton] = useState(false);
   const [activeOptionDay, setActiveOptionDay] = useState<string>("");
   const [activeOptionMonth, setActiveOptionMonth] = useState<string>("");
@@ -73,7 +74,6 @@ export const Register = () => {
   };
 
   const handleRegister = async () => {
-    console.log(emialErrorCode, nameErrorCode, dateErrorCode);
     initializeApp(firebaseConfig);
     if (emailRef.current?.value === "") {
       setEmailErrorCode("required");
@@ -144,7 +144,7 @@ export const Register = () => {
           );
           dispatch(setUser(UserData));
           if (res) {
-            redirect("/channels/@me");
+            router.push("/channels/@me");
           }
         }
       } catch (error: unknown) {

@@ -384,8 +384,6 @@ export async function updateMemberDm(conversationId: string) {
       (member) => member !== loggedUserUid
     );
     if (conversationStranger) {
-      console.log(conversationStranger);
-
       const targetRef = doc(db, "users", conversationStranger as string);
       updateDoc(targetRef, {
         DirectMessages: arrayUnion(loggedUserUid),

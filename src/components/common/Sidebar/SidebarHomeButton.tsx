@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import DiscordLogoSidebarHomeButton from "../../../assets/icons/Sidebar/DiscordLogoSidebar.svg";
 import SidebarDot from "./SidebarDot";
@@ -5,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSidebarCurrentButton } from "../../../slices/sidebarSlice";
 import { RootState } from "../../../store/store";
 import NotificationCounterDot from "../NotificationCounterDot";
+import Image from "next/image";
 
 interface SidebarHomeButtonProps {
   onClickHandler: () => void;
@@ -61,7 +63,7 @@ const SidebarHomeButton: React.FC<SidebarHomeButtonProps> = ({
                     ${isSelected ? "bg-lightBlue rounded-2xl" : "rounded-full"}
                     `}
       >
-        <img
+        <Image
           src={DiscordLogoSidebarHomeButton}
           alt=""
           className="w-[30px] h-[30px] text-white"

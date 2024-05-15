@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { User } from "../../../types/user.t";
 import {
@@ -6,23 +8,23 @@ import {
   findConversation,
   getUIDfromName,
   syncStateFromFirestore,
-} from "../../../pages/firebase/firestore";
-import { useNavigate } from "react-router-dom";
+} from "@/src/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import { BiSolidMessageRounded } from "react-icons/bi";
 import { IoMdMore } from "react-icons/io";
 import FriendAction from "./FriendAction";
 import { RootState } from "../../../store/store";
+import { redirect, useRouter } from "next/navigation";
 
 interface DisplayFriendProps {
   UserData: User;
 }
 
 const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
-  const nav = useNavigate();
   const dispatch = useDispatch();
   const myUser = useSelector((state: RootState) => state.user);
+  const router = useRouter();
 
   const handleSendMessage = async () => {
     const uid = (await getUIDfromName(UserData.name)) as string;
@@ -32,11 +34,12 @@ const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
     if (conversationId) {
       addStrangerToUserDMs(uid, myuid); // incase user deleted stranger from Dms
       syncStateFromFirestore(dispatch);
-      nav(`/channels/${conversationId}`);
+      console.log(conversationId);
+      router.push(`/channels/${conversationId}`);
     } else {
       const createdConversationId = await createConversation(uid);
-      nav(`/channels/${createdConversationId}`);
       syncStateFromFirestore(dispatch);
+      redirect(`/channels/${createdConversationId}`);
     }
   };
 

@@ -1,10 +1,11 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import {
   Message,
   getStrangerInfoFromConversation,
   sendMessage,
-} from "../../../pages/firebase/firestore";
+} from "@/src/firebase/firestore";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
 import UserProfile from "../../common/UserProfile";
 import {
@@ -24,9 +25,13 @@ import { User } from "../../../types/user.t";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import MessageLoadingScreen from "../../common/MessageLoadingScreen";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
+import { useParams } from "next/navigation";
 
 const DirectMessage = () => {
-  const { conversationID } = useParams();
+  initializeApp(firebaseConfig);
+  const conversationID = useParams().id;
   const [strangerInfo, setStrangerInfo] = useState<User>();
   const [isLoading, setIsLoading] = useState(true);
   const myUser = useSelector((state: RootState) => state.user);
@@ -52,7 +57,7 @@ const DirectMessage = () => {
       timestamp: Date.now(),
     };
     if (!conversationID) return console.error("No conversationID");
-    sendMessage(conversationID, messageObj);
+    sendMessage(conversationID as string, messageObj);
   };
 
   return (

@@ -1,9 +1,11 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { getServerPreviewName } from "../../../utils/getServerPreviewName";
 import SidebarDot from "./SidebarDot";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { setSidebarCurrentButton } from "../../../slices/sidebarSlice";
+import Image from "next/image";
 
 interface SidebarServerButtonProps {
   onClickHandler: () => void;
@@ -68,7 +70,7 @@ const SidebarServerButton: React.FC<SidebarServerButtonProps> = ({
         }}
       >
         {icon ? (
-          <img src={icon} alt="" className="w-6 h-6" />
+          <Image src={icon} alt="" className="w-6 h-6" />
         ) : (
           <p className="text-whiteMain font-ggSansMedium">
             {getServerPreviewName(text)}
