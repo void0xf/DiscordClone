@@ -1,23 +1,22 @@
 import { useRef, useState } from "react";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import FormButton from "../../../components/common/AuthPage/FormButton";
-import Link from "../../../components/common/AuthPage/Link";
-import { createNewUser } from "../../../firebase/auth.js";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
-import { User, UserStatus } from "../../../types/user.t.js";
 import Selectt from "../../../components/common/AuthPage/Select/Selectt.tsx";
 import DropDownItem from "../../../components/common/AuthPage/Select/DropDownItem.tsx";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../slices/userSlice.ts";
+// import { useDispatch } from "react-redux";
+// import { setUser } from "../../../slices/userSlice.ts";
 import CheckBox from "../../../components/common/AuthPage/CheckBox.tsx";
 import CheckBoxPolicy from "../../../components/common/AuthPage/CheckBoxPolicy.tsx";
 import { FirebaseError } from "firebase/app";
-import { isNameAvaliable } from "../../../firebase/firestore.ts";
+import { isNameAvaliable } from "../../firebase/firestore.ts";
 import { isValidDate } from "../../../utils/dateUtils.ts";
+import { User, UserStatus } from "../../../types/user.t.ts";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../slices/userSlice.ts";
+import { createNewUser } from "../../firebase/auth.ts";
 
 export const Register = () => {
-  const nav = useNavigate();
   const dispatch = useDispatch();
   const [activeButton, setActiveButton] = useState(false);
   const [activeOptionDay, setActiveOptionDay] = useState<string>("");
@@ -143,7 +142,7 @@ export const Register = () => {
           );
           dispatch(setUser(UserData));
           if (res) {
-            nav("/channels/@me");
+            // nav("/channels/@me");
           }
         }
       } catch (error: unknown) {
@@ -265,7 +264,7 @@ export const Register = () => {
             <CheckBoxPolicy
               activeButton={(isActive) => setActiveButton(isActive)}
             />
-            <Link label="Masz już konto?" navigateTo="/login" />
+            {/* <Link label="Masz już konto?" navigateTo="/login" /> */}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import {
   cancelSendedFriendRequest,
   declineFriendRequest,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "../../../pages/firebase/firestore";
 import { useDispatch } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import FriendAction from "./FriendAction";

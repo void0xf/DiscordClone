@@ -3,9 +3,9 @@ import QRcode from "../../../components/presentational/QRcode";
 import UserInputForm from "../../../components/common/AuthPage/UserInputForm";
 import Link from "../../../components/common/AuthPage/Link";
 import FormButton from "../../../components/common/AuthPage/FormButton";
-import { loginUser } from "../../../firebase/auth";
+import { loginUser } from "../../firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { getUserStateFromFirestore } from "../../../firebase/firestore";
+import { getUserStateFromFirestore } from "../../firebase/firestore";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../slices/userSlice";
 import { User } from "../../../types/user.t";
@@ -19,7 +19,6 @@ const Login = () => {
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
-  const nav = useNavigate();
 
   const handleSetEmail = (text: string) => {
     setEmail(text);
@@ -38,7 +37,6 @@ const Login = () => {
           if (user) {
             dispatch(setUser(user));
           }
-          nav("/channels/@me");
         }
       } catch (error: unknown) {
         if (error instanceof FirebaseError) {
@@ -101,7 +99,7 @@ const Login = () => {
 
           <div className="flex">
             <span className="text-TextGray text-sm">Potrzebujesz konta?</span>
-            <Link label="Zarejestruj się" navigateTo="/register" />
+            {/* <Link label="Zarejestruj się" navigateTo="/register" /> */}
           </div>
         </div>
 

@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import {
   listenForIncomingFriendRequests,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "../../firebase/firestore";
 import { Dispatch, UnknownAction } from "redux";
 
 async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {

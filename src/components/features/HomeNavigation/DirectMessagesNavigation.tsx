@@ -4,7 +4,7 @@ import { RootState } from "../../../store/store";
 import {
   getStrangerInfoFromConversation,
   getUsersFromUID,
-} from "../../../firebase/firestore";
+} from "../../../pages/firebase/firestore";
 import { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
 import DirectMessage from "./DirectMessage";

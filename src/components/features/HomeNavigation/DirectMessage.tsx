@@ -1,6 +1,9 @@
 import React from "react";
 import { DirectMessageProps } from "../../../types/DirectMessage.t";
-import { findConversation, getUIDfromName } from "../../../firebase/firestore";
+import {
+  findConversation,
+  getUIDfromName,
+} from "../../../pages/firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";

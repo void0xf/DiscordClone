@@ -1,5 +1,5 @@
 import React from "react";
-import { Message } from "../../../firebase/firestore";
+import { Message } from "../../../pages/firebase/firestore";
 
 interface DisplayChatMessageProps {
   message: Message;

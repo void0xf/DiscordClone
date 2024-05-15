@@ -4,7 +4,7 @@ import DisplayFriend from "./DisplayFriend";
 import { DisplayFriendsTabs } from "./friends.t";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { getUsersFromUID } from "../../../firebase/firestore";
+import { getUsersFromUID } from "../../../pages/firebase/firestore";
 import DisplayPendingRequest from "./DisplayPendingRequest";
 import FriendFilter from "./FriendFilter";
 

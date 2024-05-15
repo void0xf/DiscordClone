@@ -17,7 +17,7 @@ export enum SidebarButtonType {
 }
 
 export type HomePageButtonProps = {
-  onClickHandler: () => void;
+  onClickHandler?: () => void;
   text: string;
   Icon?: boolean;
   buttonType: HomePageButtonType;

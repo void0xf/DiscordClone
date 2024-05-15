@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Message, listenAndGetMessages } from "../../../firebase/firestore";
+import {
+  Message,
+  listenAndGetMessages,
+} from "../../../pages/firebase/firestore";
 import { useParams } from "react-router-dom";
 import DisplayChatMessageWithUserInfo from "./DisplayChatMessageWithUserInfo";
 import DisplayChatMessage from "./DisplayChatMessage";

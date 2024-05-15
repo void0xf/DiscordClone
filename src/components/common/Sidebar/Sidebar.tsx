@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import Logo from "../../../assets/icons/favicon.ico";
 import { getNotifcationIconString } from "../../../utils/getNotifcationIconString";
-import { getStrangerInfoFromConversation } from "../../../firebase/firestore";
+import { getStrangerInfoFromConversation } from "../../../pages/firebase/firestore";
 
 const Sidebar: React.FC<{ servers: ServerPreview[] }> = ({ servers }) => {
   const user = useSelector((state: RootState) => state.user);

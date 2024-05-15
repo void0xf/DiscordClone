@@ -6,7 +6,7 @@ import {
   findConversation,
   getUIDfromName,
   syncStateFromFirestore,
-} from "../../../firebase/firestore";
+} from "../../../pages/firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../common/UserProfile";

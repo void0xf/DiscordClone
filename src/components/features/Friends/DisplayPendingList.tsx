@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
-import { getUsersFromUID } from "../../../firebase/firestore";
+import { getUsersFromUID } from "../../../pages/firebase/firestore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DisplayPendingRequest from "./DisplayPendingRequest";

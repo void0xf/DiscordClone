@@ -4,7 +4,7 @@ import {
   Message,
   getStrangerInfoFromConversation,
   sendMessage,
-} from "../../../firebase/firestore";
+} from "../../../pages/firebase/firestore";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
 import UserProfile from "../../common/UserProfile";
 import {

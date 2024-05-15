@@ -1,7 +1,7 @@
 import React from "react";
 import { User } from "../../../types/user.t";
 import DirectMessageStrangerInfoButton from "./DirectMessageStrangerInfoButton";
-import { removeFromFriends } from "../../../firebase/firestore";
+import { removeFromFriends } from "../../../pages/firebase/firestore";
 
 interface DirectMessageStrangerInfoProps {
   user: User;
