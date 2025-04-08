@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
-import { RiInboxFill } from "react-icons/ri";
-import { MdHelp } from "react-icons/md";
+import { Inbox } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import FriendsNavigation from "./FriendsNavigation";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayAddFriend from "./DisplayAddFriend";
@@ -98,10 +98,10 @@ const Friends = () => {
           <div className="text-3xl flex px-4 justify-center items-center">
             <div className="p-2">{/* <TbMessageCircle2Filled /> */}</div>
             <div className="p-2">
-              <RiInboxFill />
+              <Inbox />
             </div>
             <div className="">
-              <MdHelp />
+              <HelpCircle />
             </div>
           </div>
         </div>

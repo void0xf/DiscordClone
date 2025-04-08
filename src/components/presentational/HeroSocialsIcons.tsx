@@ -1,21 +1,17 @@
-import { BsTwitterX } from "react-icons/bs";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa";
-
-
+import { Twitter } from "lucide-react";
+import { Instagram } from "lucide-react";
+import { Facebook } from "lucide-react";
+import { Youtube } from "lucide-react";
 
 const HeroSocialsIcons = () => {
   return (
     <div className="flex gap-6 text-2xl">
-      <BsTwitterX  />
-      <FaInstagram />
-      <FaFacebook />
-      <FaYoutube />
-      <FaTiktok />
+      <Twitter />
+      <Instagram />
+      <Facebook />
+      <Youtube />
     </div>
-  )
-}
+  );
+};
 
-export default HeroSocialsIcons
+export default HeroSocialsIcons;

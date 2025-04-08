@@ -8,16 +8,12 @@ import {
 } from "@/src/firebase/firestore";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
 import UserProfile from "../../common/UserProfile";
-import {
-  BsFillCameraVideoFill,
-  BsFillPinAngleFill,
-  BsPersonFillAdd,
-} from "react-icons/bs";
-import { PiPhoneCallFill } from "react-icons/pi";
+import { Camera, Pin, UserPlus } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import { CircleUserRound } from "lucide-react";
 import SearchForm from "../../common/SearchForm";
-import { RiInbox2Fill } from "react-icons/ri";
-import { BiSolidHelpCircle } from "react-icons/bi";
+import { Inbox } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import DirectMessageStrangerInfo from "./DirectMessageStrangerInfo";
 import DirectMessageChat from "./DirectMessageChat";
 import DirectMessageChatInput from "./DirectMessageChatInput";
@@ -75,16 +71,16 @@ const DirectMessage = () => {
             )}
           </div>
           <div className="text-gray-400 flex text-2xl gap-4">
-            <PiPhoneCallFill />
-            <BsFillCameraVideoFill />
-            <BsFillPinAngleFill />
-            <BsPersonFillAdd />
+            <PhoneCall />
+            <Camera />
+            <Pin />
+            <UserPlus />
             <CircleUserRound strokeWidth={2} />
             <div className="h-6 text-sm">
               <SearchForm />
             </div>
-            <RiInbox2Fill />
-            <BiSolidHelpCircle />
+            <Inbox />
+            <HelpCircle />
           </div>
         </div>
       </TabTittleBar>

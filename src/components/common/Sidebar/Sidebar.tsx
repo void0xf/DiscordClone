@@ -1,9 +1,9 @@
 "use client";
 import { ServerPreview } from "../../../types/user.t";
 import SidebarUtilityButton from "./SidebarUtilityButton";
-import { IoMdAdd } from "react-icons/io";
-import { FaCompass } from "react-icons/fa";
-import { TfiDownload } from "react-icons/tfi";
+import { Plus } from "lucide-react";
+import { Compass } from "lucide-react";
+import { Download } from "lucide-react";
 import SidebarGulidSeparator from "./SidebarGulidSeparator";
 import SidebarServerButton from "./SidebarServerButton";
 import SidebarHomeButton from "./SidebarHomeButton";
@@ -83,13 +83,13 @@ const Sidebar: React.FC<{ servers: ServerPreview[] }> = ({ servers }) => {
         label="Add a Server"
         iconSize={24}
         onClick={() => {}}
-        Icon={IoMdAdd}
+        Icon={Plus}
       />
       <SidebarUtilityButton
         label="Explore Discoverable Servers"
         iconSize={24}
         onClick={() => {}}
-        Icon={FaCompass}
+        Icon={Compass}
       />
 
       <SidebarGulidSeparator />
@@ -98,7 +98,7 @@ const Sidebar: React.FC<{ servers: ServerPreview[] }> = ({ servers }) => {
         label="Download Apps"
         iconSize={24}
         onClick={() => {}}
-        Icon={TfiDownload}
+        Icon={Download}
       />
     </div>
   );
