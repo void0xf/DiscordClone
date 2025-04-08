@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../../types/user.t";
-import { CiSearch } from "react-icons/ci";
-import { IoMdClose } from "react-icons/io";
+import { Search } from "lucide-react";
+import { X } from "lucide-react";
 
 interface FriendFilterProps {
   users: User[];
@@ -41,7 +41,7 @@ const FriendFilter: React.FC<FriendFilterProps> = ({ users, setNewUsers }) => {
         }}
       />
       <div className="absolute right-2 top-1 text-2xl font-extrabold">
-        {inputRef.current?.value !== "" ? <IoMdClose /> : <CiSearch />}
+        {inputRef.current?.value !== "" ? <X /> : <Search />}
       </div>
     </div>
   );

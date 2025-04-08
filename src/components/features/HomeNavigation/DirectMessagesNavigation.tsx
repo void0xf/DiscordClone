@@ -1,6 +1,6 @@
 "use client";
 
-import { GoPlus } from "react-icons/go";
+import { Plus } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import {
@@ -53,13 +53,13 @@ const DirectMessagesNavigation = () => {
   }, [conversationID]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="flex justify-between px-4 text-xs font-ggSansMedium pt-2">
         <p className="text-TextGray text-[0.75rem] leading-5 font-display font-ggSansSemiBold tracking-[0.02rem]">
           DIRECT MESSAGES
         </p>
         <button className="text-TextGray text-lg font-extrabold">
-          <GoPlus />
+          <Plus className="w-4 h-4" />
         </button>
       </div>
 

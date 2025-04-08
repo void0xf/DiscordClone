@@ -11,7 +11,6 @@ import {
 import { useDispatch } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import FriendAction from "./FriendAction";
-import { IoCloseOutline } from "react-icons/io5";
 import { Check, X } from "lucide-react";
 
 type PendingRequestType = "Incoming" | "Outgoing";
@@ -87,7 +86,7 @@ const DisplayPendingRequest: React.FC<{
             <div className="flex gap-4 items-center">
               <div>
                 <FriendAction
-                  icon={<IoCloseOutline />}
+                  icon={<X />}
                   label="Cancel"
                   onClickHandler={() => {
                     handleCancelRequest(user.name);

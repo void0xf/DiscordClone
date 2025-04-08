@@ -1,10 +1,10 @@
 "use client";
 
-import { FaCirclePlus } from "react-icons/fa6";
-import { FaGift } from "react-icons/fa";
-import { PiGifFill } from "react-icons/pi";
-import { LuSticker } from "react-icons/lu";
-import { MdEmojiEmotions } from "react-icons/md";
+import { CirclePlus } from "lucide-react";
+import { Gift } from "lucide-react";
+import { Image } from "lucide-react";
+import { Sticker } from "lucide-react";
+import { Smile } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
 interface DirectMessageChatInputProps {
@@ -58,13 +58,13 @@ const DirectMessageChatInput: React.FC<DirectMessageChatInputProps> = ({
         ref={inputRef}
       />
       <div className="text-gray-300 text-2xl absolute top-2 translate-x-3">
-        <FaCirclePlus />
+        <CirclePlus />
       </div>
       <div className="flex gap-3 absolute right-1 top-1 text-gray-300 text-2xl">
-        <FaGift className="hover:text-gray-100" />
-        <PiGifFill className="hover:text-gray-100" />
-        <LuSticker className="hover:text-gray-100" />
-        <MdEmojiEmotions className="hover:text-gray-100" />
+        <Gift className="hover:text-gray-100" />
+        <Smile className="hover:text-gray-100" />
+        <Sticker className="hover:text-gray-100" />
+        <Image className="hover:text-gray-100" />
       </div>
     </div>
   );

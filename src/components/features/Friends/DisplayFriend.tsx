@@ -11,8 +11,9 @@ import {
 } from "@/src/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../common/UserProfile";
-import { BiSolidMessageRounded } from "react-icons/bi";
-import { IoMdMore } from "react-icons/io";
+import { MessageCircle } from "lucide-react";
+import { Plus } from "lucide-react";
+
 import FriendAction from "./FriendAction";
 import { RootState } from "../../../store/store";
 import { redirect, useRouter } from "next/navigation";
@@ -61,13 +62,13 @@ const DisplayFriend: React.FC<DisplayFriendProps> = ({ UserData }) => {
           />
           <div className="flex gap-2 items-center">
             <FriendAction
-              icon={<BiSolidMessageRounded />}
+              icon={<MessageCircle />}
               label="Message"
               onClickHandler={handleSendMessage}
               hoverColor="default"
             />
             <FriendAction
-              icon={<IoMdMore />}
+              icon={<Plus />}
               label="More"
               onClickHandler={() => {}}
               hoverColor="default"
