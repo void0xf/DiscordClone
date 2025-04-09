@@ -17,7 +17,7 @@ import {
 import { User, UserStatus } from "@/src/types/user.t";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { setUser } from "@/src/slices/userSlice";
-import { Dispatch, UnknownAction } from "redux";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 
 export async function addUserDataToFireStore(uid: string, userInfo: User) {
   const firestore = getFirestore();

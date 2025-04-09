@@ -7,7 +7,7 @@ import {
 import { ServerPreview } from "@/src/types/user.t";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Dispatch, UnknownAction } from "redux";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 import ExampleServerIcon from "@/src/assets/icons/Sidebar/ExampleServerIcon.svg";
 import Sidebar from "@/src/components/common/Sidebar/Sidebar";
 import Navigation from "@/src/components/features/HomeNavigation/Navigation";
