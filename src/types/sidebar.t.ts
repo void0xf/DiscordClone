@@ -1,12 +1,12 @@
-import { IconType } from "react-icons/lib";
+import { LucideIcon } from "lucide-react";
 
 export type SidebarTooltipProp = {
-  label: string
-}
+  label: string;
+};
 
 export interface SidebarUltityButtonProps {
   label: string;
-  Icon: IconType; 
+  Icon: LucideIcon;
   onClick: () => void;
-  iconSize?: number; 
+  iconSize?: number;
 }
