@@ -22,6 +22,7 @@ export const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [activeButton, setActiveButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeOptionDay, setActiveOptionDay] = useState<string>("");
   const [activeOptionMonth, setActiveOptionMonth] = useState<string>("");
   const [activeOptionYear, setactiveOptionYear] = useState<string>("");
@@ -77,12 +78,14 @@ export const Register = () => {
     initializeApp(firebaseConfig);
     if (emailRef.current?.value === "") {
       setEmailErrorCode("required");
+      return;
     } else {
       setEmailErrorCode("");
     }
 
     if (nameRef.current?.value === "") {
       setNameErrorCode("required");
+      return;
     } else {
       setNameErrorCode("");
     }
@@ -117,6 +120,7 @@ export const Register = () => {
       nameRef.current?.value &&
       passwordRef.current?.value
     ) {
+      setIsLoading(true);
       const UserData: User = {
         id: uuidv4(),
         nickName: nickNameRef.current?.value,
@@ -153,6 +157,8 @@ export const Register = () => {
         } else {
           console.log(error);
         }
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -260,6 +266,7 @@ export const Register = () => {
               label="Kontynuuj"
               onClickHandler={handleRegister}
               activeBoolean={activeButton}
+              isLoading={isLoading}
             />
             <CheckBoxPolicy activeButton={setActiveButton} />
             <Link href="/login" className="text-[#00a8fc] text-sm">

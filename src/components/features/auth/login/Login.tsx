@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 const Login = () => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [isLoading, setIsLoading] = useState(false);
   const loginInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const [errorCode, setErrorCode] = useState("");
@@ -32,6 +33,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     if (email && password) {
+      setIsLoading(true);
       try {
         const uid = await loginUser(email, password);
         setErrorCode("");
@@ -46,6 +48,8 @@ const Login = () => {
         if (error instanceof FirebaseError) {
           setErrorCode(error.code);
         }
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -97,6 +101,7 @@ const Login = () => {
                 label="Zaloguj się"
                 onClickHandler={handleLogin}
                 activeBoolean={true}
+                isLoading={isLoading}
               />
             </div>
           </form>

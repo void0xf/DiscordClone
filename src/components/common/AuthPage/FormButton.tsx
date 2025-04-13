@@ -4,14 +4,24 @@ interface FromButton {
   label: string;
   onClickHandler: () => void;
   activeBoolean: boolean;
+  isLoading?: boolean;
 }
 
 const FormButton: React.FC<FromButton> = ({
   label,
   onClickHandler,
   activeBoolean,
+  isLoading = false,
 }) => {
   const [isShown, setIsShown] = useState(false);
+
+  const LoadingDots = () => (
+    <div className="flex space-x-1 justify-center items-center">
+      <div className="animate-bounce delay-100 h-2 w-2 bg-white rounded-full"></div>
+      <div className="animate-bounce delay-200 h-2 w-2 bg-white rounded-full"></div>
+      <div className="animate-bounce delay-300 h-2 w-2 bg-white rounded-full"></div>
+    </div>
+  );
 
   return (
     <div
@@ -22,12 +32,15 @@ const FormButton: React.FC<FromButton> = ({
       {activeBoolean ? (
         <>
           <button
-            className="bg-lightBlue w-full mt-2 h-11 rounded-sm text-whiteMain font-semibold hover:bg-brandColor duration-200"
+            disabled={isLoading}
+            className="bg-lightBlue w-full mt-2 h-11 rounded-sm text-whiteMain font-semibold hover:bg-brandColor duration-200 flex justify-center items-center"
             onClick={() => {
-              onClickHandler();
+              if (!isLoading) {
+                onClickHandler();
+              }
             }}
           >
-            {label}
+            {isLoading ? <LoadingDots /> : label}
           </button>
         </>
       ) : (

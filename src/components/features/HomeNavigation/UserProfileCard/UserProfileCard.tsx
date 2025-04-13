@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import { User, UserStatus } from "../../../../types/user.t";
 // import UserStatusDotIndicator from "../../../common/UserStatusDotIndicator";
 import { getStatusString } from "../../../../utils/userUtils/getStatusString";
-import { ArrowUpDown, ChevronRight, Copy, Smile } from "lucide-react";
+import { ArrowUpDown, ChevronRight, Copy, Smile, LogOut } from "lucide-react";
 import HoverDropDownMenu from "./HoverDropDownMenu";
 import { useDispatch } from "react-redux";
 import { setStatus } from "../../../../slices/userSlice";
 import { updateUserState } from "@/src/firebase/firestore";
 import UserStatusDotIndicator from "../../../common/UserStatusDotIndicator";
+import { useAuth } from "../../../../hooks/useAuth";
 
 interface UserProfileCardProps {
   user: User;
@@ -18,10 +19,15 @@ interface UserProfileCardProps {
 const UserProfileCard: React.FC<UserProfileCardProps> = ({ user }) => {
   const dispatch = useDispatch();
   const [ishovering, setIshovering] = useState(false);
+  const { logout } = useAuth();
 
   const handleStatusChange = (status: UserStatus) => {
     dispatch(setStatus(status));
     updateUserState(status);
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   return (
@@ -144,6 +150,15 @@ const UserProfileCard: React.FC<UserProfileCardProps> = ({ user }) => {
           <div className="flex cursor-pointer hover:bg-LightGray hover:rounded px-1 py-1 mt-2 text-TextGray ">
             <Copy width={15} />
             <p className="pl-2">Copy User ID</p>
+          </div>
+        </div>
+        <div className="p-2 border-t-[1px] border-DarkGray">
+          <div 
+            className="flex cursor-pointer hover:bg-red-600 hover:text-white hover:rounded px-1 py-1 mt-2 text-TextGray"
+            onClick={handleLogout}
+          >
+            <LogOut width={15} />
+            <p className="pl-2">Logout</p>
           </div>
         </div>
       </div>

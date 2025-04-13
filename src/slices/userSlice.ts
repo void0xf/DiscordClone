@@ -1,4 +1,3 @@
-// src/features/user/userSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserStatus } from "../types/user.t";
 
@@ -20,16 +19,18 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // Action to update the entire user object
     setUser(state, action: PayloadAction<User>) {
       return action.payload;
     },
     setStatus(state, action: PayloadAction<UserStatus>) {
       state.status = action.payload;
     },
+    resetUser() {
+      return initialState;
+    },
   },
 });
 
-export const { setUser, setStatus } = userSlice.actions;
+export const { setUser, setStatus, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;
