@@ -1,4 +1,4 @@
-import { HomePageButtonSize, HomePageButtonType } from "@/src/types/Button.t";
+import { HomePageButtonSize, HomePageButtonType } from "@/types/Button.t.ts";
 import HomePageButton from "../common/Home/HomePageButton";
 
 const Hero = () => {
