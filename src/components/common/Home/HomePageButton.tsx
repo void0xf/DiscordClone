@@ -5,7 +5,7 @@ import {
   HomePageButtonSize,
   HomePageButtonType,
 } from "../../../types/Button.t";
-import HomePageDownloadIcon from "@/src/assets/icons/HomePageDownloadIcon.svg";
+import HomePageDownloadIcon from "@/assets/icons/HomePageDownloadIcon.svg";
 import Image from "next/image";
 
 const HomePageButton: React.FC<HomePageButtonProps> = ({
@@ -33,7 +33,16 @@ const HomePageButton: React.FC<HomePageButtonProps> = ({
      flex items-center gap-2 text-center
      `}
     >
-      {Icon ? <Image src={HomePageDownloadIcon} alt="" /> : ""}
+      {Icon ? (
+        <Image
+          src={HomePageDownloadIcon}
+          alt=""
+          width={24}
+          height={24}
+        />
+      ) : (
+        ""
+      )}
       {text}
     </div>
   );
