@@ -1,20 +1,21 @@
 "use client";
 
-import CheckBoxPolicy from "@/src/components/common/AuthPage/CheckBoxPolicy";
-import FormButton from "@/src/components/common/AuthPage/FormButton";
-import DropDownItem from "@/src/components/common/AuthPage/Select/DropDownItem";
-import Selectt from "@/src/components/common/AuthPage/Select/Selectt";
-import UserInputForm from "@/src/components/common/AuthPage/UserInputForm";
-import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
-import { createNewUser } from "@/src/firebase/auth";
-import { isNameAvaliable } from "@/src/firebase/firestore";
-import { setUser } from "@/src/slices/userSlice";
-import { User, UserStatus } from "@/src/types/user.t";
-import { isValidDate } from "@/src/utils/dateUtils";
+import React, {  useState } from "react";
+import CheckBoxPolicy from "@/components/common/AuthPage/CheckBoxPolicy";
+import FormButton from "@/components/common/AuthPage/FormButton";
+import DropDownItem from "@/components/common/AuthPage/Select/DropDownItem";
+import Selectt from "@/components/common/AuthPage/Select/Selectt";
+import UserInputForm from "@/components/common/AuthPage/UserInputForm";
+import { firebaseConfig } from "@/firebase/FirebaseConfig";
+import { createNewUser } from "@/firebase/auth";
+import { isNameAvaliable } from "@/firebase/firestore";
+import { setUser } from "@/slices/userSlice";
+import { User, UserStatus } from "@/types/user.t";
+import { isValidDate } from "@/utils/dateUtils";
 import { FirebaseError, initializeApp } from "firebase/app";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 

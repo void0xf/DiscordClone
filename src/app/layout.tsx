@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import "@/src/index.css";
-import fonts from "@/src/utils/fonts/createFonts";
+import "@/index.css";
+import fonts from "@/utils/fonts/createFonts";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebase/FirebaseConfig";
 import StoreProvider from "../store/StoreProvider";
+import AuthProvider from "@/components/common/AuthProvider";
 
 export const metadata: Metadata = {
   title: "My App",
@@ -25,9 +26,11 @@ export default function RootLayout({
       </head>
       <body>
         <StoreProvider>
-          <div id="root" className={createdFonts}>
-            {children}
-          </div>
+          <AuthProvider>
+            <div id="root" className={createdFonts}>
+              {children}
+            </div>
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>

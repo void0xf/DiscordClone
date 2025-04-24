@@ -1,19 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
-import DiscordPageLogo from "@/src/assets/icons/DiscordPageLogo.svg";
-import { FirebaseError } from "firebase/app";
-import { loginUser } from "@/src/firebase/auth";
-import { getUserStateFromFirestore } from "@/src/firebase/firestore";
-import { User } from "@/src/types/user.t";
-import UserInputForm from "@/src/components/common/AuthPage/UserInputForm";
-import QRcode from "@/src/components/presentational/QRcode";
-import FormButton from "@/src/components/common/AuthPage/FormButton";
-import Image from "next/image";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
+import DiscordPageLogo from "@/assets/icons/DiscordPageLogo.svg";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "@/firebase/FirebaseConfig";
+import { FirebaseError } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getUserStateFromFirestore } from "@/firebase/firestore";
+import { User } from "@/types/user.t";
+import UserInputForm from "@/components/common/AuthPage/UserInputForm";
+import QRcode from "@/components/presentational/QRcode";
+import FormButton from "@/components/common/AuthPage/FormButton";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/src/slices/userSlice";
-import { useRouter } from "next/navigation";
+import { setUser } from "@/slices/userSlice";
+import { setAuthCookies } from "@/firebase/authCookies";
 
 const Login = () => {
   const [email, setEmail] = useState<string>();
@@ -24,6 +27,9 @@ const Login = () => {
   const [errorCode, setErrorCode] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get('redirect') || "/channels/@me";
+
   const handleSetEmail = (text: string) => {
     setEmail(text);
   };
@@ -35,13 +41,20 @@ const Login = () => {
     if (email && password) {
       setIsLoading(true);
       try {
-        const uid = await loginUser(email, password);
+        const firebaseApp = initializeApp(firebaseConfig);
+        const auth = getAuth(firebaseApp);
+        
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const uid = userCredential.user.uid;
+        
+        await setAuthCookies(userCredential.user);
+        
         setErrorCode("");
         if (uid) {
           const user: User | null = await getUserStateFromFirestore(uid);
           if (user) {
             dispatch(setUser(user));
-            router.push("/channels/@me");
+            router.push(redirectPath);
           }
         }
       } catch (error: unknown) {

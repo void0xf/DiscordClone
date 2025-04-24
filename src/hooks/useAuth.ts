@@ -11,31 +11,33 @@ export function useAuth() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // Check if auth token cookie exists
   const isAuthenticated = () => {
     if (typeof document !== "undefined") {
-      return document.cookie.includes("auth-token=");
+      return (
+        document.cookie.includes("auth-token=") ||
+        document.cookie.includes("firebaseToken=") ||
+        document.cookie.includes("isLoggedIn=true") ||
+        document.cookie.includes("session=")
+      );
     }
     return false;
   };
 
-  // Logout function that removes cookie and resets state
   const logout = async () => {
-    // Import dynamically to avoid server-side issues
     const { logOutUser } = await import("../firebase/auth");
-    
+
     const success = await logOutUser();
     if (success) {
-      // Reset user state in Redux
       dispatch(resetUser());
-      router.push("/login");
+
+      window.location.href = "/login";
     }
-    
+
     return success;
   };
 
   return {
     isAuthenticated,
-    logout
+    logout,
   };
-} 
+}

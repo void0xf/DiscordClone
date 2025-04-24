@@ -8,6 +8,7 @@ import {
 import { firebaseConfig } from "./FirebaseConfig";
 import { addUserDataToFireStore } from "./firestore";
 import { User } from "../types/user.t";
+import { clearAuthCookies } from "./authCookies";
 
 export async function createNewUser(
   email: string,
@@ -45,7 +46,8 @@ export async function logOutUser() {
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
   try {
-    signOut(auth);
+    await signOut(auth);
+    clearAuthCookies();
     return true;
   } catch (error) {
     console.error("Error logging out:", error);

@@ -9,12 +9,14 @@
     "start": "next start",
     "test": "vitest",
     "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "eslint-config-next": "^14.2.26",
     "firebase": "^10.9.0",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.363.0",
     "next": "^14.2.26",
     "react": "^18.3.1",
