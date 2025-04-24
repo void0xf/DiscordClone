@@ -1,7 +1,7 @@
 "use client";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useState } from "react";
-import tick from "@/src/assets/photos/tick.png";
+import tick from "@/assets/photos/tick.png";
 
 interface CheckBoxPolicyProps {
   activeButton: (isActive: boolean) => void;

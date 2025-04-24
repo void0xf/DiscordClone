@@ -3,16 +3,16 @@
 import {
   listenForIncomingFriendRequests,
   syncStateFromFirestore,
-} from "@/src/firebase/firestore";
-import { ServerPreview } from "@/src/types/user.t";
+} from "@/firebase/firestore";
+import { ServerPreview } from "@/types/user.t";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
-import ExampleServerIcon from "@/src/assets/icons/Sidebar/ExampleServerIcon.svg";
-import Sidebar from "@/src/components/common/Sidebar/Sidebar";
-import Navigation from "@/src/components/features/HomeNavigation/Navigation";
+import ExampleServerIcon from "@/assets/icons/Sidebar/ExampleServerIcon.svg";
+import Sidebar from "@/components/common/Sidebar/Sidebar";
+import Navigation from "@/components/features/HomeNavigation/Navigation";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
+import { firebaseConfig } from "@/firebase/FirebaseConfig";
 
 async function onFriendRequest(dispatch: Dispatch<UnknownAction>) {
   syncStateFromFirestore(dispatch);

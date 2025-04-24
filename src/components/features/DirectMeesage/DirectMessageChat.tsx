@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Message, listenAndGetMessages } from "@/src/firebase/firestore";
+import { Message, listenAndGetMessages } from "@/firebase/firestore";
 import DisplayChatMessageWithUserInfo from "./DisplayChatMessageWithUserInfo";
 import DisplayChatMessage from "./DisplayChatMessage";
 import DisplayDateInfo from "./DisplayDateInfo";

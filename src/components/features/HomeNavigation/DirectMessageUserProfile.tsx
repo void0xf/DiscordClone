@@ -7,7 +7,7 @@ import {
   getUIDfromName,
   removeFromUserFromDms,
   syncStateFromFirestore,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 

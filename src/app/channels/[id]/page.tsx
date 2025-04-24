@@ -1,6 +1,6 @@
-import DirectMessage from "@/src/components/features/DirectMeesage/DirectMessage";
-import Friends from "@/src/components/features/Friends/Friends";
-import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
+import DirectMessage from "@/components/features/DirectMeesage/DirectMessage";
+import Friends from "@/components/features/Friends/Friends";
+import { firebaseConfig } from "@/firebase/FirebaseConfig";
 import { initializeApp } from "firebase/app";
 import React from "react";
 

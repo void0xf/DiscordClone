@@ -5,8 +5,8 @@ import { User } from "../../../types/user.t";
 import FriendFilter from "./FriendFilter";
 import { DisplayFriendsTabs } from "./friends.t";
 import DisplayFriend from "./DisplayFriend";
-import EmptyAllFriendsBanner from "@/src/assets/banners/EmptyAllFriends.svg";
-import EmptyOnlineFriendsBanner from "@/src/assets/banners/EmptyOnlineFriends.svg";
+import EmptyAllFriendsBanner from "@/assets/banners/EmptyAllFriends.svg";
+import EmptyOnlineFriendsBanner from "@/assets/banners/EmptyOnlineFriends.svg";
 import Image from "next/image";
 
 const DisplayFriendsList: React.FC<{
@@ -46,7 +46,7 @@ const DisplayFriendsList: React.FC<{
       ) : (
         <div className="flex-col flex justify-center items-center bg-LightGray h-full">
           <Image src={EmptyOnlineFriendsBanner} alt="Wumps" />
-          <p>Looks like you don’t have any friends in this category.</p>
+          <p>Looks like you don't have any friends in this category.</p>
         </div>
       )}
     </div>

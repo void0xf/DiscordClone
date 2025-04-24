@@ -1,18 +1,18 @@
+import React from "react";
 import Hero from "../../presentational/Hero";
 import Navbar from "../../presentational/Navbar";
-import LeftSideHero from "@/src/assets/banners/leftSideHero.svg";
-import RightSideHero from "@/src/assets/banners/rightSideHero.svg";
-import CreateAnInvite from "@/src/assets/banners/CreateAnInviteBelong.svg";
-import HanigingOut from "@/src/assets/banners/Where hanging out is easy.svg";
-import FromFewToFandom from "@/src/assets/banners/From few to a fandom.svg";
-import ReliableTech from "@/src/assets/banners/RELIABLETECHFORSTAYINGCLOSE.svg";
-import HomePageStars from "@/src/assets/banners/HomePageStars.svg";
-
+import LeftSideHero from "@/assets/banners/leftSideHero.svg";
+import RightSideHero from "@/assets/banners/rightSideHero.svg";
+import CreateAnInvite from "@/assets/banners/CreateAnInviteBelong.svg";
+import HanigingOut from "@/assets/banners/Where hanging out is easy.svg";
+import FromFewToFandom from "@/assets/banners/From few to a fandom.svg";
+import ReliableTech from "@/assets/banners/RELIABLETECHFORSTAYINGCLOSE.svg";
+import HomePageStars from "@/assets/banners/HomePageStars.svg";
 import HeroSocialsIcons from "../../presentational/HeroSocialsIcons";
 import HeroDiscordLogo from "../../presentational/HeroDiscordLogo";
 import Image from "next/image";
 import HomePageButton from "../../common/Home/HomePageButton";
-import { HomePageButtonSize, HomePageButtonType } from "@/src/types/Button.t";
+import { HomePageButtonSize, HomePageButtonType } from "@/types/Button.t";
 
 const Home: React.FC = () => {
   return (
@@ -57,8 +57,8 @@ const Home: React.FC = () => {
               Where hanging out is easy
             </h2>
             <p className="font-ggsansNormal text-xl text-left mt-6 break-words">
-              Grab a seat in a voice channel when you’re free. Friends in your
-              server can see you’re around and instantly pop in to talk without
+              Grab a seat in a voice channel when you're free. Friends in your
+              server can see you're around and instantly pop in to talk without
               having to call.
             </p>
           </div>
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
               RELIABLE TECH FOR STAYING CLOSE
             </h2>
             <p className="text-xl font-ggsansNormal text-center w-1/2">
-              Low-latency voice and video feels like you’re in the same room.
+              Low-latency voice and video feels like you're in the same room.
               Wave hello over video, watch friends stream their games, or gather
               up and have a drawing session with screen share.
             </p>

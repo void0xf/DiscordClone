@@ -5,7 +5,7 @@ import {
   addFriend,
   getUIDfromName,
   syncStateFromFirestore,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import FormButton from "../../common/AuthPage/FormButton";

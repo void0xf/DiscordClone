@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { Message } from "@/src/firebase/firestore";
+import Image from "next/image";
+import { Message } from "@/firebase/firestore";
 import { User } from "../../../types/user.t";
 
 interface DisplayChatMessageWithUserInfoProps {
@@ -40,7 +41,7 @@ const DisplayChatMessageWithUserInfo: React.FC<
       {UserInfo ? (
         <div className="flex gap-2 items-center px-2 py-1">
           <div>
-            <img
+            <Image
               src={`${UserInfo.profilePicture}`}
               alt=""
               height={40}

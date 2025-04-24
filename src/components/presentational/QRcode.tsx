@@ -1,6 +1,6 @@
 import React from "react";
-import DiscordLoginQR from "@/src/assets/banners/LoginQRCode.svg";
-import DiscordLogoLoginQR from "@/src/assets/banners/DiscordQRCodeLogo.png";
+import DiscordLoginQR from "@/assets/banners/LoginQRCode.svg";
+import DiscordLogoLoginQR from "@/assets/banners/DiscordQRCodeLogo.png";
 import Image from "next/image";
 
 const QRcode = () => {

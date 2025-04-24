@@ -2,7 +2,7 @@
 
 import React from "react";
 import { DirectMessageProps } from "../../../types/DirectMessage.t";
-import { findConversation, getUIDfromName } from "@/src/firebase/firestore";
+import { findConversation, getUIDfromName } from "@/firebase/firestore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DirectMessageUserProfile from "./DirectMessageUserProfile";

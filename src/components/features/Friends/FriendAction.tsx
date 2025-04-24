@@ -5,7 +5,7 @@ import { User } from "../../../types/user.t";
 import {
   removeFromFriends,
   syncStateFromFirestore,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import { useDispatch } from "react-redux";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 

@@ -10,7 +10,7 @@ import {
   getOnlineUsersFromUID,
   getUsersFromUID,
   listenToUserStatuses,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import { useSelector } from "react-redux";
 import DisplayFriendsList from "./DisplayAllFriendsList";
 import { User } from "../../../types/user.t";

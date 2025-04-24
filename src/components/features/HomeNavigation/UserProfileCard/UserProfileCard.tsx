@@ -8,7 +8,7 @@ import { ArrowUpDown, ChevronRight, Copy, Smile, LogOut } from "lucide-react";
 import HoverDropDownMenu from "./HoverDropDownMenu";
 import { useDispatch } from "react-redux";
 import { setStatus } from "../../../../slices/userSlice";
-import { updateUserState } from "@/src/firebase/firestore";
+import { updateUserState } from "@/firebase/firestore";
 import UserStatusDotIndicator from "../../../common/UserStatusDotIndicator";
 import { useAuth } from "../../../../hooks/useAuth";
 

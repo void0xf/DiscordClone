@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { User } from "../../../types/user.t";
-import { getUsersFromUID } from "@/src/firebase/firestore";
+import { getUsersFromUID } from "@/firebase/firestore";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import DisplayPendingRequest from "./DisplayPendingRequest";
-import EmptyFriendsRequests from "@/src/assets/banners/EmptyFriendsRequests.svg";
+import EmptyFriendsRequests from "@/assets/banners/EmptyFriendsRequests.svg";
 import Image from "next/image";
 
 const DisplayPendingList = () => {

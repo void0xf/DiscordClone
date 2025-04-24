@@ -8,7 +8,7 @@ import {
   findConversation,
   getUIDfromName,
   syncStateFromFirestore,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "../../common/UserProfile";
 import { MessageCircle } from "lucide-react";

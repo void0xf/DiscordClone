@@ -5,7 +5,7 @@ import {
   Message,
   getStrangerInfoFromConversation,
   sendMessage,
-} from "@/src/firebase/firestore";
+} from "@/firebase/firestore";
 import TabTittleBar from "../../common/TabTitle/TabTittleBar";
 import UserProfile from "../../common/UserProfile";
 import { Camera, Pin, UserPlus } from "lucide-react";
@@ -22,7 +22,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import MessageLoadingScreen from "../../common/MessageLoadingScreen";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "@/src/firebase/FirebaseConfig";
+import { firebaseConfig } from "@/firebase/FirebaseConfig";
 import { useParams } from "next/navigation";
 
 const DirectMessage = () => {
