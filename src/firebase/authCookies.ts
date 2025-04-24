@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./FirebaseConfig";
 import Cookies from "js-cookie";
@@ -41,7 +41,7 @@ export function initAuthStateCookieSync() {
 /**
  * Call this function when user logs in to immediately set cookies
  */
-export async function setAuthCookies(user: any) {
+export async function setAuthCookies(user: User) {
   if (user) {
     try {
       const token = await user.getIdToken();
