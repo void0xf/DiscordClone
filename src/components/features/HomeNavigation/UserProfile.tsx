@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { User } from "../../../types/user.t";
-import { Mic } from "lucide-react";
+import { Mic, Settings } from "lucide-react";
 import { Headphones } from "lucide-react";
 import UserStatusDotIndicator from "../../common/UserStatusDotIndicator";
 import UserProfileCard from "./UserProfileCard/UserProfileCard";
@@ -45,8 +45,9 @@ const UserProfileHomeNavigation: React.FC<{ user: User }> = ({ user }) => {
               height={34}
               className="rounded-full"
             />
-            <div className="absolute top-[0.8rem] h-8 w-8 left-[0.8rem]">
+            <div className="absolute top-[0.8rem] h-8 w-8 left-[0.8rem] rounded-full">
               <UserStatusDotIndicator type={user.status} />
+
             </div>
           </div>
         </div>
@@ -66,7 +67,7 @@ const UserProfileHomeNavigation: React.FC<{ user: User }> = ({ user }) => {
           <Headphones />
         </button>
         <button className="hover:bg-HoverText rounded-md h-7 w-7 items-center flex justify-center">
-          {/* <TbSettingsFilled /> */}
+        <Settings />
         </button>
       </div>
     </div>

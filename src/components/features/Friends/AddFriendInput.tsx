@@ -55,13 +55,11 @@ const AddFriendInput = () => {
         placeholder="You can add friends with their Discord usernames."
         autoFocus={true}
       />
-      <div className="absolute w-1/6 top-0 right-0 -translate-x-4 text-sm h-14 flex -translate-y-4 whitespace-nowrap overflow-hidden text-ellipsis">
         <FormButton
           label="Send Friend Request"
           onClickHandler={handleAddFriend}
           activeBoolean={true}
         />
-      </div>
       <p className="text-red-400 text-sm mt-2 font-ggsansNormal">{error}</p>
       <p className="text-SidebarUltityIcon text-sm mt-1 font-ggsansNormal">
         {success}

@@ -23,6 +23,13 @@ export default {
         "elevation-low":
           "0 1px 0 hsl(0, 0%, 0.8%) / 20%, 0 1.5px 0 hsl(240, 7.7%, 2.5%) / 5%, 0 2px 0 hsl(0, 0%, 0.8%) / 5%",
       },
+      zIndex: {
+        '60': '60',
+        '70': '70',
+        '80': '80',
+        '90': '90',
+        '100': '100',
+      },
       colors: {
         brandColor: "#404eed",
         notQuiteBlack: "#23272a",
