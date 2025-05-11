@@ -9,6 +9,10 @@ import AuthProvider from "@/components/common/AuthProvider";
 export const metadata: Metadata = {
   title: "My App",
   description: "My App is a...",
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 const createdFonts = fonts.map((font) => font.variable).join(" ");
@@ -23,6 +27,8 @@ export default function RootLayout({
       <head>
         <title>Discord</title>
         <meta name="description" content="My App is a Discord clone" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>
         <StoreProvider>
